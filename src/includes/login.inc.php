@@ -5,7 +5,6 @@ session_start();
 if(isset($_POST['submit'])){
     include 'dbh.inc.php';
 
-
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
@@ -37,31 +36,8 @@ if(isset($_POST['submit'])){
                     $_SESSION['u_role'] = $row['user_role'];
                     $_SESSION['u_username'] = $row['user_username'];
 
-
-                    if($row['user_role'] == "organizer"){
-                        header("Location: ../organizer.php");
-                        exit();
-                    }
-                    else if($row['user_role'] == "tech"){
-                        header("Location: ../tech.php");
-                        exit();
-                    }
-                    else if($row['user_role'] == "booking1"){
-                        header("Location: ../booking1.php");
-                        exit();
-                    }
-                    else if($row['user_role'] == "booking2"){
-                        header("Location: ../booking2.php");
-                        exit();
-                    }
-                    else if($row['user_role'] == "manager"){
-                        header("Location: ../manager.php");
-                        exit();
-                    }
-                    else{
-                        header("Location: ../index.html?login=FAILED");
-                        exit();
-                    }
+                    header("Location: ../" . $_SESSION['u_role'] . ".php");
+                    exit();
                 }
             }
         }

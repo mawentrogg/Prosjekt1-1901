@@ -1,3 +1,13 @@
+<?php
+session_start();
+include_once 'includes\dbh.inc.php';
+
+//Checking if user is logged in
+if(!(isset($_SESSION['u_id']))){
+    header("Location: index.html");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
