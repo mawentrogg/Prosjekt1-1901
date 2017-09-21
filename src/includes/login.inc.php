@@ -5,6 +5,7 @@ session_start();
 if(isset($_POST['submit'])){
     include 'dbh.inc.php';
 
+
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
@@ -16,10 +17,10 @@ if(isset($_POST['submit'])){
         exit();
     }
     else{
-        $sql = "SELECT * FROM Users WHERE user_username='$username'";
+        $sql = "SELECT * FROM users WHERE user_username='$username'";
         $result = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($result);
-        if($resultCheck < 1){
+        if($resultCheck == 0){
             header("Location: ../index.html?login=error");
             exit();
         }
