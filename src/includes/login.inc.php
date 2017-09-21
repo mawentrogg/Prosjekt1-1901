@@ -17,10 +17,10 @@ if(isset($_POST['submit'])){
         exit();
     }
     else{
-        $sql = "SELECT * FROM users WHERE user_username='$username'";
+        $sql = "SELECT * FROM Users WHERE user_username='$username'";
         $result = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($result);
-        if($resultCheck == 0){
+        if($resultCheck < 1){
             header("Location: ../index.html?login=error");
             exit();
         }
