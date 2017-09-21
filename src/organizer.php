@@ -31,7 +31,7 @@ if(!(isset($_SESSION['u_id']))){
 						</tr>
 					</table>
 				</div>
-			</div>
-		</div>
-	</body>
+        </div>
+    </div>
+</body>
 </html>

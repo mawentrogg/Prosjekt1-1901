@@ -15,8 +15,8 @@ if(!(isset($_SESSION['u_id']))){
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-    <div class="flexBody">
 
+    <div class="flexBody">
         <div class="flexWrapper">
             <form action="includes\logout.inc.php" method="post">
                 <button type="submit" name="submit">Logg ut</button>
