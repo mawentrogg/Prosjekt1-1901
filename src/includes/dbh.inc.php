@@ -1,6 +1,6 @@
 <?php
 
-$dbServername = "kimera_gruppe4";
+$dbServername = "mysql.stud.ntnu.no";
 $dbUsername = "kimera_gruppe4";
 $dbPassword = "festiv4l";
 $dbName = "kimera_gruppe4";
