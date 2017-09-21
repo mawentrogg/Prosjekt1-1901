@@ -8,7 +8,9 @@
 
 	<div class="flexBody">
 		<div class="flexWrapper">
-			<div class="logoutDiv">Logg ut</div>
+			<form action="includes\logout.inc.php" method="post">
+			<button type="submit" name="submit">Logg ut</button>
+			</form>
 				<div class="flexWrapperInside">
 					<table>
 						<tr>

@@ -55,20 +55,21 @@
 	margin-top: 2%;
 }
 
-.logoutDiv{
+button{
 	display: flex;
-	align-self: flex-end;
+	float: right;
 	height: auto;
 	background: #ff0000;
 	color: white;
 	border-radius: 10px;
 	text-align: center;
 	padding: 10px;
-	border: 1px 0 0 #8da5a1;
+	font-family: Consolas;
 }
 
-.logoutDiv:hover{
+button:hover{
 	background-color:  #cc0000;
+	cursor: pointer;
 }
 
 table{
@@ -97,7 +98,7 @@ td a{
 	color: black;
 }
 
-input[type=text]{
+input[type=text], input[type=PASSWORD]{
 	width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
