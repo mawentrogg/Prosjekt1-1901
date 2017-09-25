@@ -40,10 +40,43 @@
                     }
                     ?>">Hjem</a>
 
+<<<<<<< HEAD
             <form action="includes\logout.inc.php" method="post">
 				<button type="submit" name="submit">Logg ut</button>
 			</form> 
 		</div>
+=======
+	<table>
+		<tr>
+			<th>Dato/tid</th>
+			<th>Scene</th>
+            <th>Artist</th>
+            <th>Lyd</th>
+            <th>Lys</th>
+            <th>Krav</th>
+		</tr>
+		<tr>
+			<th>I morgen</th>
+			<th>Moroscenen</th>
+            <td>Teletubbies</td>
+            <td>Roy Gunnar</td>
+            <td>Vigdis Sløyfrid</td>
+            <td>4 mikrofoner, 8 flasker cava, 3 horer</td>
+
+		</tr>
+        <tr>
+            <th>18/10</th>
+            <th>Moroscenen</th>
+            <th>Fantorangen</th>
+            <th>Glen Kenneth</th>
+            <th>Mygghild</th>
+            <th></th>
+        </tr>
+
+
+	</table>
+
+>>>>>>> master
 	</div>
 </body>
 </html>
