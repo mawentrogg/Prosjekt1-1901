@@ -11,6 +11,7 @@
     $resultConcert = mysqli_query($conn, $sqlConcert);
     $resultBand = mysqli_query($conn, $sqlBand);
 
+
 ?>
 
 <!DOCTYPE html>
@@ -36,11 +37,20 @@
 
                     <?php
 
+
                     if (mysqli_num_rows($resultConcert) > 0 and mysqli_num_rows($resultBand) > 0){
-                        while($row = mysqli_fetch_assoc($resultConcert) and $row2 = mysqli_fetch_assoc($resultBand)){
-                            echo "<tr> <td>" . $row['ConcertTimeStart'] . "</td> <td>" . $row['SceneID'] . "</td> <td>" . $row2['BandName'] . "</td> " . "</tr>";
+                        while($row = mysqli_fetch_assoc($resultConcert) and $row2 = mysqli_fetch_assoc($resultBand)) {
+
+                            $BandID = $row['BandID'];
+                            $sqlID = "SELECT * FROM Band WHERE BandID = '$BandID'";
+                            $resultID = mysqli_query($conn, $sqlID);
+                            $row3 = mysqli_fetch_assoc($resultID);
+                            $bandName = $row3['BandName'];
+
+                            echo "<tr> <td>" . $row['ConcertTimeStart'] . "</td> <td>" . $row['SceneID'] . "</td> <td> ". $bandName. "</td></tr>";
                         }
                     }
+
 
                     ?>
 
