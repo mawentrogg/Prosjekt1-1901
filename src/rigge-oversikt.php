@@ -27,15 +27,12 @@
 
 	<table>
 		<tr>
-			<th>Dato/tid</th>
-			<th>Scene</th>
-            <th>Artist</th>
-            <th>Lyd</th>
-            <th>Lys</th>
+			<th>RiggeID</th>
+			<th>RiggeRolle</th>
 		</tr>
 		<tr>
-			<th>HENTINNFRADATABASE</th>
-			<th>HENTINNFRADATABASE</th>
+			<td>HENTINNFRADATABASE</td>
+			<td>HENTINNFRADATABASE</td>
 		</tr>
 
 
