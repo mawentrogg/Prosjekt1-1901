@@ -7,7 +7,7 @@ if(!(isset($_SESSION['u_id']))){
     header("Location: index.html");
 }
 else{
-    if(!($_SESSION['u_username'] == "tech")){
+    if(!($_SESSION['u_role'] == "tech")){
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }

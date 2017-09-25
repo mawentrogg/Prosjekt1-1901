@@ -1,3 +1,5 @@
+<!-- For brukerhistorie 4, Bookingansvarlig skal få oversikt over tekniske behov-->
+
 <?php
 session_start();
 
@@ -5,6 +7,11 @@ session_start();
 if(!(isset($_SESSION['u_id']))){
     header("Location: index.html");
     exit();
+}
+else{
+    if(!($_SESSION['u_role'] == "bookingans")){
+        header("Location: " . $_SESSION['u_role'] . ".php");
+    }
 }
 
 include 'includes/dbh.inc.php';
@@ -39,7 +46,7 @@ $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                echo "<tr> <th>" . $row['BandName'] . "</th> <th>" . $row['BandDemands'] . "</th>" . "</tr>";
+                echo "<tr> <td>" . $row['BandName'] . "</td> <td>" . $row['BandDemands'] . "</td>" . "</tr>";
             }
         }
         ?>
