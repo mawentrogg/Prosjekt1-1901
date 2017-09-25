@@ -32,11 +32,24 @@
             <th>Artist</th>
             <th>Lyd</th>
             <th>Lys</th>
+            <th>Krav</th>
 		</tr>
 		<tr>
-			<th>HENTINNFRADATABASE</th>
-			<th>HENTINNFRADATABASE</th>
+			<th>I morgen</th>
+			<th>Moroscenen</th>
+            <th>Teletubbies</th>
+            <th>Roy Gunnar</th>
+            <th>Vigdis Sløyfrid</th>
+            <th>4 mikrofoner, 8 flasker cava, 3 horer</th>
 		</tr>
+        <tr>
+            <th>18/10</th>
+            <th>Moroscenen</th>
+            <th>Fantorangen</th>
+            <th>Glen Kenneth</th>
+            <th>Mygghild</th>
+            <th></th>
+        </tr>
 
 
 	</table>
