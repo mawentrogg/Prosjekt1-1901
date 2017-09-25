@@ -1,11 +1,16 @@
 <?php
     session_start();
-    include_once 'includes\dbh.inc.php';
-
     //Checking if user is logged in
     if(!(isset($_SESSION['u_id']))){
         header("Location: index.html");
     }
+
+    include_once 'includes/dbh.inc.php';
+    $sqlConcert = "SELECT * FROM Concert";
+    $sqlBand = "SELECT * FROM Band";
+    $resultConcert = mysqli_query($conn, $sqlConcert);
+    $resultBand = mysqli_query($conn, $sqlBand);
+
 ?>
 
 <!DOCTYPE html>
@@ -28,22 +33,17 @@
             			<th>Lys</th>
             			<th>Krav</th>
 					</tr>
-					<tr>
-						<td>I morgen</td>
-						<td>Moroscenen</td>
-            			<td>Teletubbies</td>
-            			<td>Roy Gunnar</td>
-            			<td>Vigdis Sløyfrid</td>
-            			<td>4 mikrofoner, 8 flasker cava, 3 horer</td>
-					</tr>
-					<tr>
-			            <td>18/10</td>
-			            <td>Moroscenen</td>
-			            <td>Fantorangen</td>
-			            <td>Glen Kennetd</td>
-			            <td>Mygghild</td>
-			            <td>Sjokoladekake</td>
-        			</tr>
+
+                    <?php
+
+                    if (mysqli_num_rows($resultConcert) > 0 and mysqli_num_rows($resultBand) > 0){
+                        while($row = mysqli_fetch_assoc($resultConcert) and $row2 = mysqli_fetch_assoc($resultBand)){
+                            echo "<tr> <td>" . $row['ConcertTimeStart'] . "</td> <td>" . $row['SceneID'] . "</td> <td>" . $row2['BandName'] . "</td> " . "</tr>";
+                        }
+                    }
+
+                    ?>
+
 				</table>
 			</div>
 
