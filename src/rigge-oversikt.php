@@ -27,13 +27,30 @@
 
 	<table>
 		<tr>
-			<th>RiggeID</th>
-			<th>RiggeRolle</th>
+			<th>Dato/tid</th>
+			<th>Scene</th>
+            <th>Artist</th>
+            <th>Lyd</th>
+            <th>Lys</th>
+            <th>Krav</th>
 		</tr>
 		<tr>
-			<td>HENTINNFRADATABASE</td>
-			<td>HENTINNFRADATABASE</td>
+			<th>I morgen</th>
+			<th>Moroscenen</th>
+            <td>Teletubbies</td>
+            <td>Roy Gunnar</td>
+            <td>Vigdis Sløyfrid</td>
+            <td>4 mikrofoner, 8 flasker cava, 3 horer</td>
+
 		</tr>
+        <tr>
+            <th>18/10</th>
+            <th>Moroscenen</th>
+            <th>Fantorangen</th>
+            <th>Glen Kenneth</th>
+            <th>Mygghild</th>
+            <th></th>
+        </tr>
 
 
 	</table>
