@@ -16,7 +16,22 @@
 </head>
 <body style="background-color: #3C6E71">
 	<div class="flexBody">
-	<a href="<?php
+    	<div class="flexWrapper">
+   			<p class="insideMenuHeader">Rigge-oversikt</p>
+        	<div class="flexWrapperInside">
+				<table>
+					<tr>
+						<th>RiggeID</th>
+						<th>RiggeRolle</th>
+					</tr>
+					<tr>
+						<td>HENTINNFRADATABASE</td>
+						<td>HENTINNFRADATABASE</td>
+					</tr>
+				</table>
+			</div>
+
+			<a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
                         echo $_SESSION['u_role'] . ".php";
                     }
@@ -25,20 +40,10 @@
                     }
                     ?>">Hjem</a>
 
-	<table>
-		<tr>
-			<th>RiggeID</th>
-			<th>RiggeRolle</th>
-		</tr>
-		<tr>
-			<th>HENTINNFRADATABASE</th>
-			<th>HENTINNFRADATABASE</th>
-		</tr>
-
-
-	</table>
-
+            <form action="includes\logout.inc.php" method="post">
+				<button type="submit" name="submit">Logg ut</button>
+			</form> 
+		</div>
 	</div>
-
 </body>
 </html>
