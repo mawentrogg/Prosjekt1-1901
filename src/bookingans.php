@@ -29,7 +29,10 @@ else{
             <div class="flexWrapperInside">
                 <table>
                     <tr>
-                        <th style="color: white; background-color: #353535;">Oversikt</th>
+                        <th style="color: white; background-color: #353535;">Oversikt:</th>
+                    </tr>
+                    <tr>
+                        <td><a href="band-demands.php">Band Demands</a></td>
                     </tr>
                 </table>
             </div>
