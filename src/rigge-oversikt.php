@@ -16,18 +16,34 @@
 </head>
 <body style="background-color: #3C6E71">
 	<div class="flexBody">
-    	<div class="flexWrapper">
+    	<div style="width:auto" class="flexWrapper">
    			<p class="insideMenuHeader">Rigge-oversikt</p>
         	<div class="flexWrapperInside">
 				<table>
 					<tr>
-						<th>RiggeID</th>
-						<th>RiggeRolle</th>
+						<th>Dato/tid</th>
+						<th>Scene</th>
+            			<th>Artist</th>
+            			<th>Lyd</th>
+            			<th>Lys</th>
+            			<th>Krav</th>
 					</tr>
 					<tr>
-						<td>HENTINNFRADATABASE</td>
-						<td>HENTINNFRADATABASE</td>
+						<td>I morgen</td>
+						<td>Moroscenen</td>
+            			<td>Teletubbies</td>
+            			<td>Roy Gunnar</td>
+            			<td>Vigdis Sløyfrid</td>
+            			<td>4 mikrofoner, 8 flasker cava, 3 horer</td>
 					</tr>
+					<tr>
+			            <td>18/10</td>
+			            <td>Moroscenen</td>
+			            <td>Fantorangen</td>
+			            <td>Glen Kennetd</td>
+			            <td>Mygghild</td>
+			            <td>mat</td>
+        			</tr>
 				</table>
 			</div>
 
@@ -40,43 +56,13 @@
                     }
                     ?>">Hjem</a>
 
-<<<<<<< HEAD
             <form action="includes\logout.inc.php" method="post">
 				<button type="submit" name="submit">Logg ut</button>
 			</form> 
 		</div>
-=======
-	<table>
-		<tr>
-			<th>Dato/tid</th>
-			<th>Scene</th>
-            <th>Artist</th>
-            <th>Lyd</th>
-            <th>Lys</th>
-            <th>Krav</th>
-		</tr>
-		<tr>
-			<th>I morgen</th>
-			<th>Moroscenen</th>
-            <td>Teletubbies</td>
-            <td>Roy Gunnar</td>
-            <td>Vigdis Sløyfrid</td>
-            <td>4 mikrofoner, 8 flasker cava, 3 horer</td>
-
-		</tr>
-        <tr>
-            <th>18/10</th>
-            <th>Moroscenen</th>
-            <th>Fantorangen</th>
-            <th>Glen Kenneth</th>
-            <th>Mygghild</th>
-            <th></th>
-        </tr>
-
 
 	</table>
 
->>>>>>> master
 	</div>
 </body>
 </html>
