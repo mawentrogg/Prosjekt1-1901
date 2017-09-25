@@ -42,7 +42,7 @@
 			            <td>Fantorangen</td>
 			            <td>Glen Kennetd</td>
 			            <td>Mygghild</td>
-			            <td>mat</td>
+			            <td>Sjokoladekake</td>
         			</tr>
 				</table>
 			</div>
