@@ -55,6 +55,7 @@
 	margin-top: 2%;
 }
 
+
 button{
 	display: flex;
 	float: right;
@@ -86,6 +87,12 @@ th, td, tr{
 	padding: 10px;
 	background-color: #b2c2bf;
 	border-radius: 10px;
+	font-family: Consolas;
+}
+
+th{
+	background-color: #353535;
+	color: white;
 }
 
 td:hover{

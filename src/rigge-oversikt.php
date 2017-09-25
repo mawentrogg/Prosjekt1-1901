@@ -37,10 +37,11 @@
 		<tr>
 			<th>I morgen</th>
 			<th>Moroscenen</th>
-            <th>Teletubbies</th>
-            <th>Roy Gunnar</th>
-            <th>Vigdis Sløyfrid</th>
-            <th>4 mikrofoner, 8 flasker cava, 3 horer</th>
+            <td>Teletubbies</td>
+            <td>Roy Gunnar</td>
+            <td>Vigdis Sløyfrid</td>
+            <td>4 mikrofoner, 8 flasker cava, 3 horer</td>
+
 		</tr>
         <tr>
             <th>18/10</th>
