@@ -24,14 +24,14 @@ if(!(isset($_SESSION['u_id']))){
 				<div class="flexWrapperInside">
 					<table>
 						<tr>
-							<th style="color: white; background-color: #353535;">Oversikt</th>
+							<th style="color: white; background-color: #353535;">Oversikt:</th>
 						</tr>
 						<tr>
 							<td><a href="rigge-oversikt.php">Rigge-oversikt</a></td>
 						</tr>
 					</table>
 				</div>
-			</div>
-		</div>
-	</body>
+        </div>
+    </div>
+</body>
 </html>
