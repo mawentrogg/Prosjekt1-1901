@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
         exit();
     }
     else{
-        $sql = "SELECT * FROM Users WHERE user_username='$username'";
+        $sql = "SELECT * FROM Users WHERE UserUsername='$username'";
         $result = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($result);
         if($resultCheck < 1){
@@ -26,15 +26,15 @@ if(isset($_POST['submit'])){
         else{
             if($row = mysqli_fetch_assoc($result)){
                 //Verifying the password
-                if(!($password == $row['user_password'])){
+                if(!($password == $row['UserPassword'])){
                     header("Location: ../index.html?login=error");
                     exit();
                 }
                 else{
                     //Log in the user here!
-                    $_SESSION['u_id'] = $row['user_id'];
-                    $_SESSION['u_role'] = $row['user_role'];
-                    $_SESSION['u_username'] = $row['user_username'];
+                    $_SESSION['u_id'] = $row['UserID'];
+                    $_SESSION['u_role'] = $row['UserRole'];
+                    $_SESSION['u_username'] = $row['UserUsername'];
 
                     header("Location: ../" . $_SESSION['u_role'] . ".php");
                     exit();
