@@ -13,6 +13,8 @@ else{
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }
+include_once 'includes/dbh.inc.php';
+$username = $_SESSION['u_username'];
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +39,21 @@ else{
             <form action="includes/insert-demands.inc.php" method="POST">
                 <p class="indexHeader">Add demands for band/artist</p>
                 <label>Name of band/artist: </label>
-                <input type = text name="BandName">
+
+                    <?php
+                    $sql = "SELECT * FROM Band WHERE Manager = '$username'";
+                    $result = mysqli_query($conn, $sql);
+                    if(mysqli_num_rows($result) > 0){
+                        echo "<select name = 'BandName'>";
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "<option value = " . $row['BandName'] . ">" . $row['BandName'] . "</option>";
+                        }
+                        echo "</select><br>";
+                    }
+                    else{
+                        echo $username . " is not manager of a band <br>";
+                    }
+                    ?>
                 <label>Demands: </label><br>
                 <textarea name="BandDemands" rows="10" cols="80"></textarea>
                 <input type="submit" name = 'submit' value="Add demands"/>
