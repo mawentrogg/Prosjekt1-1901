@@ -34,6 +34,9 @@ else{
                     <tr>
                         <td><a href="band-demands.php">Band Demands</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="rigge-oversikt.php">Riggeoversikt</a></td>
+                    </tr>
                 </table>
             </div>
         </div>
