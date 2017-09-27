@@ -62,10 +62,10 @@
                             $row5 = mysqli_fetch_assoc($resultIDLight);
                             $LightName = $row5['TechName'];
 
-                            echo "<tr> <td>" . $row['ConcertTimeStart'] . "</td> <td>" . $row['SceneID'] . "</td> <td> ". $bandName. "</td> <td> " . $SoundName. "</td> <td>" . $LightName . "</td></tr>";
+                            echo "<tr> <td>" . $row['ConcertTimeStart'] . "</td> <td>" . $row['SceneID'] . "</td> <td> ". $bandName. "</td> <td> " . $SoundName. "</td> <td>" . $LightName . "</td><td><a href='band-demands.php'>Se krav</a></td></tr>";
 
 
-                            
+
 
                         }
                     }
