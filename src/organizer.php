@@ -16,13 +16,13 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Organizer</title>
+	<title>Arrangør</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
 	<div class="flexBody">
 		<div class="flexWrapper">
-			<p class="insideMenuHeader">Organizer//Oversikt</p>
+			<p class="insideMenuHeader">Arrangør//Oversikt</p>
 			<div class="flexWrapperInside">
 				<table>
 					<tr>
