@@ -41,13 +41,32 @@
                     if (mysqli_num_rows($resultConcert) > 0 and mysqli_num_rows($resultBand) > 0){
                         while($row = mysqli_fetch_assoc($resultConcert) and $row2 = mysqli_fetch_assoc($resultBand)) {
 
+
+
+
                             $BandID = $row['BandID'];
                             $sqlID = "SELECT * FROM Band WHERE BandID = '$BandID'";
-                            $resultID = mysqli_query($conn, $sqlID);
-                            $row3 = mysqli_fetch_assoc($resultID);
+                            $resultIDBand = mysqli_query($conn, $sqlID);
+                            $row3 = mysqli_fetch_assoc($resultIDBand);
                             $bandName = $row3['BandName'];
 
-                            echo "<tr> <td>" . $row['ConcertTimeStart'] . "</td> <td>" . $row['SceneID'] . "</td> <td> ". $bandName. "</td></tr>";
+                            $SoundID = $row['SoundID'];
+                            $sqlIDSound = "SELECT * FROM Technicians WHERE TechID = '$SoundID'";
+                            $resultIDSound = mysqli_query($conn, $sqlIDSound);
+                            $row4 = mysqli_fetch_assoc($resultIDSound);
+                            $SoundName = $row4['TechName'];
+
+                            $LightID = $row['LightID'];
+                            $sqlIDLight = "SELECT * FROM Technicians WHERE TechID = '$LightID'";
+                            $resultIDLight = mysqli_query($conn, $sqlIDLight);
+                            $row5 = mysqli_fetch_assoc($resultIDLight);
+                            $LightName = $row5['TechName'];
+
+                            echo "<tr> <td>" . $row['ConcertTimeStart'] . "</td> <td>" . $row['SceneID'] . "</td> <td> ". $bandName. "</td> <td> " . $SoundName. "</td> <td>" . $LightName . "</td></tr>";
+
+
+                            
+
                         }
                     }
 
