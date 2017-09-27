@@ -47,7 +47,18 @@ $username = $_SESSION['u_username'];
                     ?>
                 <label>Demands: </label><br>
                 <textarea name="BandDemands" rows="10" cols="80"></textarea>
+                <a class="hjemButton" href="<?php
+                if(isset($_SESSION['u_id'])){
+                    echo $_SESSION['u_role'] . ".php";
+                }
+                else{
+                    echo "index.html";
+                }
+                ?>">Hjem</a>
                 <input type="submit" name = 'submit' value="Add demands"/>
+            </form>
+            <form action="view-demands-manager.php" method="POST">
+                <input type="submit" name = 'submit' value="View existing demands"/>
             </form>
         </div>
     </div>
