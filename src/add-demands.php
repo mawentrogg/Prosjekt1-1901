@@ -25,17 +25,8 @@ $username = $_SESSION['u_username'];
 </head>
 <body style="background-color: #3C6E71">
 <div class="flexBody">
-    <a href="<?php
-    if(isset($_SESSION['u_id'])){
-        echo $_SESSION['u_role'] . ".php";
-    }
-    else{
-        echo "index.html";
-    }
-    ?>">Hjem</a>
-
-    <div class="indexBody">
-        <div class="indexWrapper">
+    <div class="flexBody">
+        <div style="width:auto" class="flexWrapper">
             <form action="includes/insert-demands.inc.php" method="POST">
                 <p class="indexHeader">Add demands for band/artist</p>
                 <label>Name of band/artist: </label>

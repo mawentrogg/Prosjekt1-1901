@@ -109,7 +109,10 @@ th, td, tr{
 	padding: 10px;
 	background-color: #b2c2bf;
 	border-radius: 10px;
-	font-family: Consolas;
+}
+
+td{
+	word-wrap: break-word;
 }
 
 th{

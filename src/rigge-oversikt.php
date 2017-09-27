@@ -22,7 +22,7 @@
 </head>
 <body style="background-color: #3C6E71">
 	<div class="flexBody">
-    	<div style="width:auto" class="flexWrapper">
+    	<div style="width:auto;height:70vh;" class="flexWrapper">
    			<p class="insideMenuHeader">Rigge-oversikt</p>
         	<div class="flexWrapperInside">
 				<table>
