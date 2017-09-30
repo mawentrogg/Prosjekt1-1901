@@ -34,6 +34,12 @@ $username = $_SESSION['u_username'];
                     <input type="text" name="bandName"><br>
                     Date:<br>
                     <input type="date" name="date"><br>
+                    Time:<br>
+                    <input type="time" name="time"><br>
+                    Length of set in minutes:
+                    <input type="number" name="length"><br>
+                    Stage/scene:<br>
+                    <input type="number" name="scene"><br>
                     Price:<br>
                     <input type="number" name="price"><br>
                     Contact e-mail:<br>
