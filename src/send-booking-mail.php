@@ -13,20 +13,25 @@ $price = $_POST['price'];
 $email = $_POST['email'];
 
 
-$full_date = $date . ' ' . $time;
-$startTime = strtotime($full_date);
+$startTime = date($date . ' ' . $time);
 
-$endTime = strtotime($selectedTime) + $length*60;
+
+
+$endTime = date($date . ' ' . $time); //pluss $length minutter
 
 $sql = "INSERT INTO Booking_Offers (BandName, ConcertTimeStart, ConcertTimeEnd, SceneID, ContactEmail)
 VALUES ('$bandName', '$startTime', '$endTime', $scene, '$email')";
 
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
 
-
-mail($email, utf8_decode("Booking offer for ") . utf8_decode($bandName), 
-"Your band " . $bandName . " has received an offer to play at festiv4len on " . $date . ", " . $time . " on Stage " . $scene . 
-". Your set will last " . $length . " minutes\n\n" . 
+mail($email, utf8_decode("Booking offer for ") . utf8_decode($bandName),
+"Your band " . $bandName . " has received an offer to play at festiv4len on " . $date . ", " . $time . " on Stage " . $scene .
+". Your set will last " . $length . " minutes\n\n" .
 "For the concert, you will be paid " . $price . "kr \n\nClick the following link to review your offer. \n\n\n"
 . "http://org.ntnu.no/festiv4len/booking-reply.php?band=" . $bandName);
 
