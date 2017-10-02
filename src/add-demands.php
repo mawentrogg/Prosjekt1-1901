@@ -28,33 +28,45 @@ $username = $_SESSION['u_username'];
     <div class="flexBody">
         <div style="width:auto" class="flexWrapper">
             <form action="includes/insert-demands.inc.php" method="POST">
-                <p class="indexHeader">Add demands for band/artist</p>
-                <label>Name of band/artist: </label>
+                <p class="indexHeader">Add technical demands for a concert</p>
+                <label>Choose a Concert: </label>
 
                     <?php
-                    $sql = "SELECT * FROM Band WHERE Manager = '$username'";
+
+                    echo "Håvard sender concertID hit!<br>"
+
+                    /*
+
+                    $sql = "SELECT * FROM Concert";
+                    $result = mysqli_query($conn, $sql);
+
+
+                    echo "<select name = 'ConcertID'>";
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<option value = " . $row['ConcertID'] . "> ConcertID: " . $row['ConcertID'] . "</option>";
+                    }
+                    echo "</select><br>";
+                    */
+                    ?>
+                <label>Demands: </label>
+                <?php
+                    $sql = "SELECT * FROM Technical_Demands";
                     $result = mysqli_query($conn, $sql);
                     if(mysqli_num_rows($result) > 0){
-                        echo "<select name = 'BandName'>";
                         while($row = mysqli_fetch_assoc($result)){
-                            echo "<option value = " . $row['BandName'] . ">" . $row['BandName'] . "</option>";
+                            echo "<br><input type = 'checkbox' name = 'ConcertDemands[]' value = " . $row['DemandText'] . ">" . $row['DemandText'] . "</input>";
                         }
-                        echo "</select><br>";
                     }
-                    else{
-                        echo $username . " is not manager of a band <br>";
-                    }
-                    ?>
-                <label>Demands: </label><br>
-                <textarea name="BandDemands" rows="10" cols="80"></textarea>
-                <a class="hjemButton" href="<?php
+
+                ?>
+                <br><br><a class="hjemButton" href="<?php
                 if(isset($_SESSION['u_id'])){
                     echo $_SESSION['u_role'] . ".php";
                 }
                 else{
                     echo "index.html";
                 }
-                ?>">Hjem</a>
+                ?>">Hjem</a><br><br>
                 <input type="submit" name = 'submit' value="Add demands"/>
             </form>
             <form action="view-demands-manager.php" method="POST">
