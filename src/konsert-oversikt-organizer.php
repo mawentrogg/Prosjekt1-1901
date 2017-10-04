@@ -3,7 +3,7 @@
 
 // For brukerhistorie 2, Arrangør skal få oversikt over alle konserter på alle scener
 
-if ($_SESSION["u_role"] == "organizer" || TRUE) {
+if ($_SESSION["u_role"] == "organizer") {
     
     $mysqli = mysqli_connect("mysql.stud.ntnu.no", "kimera_gruppe4", "festiv4l", "kimera_gruppe4");
     
