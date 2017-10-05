@@ -16,7 +16,7 @@ else{
 include_once 'includes/dbh.inc.php';
 $username = $_SESSION['u_username'];
 //$concertID = $_SESSION['concertID'];
-$concertID = 5;
+$concertID = 2;
 
 $sql = "SELECT * FROM Concert WHERE ConcertID = '$concertID'";
 $result = mysqli_query($conn, $sql);
@@ -68,7 +68,7 @@ $bandName = $row['BandName'];
                             echo "<br><input type = 'checkbox' name = 'ConcertDemands[]' value = " . $row['DemandText'] . ">" . $row['DemandText'] . "</input>";
                         }
                     }
-                    echo "<input type = 'hidden' name = 'concertID' value='$concertID'></input>";
+                    echo "<input type = 'hidden' name = 'ConcertID' value='$concertID'></input>";
                 ?>
                 <input type="submit" name ="submit" value="Add demands"/>
             </form>
