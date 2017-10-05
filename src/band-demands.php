@@ -71,9 +71,6 @@ $result = mysqli_query($conn, $sql);
                 $resultdemandID = mysqli_query($conn, $sqldemandID);
                 $row3 = mysqli_fetch_assoc($resultdemandID);
                 $demands;
-                while(){
-
-                }
 
                 echo "<tr> <td>" . "Scene " . $row['SceneID']. " | " . date('d.M.Y H:s',strtotime($row['ConcertTimeStart'])) .  "</td> <td>" . $demands . "</td>" . "</tr>";
         }

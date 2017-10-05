@@ -129,6 +129,24 @@ button:hover{
 	background-color:  #7e9a95;
 }
 
+.helleButton{
+	width: auto;
+	margin-top: 2%;
+	border-radius: 10px;
+	padding: 10px;
+	text-align: center;
+	font-family: Consolas;
+	font-weight: bold;
+	color: black;
+	text-decoration: none;
+	border: 1px solid #353535;
+	background-color: #b2c2bf;
+}
+
+.helleButton: hover{
+	background-color: #7e9a95;
+}
+
 table{
 	width:100%;
 	height: auto;
