@@ -63,6 +63,7 @@
                             $row3 = mysqli_fetch_assoc($resultIDBand);
                             $bandName = $row3['BandName'];
 
+
                             $ConcertID = $row['ConcertID'];
                             $sqlConTech = "SELECT UserID FROM Concerts_UserTechnicians WHERE ConcertID = '$ConcertID'";
                             $resultConTech = mysqli_query($conn, $sqlConTech);
@@ -74,8 +75,9 @@
                             $userName = $usersArray['UserFirstname'];
 
 
+
                             if($_SESSION["u_username"] == $usersArray['UserUsername']){
-                                $style = 'background-color: #384745; color:white; border-radius:5px;';
+                                $style = 'background-color: #88cc88; border-radius:5px;';
                             }
                             else{
                                 $style = 'background-color:#b2c2bf; border-radius:5px;';
