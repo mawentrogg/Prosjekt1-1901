@@ -2,7 +2,8 @@
 session_start();
 include_once 'includes/dbh.inc.php';
 
-$band = $_GET["band"]
+$band = $_GET["band"];
+$val = $_GET["val"];
 
 ?>
 
@@ -38,20 +39,21 @@ $band = $_GET["band"]
               $result = mysqli_query($conn, $sql);
               $offer_result = $result->fetch_all();
 
-              $bandName = $offer_result[0][1];
+              $bandName = $offer_result[0][2];
+              $validation = $offer_result[0][1];
 
 
-              if($band == $bandName)
+              if($band == $bandName and $validation == $val)
               {
 
 
 
 
 
-                $concertStart = $offer_result[0][2];
-                $concertEnd = $offer_result[0][3];
-                $scene = $offer_result[0][4];
-                $email = $offer_result[0][5];
+                $concertStart = $offer_result[0][3];
+                $concertEnd = $offer_result[0][4];
+                $scene = $offer_result[0][5];
+                $email = $offer_result[0][6];
                 $id = $offer_result[0][0];
 
 
