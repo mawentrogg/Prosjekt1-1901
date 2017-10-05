@@ -25,7 +25,20 @@ $username = $_SESSION['u_username'];
 </head>
 <body style="background-color: #3C6E71">
 <div class="flexBody">
-    <div class="flexBody">
+ <div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.html";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
         <div style="width:auto" class="flexWrapper">
             <form action="includes/insert-demands.inc.php" method="POST">
                 <p class="indexHeader">Add technical demands for a concert</p>
@@ -74,8 +87,5 @@ $username = $_SESSION['u_username'];
             </form>
         </div>
     </div>
-
-</div>
-
 </body>
 </html>
