@@ -44,7 +44,7 @@ $val = $_GET["val"];
                 $email = $offer_result[0][6];
                 $id = $offer_result[0][0];
 
-                if ($offer_result[0][6] == 0) {
+
                   echo "<table>
                     <tr>
                       <th>Band</th>
@@ -61,15 +61,18 @@ $val = $_GET["val"];
 
                   </table>";
 
+                  echo $offer_reulst[0][7];
 
+                  if ($offer_result[0][7] == 0) {
 
+                  ob_start();
                   echo '<form method="post"> <input type="submit" value="Accept" name="accept"></form>
                   <form method="post" onsubmit="return confirmDelete();"> <input type="submit" value="Decline" name="decline" ></form>';
 
                   if(isset($_POST['accept'])){
+                    ob_end_clean();
                     $updateAccept = "UPDATE Booking_Offers SET Accepted=1 WHERE BookingOfferID=" . $id;
                     if ($conn->query($updateAccept) === TRUE) {
-                        echo "Record updated successfully";
                         $sql2 = "INSERT IGNORE INTO Band (BandName, Manager)
                         VALUES ('$bandName', '$email')";
 
@@ -90,12 +93,12 @@ $val = $_GET["val"];
                             $_SESSION['concertID'] = $concertResult[0][0];
 
                             $concertID2 = $concertResult[0][0];
-                            echo '<p>The Offer has been accepted, you will be redirected to Add Demands in <span id="counter">3</span> second(s).<br><br></p>';
+                            echo 'The Offer has been accepted, click below to add technical demands<br>';
 
 
-                            echo "Your concert ID: " . $concertID2;
+                            echo "Your concert ID: <br><br>" . $concertID2;
 
-                            header('refresh: 3; url=add-demands.php');
+                            echo '<form action="add-demands.php"> <input type="submit" value="Add demands"></form>';
 
                           } else {
                               echo "Error: " . $sql4 . "<br>" . $conn->error;
@@ -131,12 +134,11 @@ $val = $_GET["val"];
 
                   $_SESSION['concertID'] = $concertResult[0][0];
                   $concertID2 = $concertResult[0][0];
-                  echo '<p>You have already accepted the offer, and will be redirected to Add Demands in <span id="counter">5</span> second(s).<br><br></p>';
-
+                  echo '<p>You have already accepted the offer, click below to add technical demands.<br><br></p>';
 
                   echo "Your concert ID: " . $concertID2;
 
-                  header('refresh: 5; url=add-demands.php');
+                  echo '<form action="add-demands.php"> <input type="submit" value="Add demands"></form>';
 
                 }
               } else {
