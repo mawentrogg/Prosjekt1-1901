@@ -27,7 +27,7 @@ $val = $_GET["val"];
             <div class="flexWrapperInside" style="background-color: #353535">
 
               <?php
-              $sql = "SELECT * FROM Booking_Offers WHERE bandName = '$band'";
+              $sql = "SELECT * FROM Booking_Offers WHERE bandName = '$band' AND Validation = $val";
               $result = mysqli_query($conn, $sql);
               $offer_result = $result->fetch_all();
 
