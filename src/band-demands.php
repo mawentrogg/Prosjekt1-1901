@@ -60,6 +60,10 @@ $result = mysqli_query($conn, $sql);
         ?>
     </table>
     </div>
+
+
+        <a class="hjemButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
+
     </div>
 </div>
 </body>
