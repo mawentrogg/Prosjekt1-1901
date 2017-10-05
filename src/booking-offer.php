@@ -23,20 +23,6 @@ $username = $_SESSION['u_username'];
 </head>
 <body style="background-color: #3C6E71">
     <div class="flexBody">
-    <div class="flexTop">
-        <a class="hjemButton" href="<?php
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.html";
-                    }
-                    ?>">Hjem</a>
-        <p class="superHeader">Festiv4len</p>
-        <form action="includes\logout.inc.php" method="post">
-            <button type="submit" name="submit">Logg ut</button>
-        </form> 
-    </div>
         <div style="width:auto;height:70vh;" class="flexWrapper">
             <p class="insideMenuHeader">Send booking offer</p>
             <div class="flexWrapperInside" style="background-color: #353535">
@@ -67,8 +53,30 @@ $username = $_SESSION['u_username'];
                       session_destroy();
                     }
                 ?>
+                            
+
+
+
+
+
             </div>
+
+            <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.html";
+                    }
+                    ?>">Hjem</a>
+
+            <form action="includes\logout.inc.php" method="post">
+                <button type="submit" name="submit">Logg ut</button>
+            </form> 
         </div>
+
+    </table>
+
     </div>
 </body>
 </html>
