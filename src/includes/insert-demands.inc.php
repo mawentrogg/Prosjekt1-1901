@@ -2,47 +2,20 @@
 
 session_start();
 
-if (isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
     include_once 'dbh.inc.php';
 
-    $BandName = mysqli_real_escape_string($conn, $_POST['BandName']);
-    $BandDemands = mysqli_real_escape_string($conn, $_POST['BandDemands']);
+    $ConcertID = $_POST['ConcertID'];
+    $ConcertDemands = $_POST['ConcertDemands'];
 
-
-    //Error handlers
-
-    //Check for empty fields
-    if(empty($BandName) || empty($BandDemands)){
-        header("Location: ../add-demands.php?demands=empty");
-        exit();
-    }
-    else{
-        $username = $_SESSION['u_username'];
-        $sql = "SELECT * FROM Band WHERE BandName = '$BandName'";
-        $result = mysqli_query($conn, $sql);
-
-        if (!(mysqli_num_rows($result) == 1)) {
-            header("Location: ../add-demands.php?demands=BandNotFound");
-            exit();
-        }
-        else{
-            while($row = mysqli_fetch_assoc($result)) {
-                if($row['Manager'] == $username){
-                    $sql = "UPDATE Band SET BandDemands = '$BandDemands' WHERE BandName = '$BandName';";
-                    mysqli_query($conn, $sql);
-                    header("Location: ../add-demands.php?demands=success");
-                    exit();
-                }
-                else{
-                    header("Location: ../add-demands.php?demands=erroasdr" . $username . "asdasd");
-                    exit();
-                }
-            }
-        }
-
+    foreach ($ConcertDemands as  &$value){
+        $sql = "INSERT INTO Concert_Demands (ConcertID, Demand) VALUES ('$ConcertID', '$value')";
+        mysqli_query($conn, $sql);
     }
 
+    header("Location: ../add-demands.php?DemandsAdded");
+    exit();
 }
 else {
     header("Location: ../index.html");

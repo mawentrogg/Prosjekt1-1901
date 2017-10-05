@@ -40,6 +40,9 @@ else{
                     <tr>
                         <td><a href="rigge-oversikt.php">Riggeoversikt</a></td>
                     </tr>
+                    <tr>
+                    <td><a href="band.php">Band-oversikt</a></td>
+                </tr>
                 </table>
             </div>
         </div>

@@ -28,6 +28,10 @@ else{
 					<tr>
 						<td><a href="rigge-oversikt.php">Rigge-oversikt</a></td>
 					</tr>
+					<tr>
+						<td><a href="konsert-oversikt-organizer.php">Konsert-oversikt</a></td>
+					</tr>
+					
 				</table>
 			</div>
 			<form action="includes\logout.inc.php" method="post">

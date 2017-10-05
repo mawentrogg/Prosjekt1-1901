@@ -37,7 +37,7 @@
 	display: flex;
 	background-color: #353535;
 	justify-content: center;
-	flex-direction: column;	
+	flex-direction: column;
 	height: 50%;
 	width: 50%;
 	padding: 15px;
@@ -110,6 +110,21 @@ th, td, tr{
 	background-color: #b2c2bf;
 	border-radius: 10px;
 }
+
+<<<<<<< HEAD
+=======
+.finished > td{
+  background-color: #57625f;
+}
+
+.started > td{
+  background-color: #88cc88;
+}
+
+.unStarted > td{
+  background-color: #99c5aa;
+}
+
 
 th{
 	background-color: #353535;
