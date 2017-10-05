@@ -22,10 +22,21 @@ else{
 <body style="background-color: #3C6E71">
 
     <div class="flexBody">
+    <div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.html";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
         <div class="flexWrapper">
-            <form action="includes\logout.inc.php" method="post">
-                <button type="submit" name="submit">Logg ut</button>
-            </form>
             <div class="flexWrapperInside">
                 <table>
                     <tr>
