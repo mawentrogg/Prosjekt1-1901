@@ -15,14 +15,15 @@ else{
 }
 
 include 'includes/dbh.inc.php';
-$sql = "SELECT * FROM Band";
+$sql = "SELECT * FROM Concert";
 $result = mysqli_query($conn, $sql);
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Band Demands</title>
+    <title>Konsertkrav</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
@@ -42,27 +43,49 @@ $result = mysqli_query($conn, $sql);
         </form> 
     </div>
     <div style="width:auto;height:auto" class="flexWrapper">
-    <p class="insideMenuHeader">Band-krav</p>
+        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
+            <?php
+            $userLoggedIn = $_SESSION["u_username"];
+            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
+            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
+            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
+            $firstName = $usersArrayTop["UserFirstname"];
+            echo $firstName;
+            ?></p>
+
+    <p class="insideMenuHeader">Konsertkrav</p>
     <div class="flexWrapperInside">
     <table>
         <tr>
-            <th>Band</th>
-            <th>Demands</th>
+            <th>Konsert</th>
+            <th>Tekniske krav</th>
         </tr>
         <?php
 
         if (mysqli_num_rows($result) > 0) {
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                echo "<tr> <td>" . $row['BandName'] . "</td> <td>" . $row['BandDemands'] . "</td>" . "</tr>";
-            }
+
+                $concertID = $row['ConcertID'];
+                $sqldemandID = "SELECT * FROM Concert_Demands WHERE ConcertID = '$concertID'";
+                $resultdemandID = mysqli_query($conn, $sqldemandID);
+                $row3 = mysqli_fetch_assoc($resultdemandID);
+                $demands;
+                while(){
+
+                }
+
+                echo "<tr> <td>" . "Scene " . $row['SceneID']. " | " . date('d.M.Y H:s',strtotime($row['ConcertTimeStart'])) .  "</td> <td>" . $demands . "</td>" . "</tr>";
         }
+        }
+
+
         ?>
     </table>
     </div>
 
 
-        <a class="hjemButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
+        <a class="helleButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
 
     </div>
 </div>
