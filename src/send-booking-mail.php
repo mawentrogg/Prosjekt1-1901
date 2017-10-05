@@ -4,7 +4,7 @@ session_start();
 include_once 'includes/dbh.inc.php';
 
 
-$bandName = $_POST['bandName'];
+$bandName = str_replace(' ', '_', $_POST['bandName']);
 $date = $_POST['date'];
 $time = $_POST['time'];
 $length = $_POST['length'];
@@ -12,6 +12,7 @@ $scene = $_POST['scene'];
 $price = $_POST['price'];
 $email = $_POST['email'];
 $val = rand();
+
 
 
 $startTime = date($date . ' ' . $time);
