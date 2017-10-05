@@ -136,6 +136,7 @@ $band = $_GET["band"]
 
                     if ($conn->query($delete) === TRUE) {
                         echo "Offer declined";
+                        header("Refresh:3");
                     } else {
                         echo "Error deleting offer: " . $conn->error;
                     }
