@@ -18,14 +18,6 @@ $val = $_GET["val"];
       function confirmDelete() {
         return confirm("Are you sure you want to decline the offer?");
       }
-
-
-
-
-
-
-
-
     </script>
 </head>
 <body style="background-color: #3C6E71">
@@ -46,23 +38,13 @@ $val = $_GET["val"];
               if($band == $bandName and $validation == $val)
               {
 
-
-
-
-
                 $concertStart = $offer_result[0][3];
                 $concertEnd = $offer_result[0][4];
                 $scene = $offer_result[0][5];
                 $email = $offer_result[0][6];
                 $id = $offer_result[0][0];
 
-
-
-
-
                 if ($offer_result[0][6] == 0) {
-
-
                   echo "<table>
                     <tr>
                       <th>Band</th>
@@ -115,8 +97,6 @@ $val = $_GET["val"];
 
                             header('refresh: 3; url=add-demands.php');
 
-
-
                           } else {
                               echo "Error: " . $sql4 . "<br>" . $conn->error;
                           }
@@ -126,12 +106,6 @@ $val = $_GET["val"];
                     } else {
                         echo "Error updating record: " . $conn->error;
                     }
-
-
-
-
-
-
                   }
                   if(isset($_POST['decline'])){
                     $delete = "DELETE FROM Booking_Offers WHERE BandName= '$band'";
@@ -144,11 +118,6 @@ $val = $_GET["val"];
                     }
                   }
 
-
-
-
-
-
                 } else {
 
                   $bands = "SELECT * FROM Band WHERE bandName = '$band'";
@@ -159,10 +128,6 @@ $val = $_GET["val"];
                   $concert = "SELECT * FROM Concert WHERE BandID = " . $BandID;
                   $result3 = mysqli_query($conn, $concert);
                   $concertResult = $result3->fetch_all();
-
-
-
-
 
                   $_SESSION['concertID'] = $concertResult[0][0];
                   $concertID2 = $concertResult[0][0];
@@ -177,16 +142,7 @@ $val = $_GET["val"];
               } else {
                 echo "Your band " . $band . "does not have an offer";
               }
-
-
-
               ?>
-
-
-
-
-
-
 
             </div>
 
