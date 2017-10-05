@@ -3,20 +3,18 @@
 <?php
 session_start();
 
+
 //Checking if user is logged in
-if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+if(!(isset($_SESSION['concertID']))){
+    header("Location: index.html?Denied");
     exit();
 }
-else{
-    if(!($_SESSION['u_role'] == "manager")){
-        header("Location: " . $_SESSION['u_role'] . ".php");
-    }
-}
+
+
 include_once 'includes/dbh.inc.php';
 $username = $_SESSION['u_username'];
-//$concertID = $_SESSION['concertID'];
-$concertID = 2;
+$concertID = $_SESSION['concertID'];
+//$concertID = 2;
 
 $sql = "SELECT * FROM Concert WHERE ConcertID = '$concertID'";
 $result = mysqli_query($conn, $sql);
