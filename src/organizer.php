@@ -20,8 +20,7 @@ else{
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-	<div class="flexBody">
-	<div class="flexTop">
+<div class="flexTop">
         <a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
                         echo $_SESSION['u_role'] . ".php";
@@ -35,6 +34,7 @@ else{
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
+	<div class="flexBody">
 		<div class="flexWrapper">
 			<p class="insideMenuHeader">Arrangør//Oversikt</p>
 			<div class="flexWrapperInside">
