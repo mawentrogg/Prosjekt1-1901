@@ -111,10 +111,6 @@ th, td, tr{
 	border-radius: 10px;
 }
 
-td{
-	word-wrap: break-word;
-}
-
 th{
 	background-color: #353535;
 	color: white;

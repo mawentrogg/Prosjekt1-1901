@@ -24,10 +24,15 @@ $band = $_GET["band"]
               $sql = "SELECT * FROM Booking_Offers WHERE bandName = '$band'";
               $result = mysqli_query($conn, $sql);
               $offer_result = $result->fetch_all();
-              print_r($offer_result);
               if ($offer_result[0][6] == 0) {
+                <table>
+                  <tr>
+                    <th>
+                  </tr>
+                </table>
                 echo "ikke accepted";
-                //godta/ikke-godta
+                echo '<input type="submit" value="Accept">
+                <input type="submit" value="Decline">';
                 //legg til band
                 //legg til konsert
               } else {
