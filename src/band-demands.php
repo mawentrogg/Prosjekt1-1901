@@ -55,9 +55,7 @@ $result = mysqli_query($conn, $sql);
                     }
                     ?>">Hjem</a>
 
-    <form action="includes\logout.inc.php" method="post">
-        <button type="submit" name="submit">Logg ut</button>
-    </form> 
+        <a class="hjemButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
     </div>
 </div>
 </body>

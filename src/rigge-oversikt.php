@@ -29,7 +29,7 @@
 
         echo $firstName;
         ?></p>
-   			<p class="insideMenuHeader">Rigge-oversikt</p> 
+   			<p class="insideMenuHeader">Rigge-oversikt</p>
         	<div class="flexWrapperInside">
 				<table>
 					<tr>
@@ -37,7 +37,6 @@
 						<th>Scene</th>
             			<th>Artist</th>
             			<th>Tekniker</th>
-            			<th>Krav</th>
 					</tr>
 
                     <?php
@@ -68,7 +67,7 @@
                                 $style = 'background-color:#b2c2bf; border-radius:5px;';
                             }
 
-                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart'] . "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td><td style='$style;'><a style='$style;'href='band-demands.php'>Se krav</a></td></tr>";
+                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart'] . "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td></tr>";
                         }
                     }
 
@@ -78,18 +77,8 @@
 				</table>
 			</div>
 
-			<a class="hjemButton" href="<?php
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.html";
-                    }
-                    ?>">Hjem</a>
+            <a class='hjemButton' style='$style;'href='band-demands.php'>Se krav</a>
 
-            <form action="includes\logout.inc.php" method="post">
-				<button type="submit" name="submit">Logg ut</button>
-			</form> 
 		</div>
 
 	</table>
