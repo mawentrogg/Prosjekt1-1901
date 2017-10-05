@@ -91,7 +91,7 @@
 
 			</div>
 
-            <a class='hjemButton' style='$style;'href='band-demands.php'>Se krav</a>
+            <a class='helleButton' style='$style;'href='band-demands.php'>Se krav</a>
 			</div> 
 
 		</div>
