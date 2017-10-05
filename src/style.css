@@ -111,6 +111,18 @@ th, td, tr{
 	border-radius: 10px;
 }
 
+.finished > td{
+  background-color: #57625f;
+}
+
+.started > td{
+  background-color: #88cc88;
+}
+
+.unStarted > td{
+  background-color: #99c5aa;
+}
+
 th{
 	background-color: #353535;
 	color: white;
@@ -151,3 +163,7 @@ input[type=submit]{
 input[type=submit]:hover{
 	background-color: #45a049;
 }
+
+
+
+
