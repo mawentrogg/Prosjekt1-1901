@@ -42,6 +42,9 @@ else{
                     <tr>
                         <th style="color: white; background-color: #353535;">Oversikt</th>
                     </tr>
+                    <tr>
+                        <td><a href="concert-report.php">Se konsertrapport</a></td>
+                    </tr>
                 </table>
             </div>
         </div>
