@@ -65,37 +65,55 @@ include 'includes/dbh.inc.php';
                 </tr>
 
                 <?php
-                    $sqlReport = "SELECT * FROM Concert_Report";
-                    $resultReport = mysqli_query($conn, $sqlReport);
-                    while($row = mysqli_fetch_assoc($resultReport)){
+                    $sqlConcert = "SELECT * FROM Concert";
+                    $resultConcert = mysqli_query($conn, $sqlConcert);
+                    while($row = mysqli_fetch_assoc($resultConcert)){
 
-                        //Getting BandID and date from concertID
-                        $concertID = $row['ConcertID'];
-                        $sqlConcert = "SELECT * FROM Concert WHERE ConcertID = '$concertID'";
-                        $resultConcert = mysqli_query($conn, $sqlConcert);
-                        $concertArray = mysqli_fetch_assoc($resultConcert);
-                        $bandID = $concertArray['BandID'];
-                        $date = date('d.M.Y H:s', strtotime($concertArray['ConcertTimeStart']));
+                        //Checking if concert is to be added, based on date
+                        $currentTime = time();
+                        $dateSeconds = strtotime($row['ConcertTimeStart']);
 
-                        //Getting bandName from BandID
-                        $sqlBand = "SELECT * FROM Band WHERE BandID = '$bandID'";
-                        $resultBand = mysqli_query($conn, $sqlBand);
-                        $bandArray = mysqli_fetch_assoc($resultBand);
-                        $bandName = $bandArray['BandName'];
+                        if($currentTime > $dateSeconds){
+                            //Getting BandID and date
+                            $bandID = $row['BandID'];
+                            $date = date('d.M.Y H:s', strtotime($row['ConcertTimeStart']));
 
-                        //Getting bandGenre from BandID
-                        $sqlBand = "SELECT * FROM BandInfo WHERE BandID = '$bandID'";
-                        $resultBand = mysqli_query($conn, $sqlBand);
-                        $bandArray = mysqli_fetch_assoc($resultBand);
-                        $bandGenre = $bandArray['Genre'];
+                            //Getting bandName from BandID
+                            $sqlBand = "SELECT * FROM Band WHERE BandID = '$bandID'";
+                            $resultBand = mysqli_query($conn, $sqlBand);
+                            $bandArray = mysqli_fetch_assoc($resultBand);
+                            $bandName = $bandArray['BandName'];
 
-                        //Beregne fortjeneste
-                        $outcome = $row['Outcome'];
-                        $income = $row['Income'];
-                        $profit = $income - $outcome;
+                            //Getting bandGenre from BandID
+                            $sqlBand = "SELECT * FROM BandInfo WHERE BandID = '$bandID'";
+                            $resultBand = mysqli_query($conn, $sqlBand);
+                            $bandArray = mysqli_fetch_assoc($resultBand);
+                            $bandGenre = $bandArray['Genre'];
 
-                        echo "<tr><td>" . $date . "</td> <td>" . $bandName . "</td> <td>" . $bandGenre . "</td> <td>" . $row['Attendance'] . "</td> 
-                               <td>" . $income . ",-</td>  <td>" . $outcome . ",-</td>   <td>" . $profit . ",-</td>";
+                            //Getting attendance and economy from ConcertID
+                            $concertID = $row['ConcertID'];
+                            $sqlReport = "SELECT * FROM Concert_Report WHERE ConcertID = '$concertID'";
+                            $resultReport = mysqli_query($conn, $sqlReport);
+                            $reportArray = mysqli_fetch_assoc($resultReport);
+                            $attendance = $reportArray['Attendance'];
+                            $outcome = $reportArray['Outcome'];
+                            $income = $reportArray['Income'];
+                            $profit = $income - $outcome;
+
+
+                            echo "<tr><td>" . $date . "</td> <td>" . $bandName . "</td> <td>" . $bandGenre . "</td> <td>" . $attendance . "</td> 
+                            <td>" . $income . ",-</td>  <td>" . $outcome . ",-</td>   <td>" . $profit . ",-</td>";
+                        }
+
+
+
+
+                        if($currentTime > $dateSeconds){
+
+
+
+
+                        }
                     }
 
 
