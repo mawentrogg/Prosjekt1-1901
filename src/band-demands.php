@@ -88,11 +88,19 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
                             $style = 'background-color:#b2c2bf; border-radius:5px;';
                         }
 
+                        //Finner demand
                         $sqlDemand = "SELECT * FROM Concert_Demands WHERE ConcertID = '$ConcertID'";
                         $resultDemand = mysqli_query($conn, $sqlDemand);
                         $demandArray = mysqli_fetch_assoc($resultDemand);
 
-                        echo "<tr> <td style='$style;'>" . "Scene " . $row['SceneID'] . " | " . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . "</td> <td style='$style'>" . $demandArray['Demand']  . "</td>" . "</tr>";
+                        $outDemand = "";
+                        while($rowDemand = mysqli_fetch_assoc($resultDemand)){
+                            $outDemand = $outDemand. $rowDemand['Demand'] . ", ";
+                        }
+
+                        $outDemand = substr($outDemand, 0,-2);
+
+                        echo "<tr> <td style='$style;'>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . " | " . "Scene " . $row['SceneID']  . "</td> <td style='$style'>" . $outDemand  . "</td>" . "</tr>";
                     }
 
                 }
