@@ -15,10 +15,10 @@ include_once 'includes/dbh.inc.php';
 <body style="background-color: #3C6E71">
     <div class="flexBody">
         <div style="width:auto;height:70vh;" class="flexWrapper">
-            <p class="insideMenuHeader">New booking-url</p>
+            <p class="insideMenuHeader">Resend booking offers</p>
             <div class="flexWrapperInside" style="background-color: #353535">
               <form action="send-ny-mail.php" method="post">
-                Enter your email address below, and we’ll send you a new link to review your offer. <br>
+                Enter your email address below, and we’ll send you a new email to review your booking offers. <br>
                   <input type="email" name="email"><br>
                   <input type="submit" value="Send">
               </form>
