@@ -35,7 +35,7 @@ else{
         </form> 
     </div>
     <div style="margin:0;height:100%;" class="flexBody">
-        <div style="width:auto;height:100%;" class="flexWrapper">
+        <div style="height:80vh;" class="flexWrapper">
             <p class="insideMenuHeader">Konsert-oversikt</p> 
                 <div class="flexWrapperInside">
 
@@ -126,6 +126,12 @@ if ($_SESSION["u_role"] == "organizer") { // TODO: remove || TRUE
             
             $concert_time_start = $row["ConcertTimeStart"];
             $concert_time_end = $row["ConcertTimeEnd"];
+
+            //Strings to display time
+            $displayStart = strtotime($concert_time_start);
+            $displayStart = date('d.M.Y H:s', $displayStart);
+            $displayEnd = strtotime($concert_time_end);
+            $displayEnd = date('H:s', $displayEnd);
             
             $unix_concert_time_start = strtotime($concert_time_start);
             $unix_concert_time_end = strtotime($concert_time_end);
@@ -147,8 +153,8 @@ if ($_SESSION["u_role"] == "organizer") { // TODO: remove || TRUE
             echo "<tr class='$concert_row_class'>\r\n"
                     . "<td>$band_name</td>"
                     . "<td>$scene_name</td>"
-                    . "<td>$concert_time_start</td>"
-                    . "<td>$concert_time_end</td>"
+                    . "<td>$displayStart</td>"
+                    . "<td>$displayEnd</td>"
                     . "</tr>\r\n";
         }
 

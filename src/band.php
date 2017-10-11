@@ -18,8 +18,22 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-	<div class="flexBody">
-    	<div style="width:auto;height:70vh;" class="flexWrapper">
+<div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.html";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
+	<div style="margin:0; height:100%" class="flexBody">
+    	<div style="height:80vh;" class="flexWrapper">
         
         <?php
             $conn = mysqli_connect("mysql.stud.ntnu.no", "kimera_gruppe4", "festiv4l", "kimera_gruppe4");
@@ -32,7 +46,7 @@
                         FROM Band 
                         INNER JOIN BandInfo ON Band.BandID=BandInfo.BandID";
             ?>
-            <p class="insideMenuHeader">Rigge-oversikt</p>
+            <p class="insideMenuHeader">Band-oversikt</p>
         	<div class="flexWrapperInside">
                 <?php
                 if($result = mysqli_query($conn, $bandQuery)) {
@@ -69,21 +83,7 @@
                    }
                    mysqli_close($conn);
                 ?>
-            </div>
-
-            <a class="hjemButton" href="<?php
-            //From "rigge-oversikt.php"
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.html";
-                    }
-                    ?>">Hjem</a>
-
-            <form action="includes\logout.inc.php" method="post">
-				<button type="submit" name="submit">Logg ut</button>
-			</form> 
+            </div> 
 		</div>
 
 	</table>

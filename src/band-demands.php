@@ -15,51 +15,104 @@ else{
 }
 
 include 'includes/dbh.inc.php';
-$sql = "SELECT * FROM Band";
-$result = mysqli_query($conn, $sql);
+$sqlConcert = "SELECT * FROM Concert";
+$sqlConcertDemands = "SELECT * FROM Concert_Demands";
+$resultConcert = mysqli_query($conn, $sqlConcert);
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Band Demands</title>
+    <title>Konsertkrav</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
 <div class="flexBody">
-<div class="flexTop">
+    <div class="flexTop">
         <a class="hjemButton" href="<?php
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.html";
-                    }
-                    ?>">Hjem</a>
+        if(isset($_SESSION['u_id'])){
+            echo $_SESSION['u_role'] . ".php";
+        }
+        else{
+            echo "index.html";
+        }
+        ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
         <form action="includes\logout.inc.php" method="post">
             <button type="submit" name="submit">Logg ut</button>
-        </form> 
+        </form>
     </div>
-    <div style="width:auto;height:auto" class="flexWrapper">
-    <p class="insideMenuHeader">Band-krav</p>
-    <div class="flexWrapperInside">
-    <table>
-        <tr>
-            <th>Band</th>
-            <th>Demands</th>
-        </tr>
-        <?php
+    <div style="width:auto;height:70vh;" class="flexWrapper">
+        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
+            <?php
+            $userLoggedIn = $_SESSION["u_username"];
+            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
+            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
+            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
+            $firstName = $usersArrayTop["UserFirstname"];
 
-        if (mysqli_num_rows($result) > 0) {
-            // output data of each row
-            while($row = mysqli_fetch_assoc($result)) {
-                echo "<tr> <td>" . $row['BandName'] . "</td> <td>" . $row['BandDemands'] . "</td>" . "</tr>";
-            }
-        }
-        ?>
-    </table>
-    </div>
+            echo $firstName;
+            ?></p>
+
+        <p class="insideMenuHeader">Konsertkrav</p>
+        <div class="flexWrapperInside">
+            <table>
+                <tr>
+                    <th>Konsert</th>
+                    <th>Tekniske krav</th>
+                </tr>
+                <?php
+
+                if (mysqli_num_rows($resultConcert)){
+                    while($row = mysqli_fetch_assoc($resultConcert)) {
+
+
+                        $ConcertID = $row['ConcertID'];
+                        $sqlConTech = "SELECT UserID FROM Concerts_UserTechnicians WHERE ConcertID = '$ConcertID'";
+                        $resultConTech = mysqli_query($conn, $sqlConTech);
+                        $conTechArray = mysqli_fetch_assoc($resultConTech);
+
+                        //finner brukernavn slik at vi kan sjekke om den brukeren er innlogget og linja markeres grønt
+                        $userIDConTech = $conTechArray['UserID'];
+                        $sqlUsers = "SELECT * FROM Users WHERE UserID = '$userIDConTech'";
+                        $resultUsers = mysqli_query($conn, $sqlUsers);
+                        $usersArray= mysqli_fetch_assoc($resultUsers);
+                        $userName = $usersArray['UserFirstname'];
+
+                        //endrer bakgrunnsfarge dersom gjeldende bruker er pålogget
+                        if($_SESSION["u_username"] == $usersArray['UserUsername']){
+                            $style = 'background-color: #88cc88; border-radius:5px;';
+                        }
+                        else{
+                            $style = 'background-color:#b2c2bf; border-radius:5px;';
+                        }
+
+                        //Finner demand
+                        $sqlDemand = "SELECT * FROM Concert_Demands WHERE ConcertID = '$ConcertID'";
+                        $resultDemand = mysqli_query($conn, $sqlDemand);
+                        $demandArray = mysqli_fetch_assoc($resultDemand);
+
+                        $outDemand = "";
+                        while($rowDemand = mysqli_fetch_assoc($resultDemand)){
+                            $outDemand = $outDemand. $rowDemand['Demand'] . ", ";
+                        }
+
+                        $outDemand = substr($outDemand, 0,-2);
+
+                        echo "<tr> <td style='$style;'>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . " | " . "Scene " . $row['SceneID']  . "</td> <td style='$style'>" . $outDemand  . "</td>" . "</tr>";
+                    }
+
+                }
+
+
+                ?>
+            </table>
+        </div>
+
+
+        <a class="helleButton" style='$style;'href='bookingans.php'>Tilbake</a>
+
     </div>
 </div>
 </body>

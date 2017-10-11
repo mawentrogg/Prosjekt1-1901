@@ -3,18 +3,32 @@
 <?php
 session_start();
 
+
 //Checking if user is logged in
-if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+if(!(isset($_SESSION['concertID']))){
+    header("Location: index.html?Denied");
     exit();
 }
-else{
-    if(!($_SESSION['u_role'] == "manager")){
-        header("Location: " . $_SESSION['u_role'] . ".php");
-    }
-}
+
+
 include_once 'includes/dbh.inc.php';
 $username = $_SESSION['u_username'];
+$concertID = $_SESSION['concertID'];
+//$concertID = 2;
+
+$sql = "SELECT * FROM Concert WHERE ConcertID = '$concertID'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$bandID = $row['BandID'];
+$date = strtotime($row['ConcertTimeStart']);
+$date = date('d.M.Y H:s', $date);
+
+$sql = "SELECT * FROM Band WHERE BandID = '$bandID'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$bandName = $row['BandName'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -41,26 +55,8 @@ $username = $_SESSION['u_username'];
     </div>
         <div style="width:auto" class="flexWrapper">
             <form action="includes/insert-demands.inc.php" method="POST">
-                <p class="indexHeader">Add technical demands for a concert</p>
-                <label>Choose a Concert: </label>
+                <?php echo "<p class='indexHeader'>Technical demands: <br> " . $bandName . " - " . $date . "</p>"; ?>
 
-                    <?php
-
-                    echo "Håvard sender concertID hit!<br>"
-
-                    /*
-
-                    $sql = "SELECT * FROM Concert";
-                    $result = mysqli_query($conn, $sql);
-
-
-                    echo "<select name = 'ConcertID'>";
-                    while($row = mysqli_fetch_assoc($result)){
-                        echo "<option value = " . $row['ConcertID'] . "> ConcertID: " . $row['ConcertID'] . "</option>";
-                    }
-                    echo "</select><br>";
-                    */
-                    ?>
                 <label>Demands: </label>
                 <?php
                     $sql = "SELECT * FROM Technical_Demands";
@@ -70,20 +66,9 @@ $username = $_SESSION['u_username'];
                             echo "<br><input type = 'checkbox' name = 'ConcertDemands[]' value = " . $row['DemandText'] . ">" . $row['DemandText'] . "</input>";
                         }
                     }
-
+                    echo "<input type = 'hidden' name = 'ConcertID' value='$concertID'></input>";
                 ?>
-                <br><br><a class="hjemButton" href="<?php
-                if(isset($_SESSION['u_id'])){
-                    echo $_SESSION['u_role'] . ".php";
-                }
-                else{
-                    echo "index.html";
-                }
-                ?>">Hjem</a><br><br>
-                <input type="submit" name = 'submit' value="Add demands"/>
-            </form>
-            <form action="view-demands-manager.php" method="POST">
-                <input type="submit" name = 'submit' value="View existing demands"/>
+                <input type="submit" name ="submit" value="Add demands"/>
             </form>
         </div>
     </div>

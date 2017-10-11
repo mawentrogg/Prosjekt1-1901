@@ -32,7 +32,7 @@
         </form> 
     </div>
 	<div style="margin:0;height:100%;" class="flexBody">
-    	<div style="width:auto;height:70vh;" class="flexWrapper">
+    	<div style="height:80vh;" class="flexWrapper">
         <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
         <?php
         $userLoggedIn = $_SESSION["u_username"];
@@ -43,7 +43,7 @@
 
         echo $firstName;
         ?></p>
-   			<p class="insideMenuHeader">Rigge-oversikt</p> 
+   			<p class="insideMenuHeader">Rigge-oversikt</p>
         	<div class="flexWrapperInside">
 				<table>
 					<tr>
@@ -51,7 +51,6 @@
 						<th>Scene</th>
             			<th>Artist</th>
             			<th>Tekniker</th>
-            			<th>Krav</th>
 					</tr>
 
                     <?php
@@ -64,6 +63,7 @@
                             $row3 = mysqli_fetch_assoc($resultIDBand);
                             $bandName = $row3['BandName'];
 
+
                             $ConcertID = $row['ConcertID'];
                             $sqlConTech = "SELECT UserID FROM Concerts_UserTechnicians WHERE ConcertID = '$ConcertID'";
                             $resultConTech = mysqli_query($conn, $sqlConTech);
@@ -75,21 +75,27 @@
                             $userName = $usersArray['UserFirstname'];
 
 
+
                             if($_SESSION["u_username"] == $usersArray['UserUsername']){
-                                $style = 'background-color: #384745; color:white; border-radius:5px;';
+                                $style = 'background-color: #88cc88; border-radius:5px;';
                             }
                             else{
                                 $style = 'background-color:#b2c2bf; border-radius:5px;';
                             }
 
-                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart'] . "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td><td style='$style;'><a style='$style;'href='band-demands.php'>Se krav</a></td></tr>";
+                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart'] . "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td></tr>";
                         }
                     }
 
 
                     ?>
 				</table>
+
+			</div>
+
+            <a class='helleButton' style='$style;'href='band-demands.php'>Se krav</a>
 			</div> 
+
 		</div>
 	</div>
 </body>

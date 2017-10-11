@@ -35,7 +35,7 @@ else{
         </form> 
     </div>
 	<div class="flexBody">
-		<div class="flexWrapper">
+		<div style="width:50%" class="flexWrapper">
 			<p class="insideMenuHeader">Arrangør//Oversikt</p>
 			<div class="flexWrapperInside">
 				<table>
