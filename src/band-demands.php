@@ -111,7 +111,11 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
         </div>
 
 
+<<<<<<< HEAD
         <a class="helleButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
+=======
+        <a class="helleButton" style='$style;'href='bookingans.php'>Tilbake</a>
+>>>>>>> Jonassin
 
     </div>
 </div>

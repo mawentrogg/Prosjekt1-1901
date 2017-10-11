@@ -32,7 +32,7 @@
         </form> 
     </div>
 	<div style="margin:0;height:100%;" class="flexBody">
-    	<div style="width:auto;height:70vh;" class="flexWrapper">
+    	<div style="height:80vh;" class="flexWrapper">
         <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
         <?php
         $userLoggedIn = $_SESSION["u_username"];

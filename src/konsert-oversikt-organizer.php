@@ -35,7 +35,7 @@ else{
         </form> 
     </div>
     <div style="margin:0;height:100%;" class="flexBody">
-        <div style="width:auto;height:100%;" class="flexWrapper">
+        <div style="height:80vh;" class="flexWrapper">
             <p class="insideMenuHeader">Konsert-oversikt</p> 
                 <div class="flexWrapperInside">
 

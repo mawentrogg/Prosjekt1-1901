@@ -61,7 +61,7 @@
 	justify-content: center;
 	flex-direction: column;
 	height: 50%;
-	width: 50%;
+	width: 70%;
 	padding: 15px;
 	border-radius: 20px;
 	margin-top: 90px;
@@ -189,7 +189,7 @@ td a{
 	color: black;
 }
 
-input[type=text], input[type=PASSWORD]{
+input[type=text], input[type=PASSWORD], input[type=date], input[type=time], input[type=email], input[type=number]{
 	width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
