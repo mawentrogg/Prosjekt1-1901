@@ -18,8 +18,22 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-	<div class="flexBody">
-    	<div style="width:auto;height:70vh;" class="flexWrapper">
+<div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.html";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
+	<div style="margin:0; height:100%" class="flexBody">
+    	<div style="height:80vh;" class="flexWrapper">
         
         <?php
             $conn = mysqli_connect("mysql.stud.ntnu.no", "kimera_gruppe4", "festiv4l", "kimera_gruppe4");
@@ -28,11 +42,13 @@
              }
             
 
-            $bandQuery = "SELECT Band.BandID, Band.BandName, BandInfo.BandID, BandInfo.PopRank, BandInfo.Sales, BandInfo.Genre 
+             $bandQuery = "SELECT Band.BandID, Band.BandName, BandInfo.BandID, BandInfo.PopRank, BandInfo.Sales, BandInfo.Genre, Concert.ConcertTimeStart, Concert.BandID, Concert.FestivalID, Festival.FestivalID, Festival.FestivalName
                         FROM Band 
-                        INNER JOIN BandInfo ON Band.BandID=BandInfo.BandID";
+                        INNER JOIN BandInfo ON Band.BandID=BandInfo.BandID
+                        INNER JOIN Concert ON Band.BandID=Concert.BandID
+                        INNER JOIN Festival ON Concert.FestivalID=Festival.FestivalID";
             ?>
-            <p class="insideMenuHeader">Rigge-oversikt</p>
+            <p class="insideMenuHeader">Band-oversikt</p>
         	<div class="flexWrapperInside">
                 <?php
                 if($result = mysqli_query($conn, $bandQuery)) {
@@ -56,7 +72,8 @@
 
                             //I belive this needs some onClick functionality, checking php compatibility.
                             //This entire table should be refered to whenever anyone clicks an individual band name, eventlistener and ID of the selected item somehow. 
-                            echo "<td> snart fikset </td>";
+                            //Defaulting to listing one of the concerts...
+                            echo "<td>" . $row['ConcertTimeStart'] . " @ " . $row['FestivalName'] ."</td>";
                             echo "</tr>";
                          }
                          echo "</table>";
@@ -69,21 +86,7 @@
                    }
                    mysqli_close($conn);
                 ?>
-            </div>
-
-            <a class="hjemButton" href="<?php
-            //From "rigge-oversikt.php"
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.html";
-                    }
-                    ?>">Hjem</a>
-
-            <form action="includes\logout.inc.php" method="post">
-				<button type="submit" name="submit">Logg ut</button>
-			</form> 
+            </div> 
 		</div>
 
 	</table>
