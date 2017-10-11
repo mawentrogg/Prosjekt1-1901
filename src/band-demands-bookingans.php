@@ -44,17 +44,6 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
         </form>
     </div>
     <div style="width:auto;height:70vh;" class="flexWrapper">
-        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
-            <?php
-            $userLoggedIn = $_SESSION["u_username"];
-            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
-            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
-            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
-            $firstName = $usersArrayTop["UserFirstname"];
-
-            echo $firstName;
-            ?></p>
-
         <p class="insideMenuHeader">Konsertkrav</p>
         <div class="flexWrapperInside">
             <table>
@@ -111,7 +100,7 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
         </div>
 
 
-        <a class="helleButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
+        <a class="helleButton" style='$style;'href='rigge-oversikt-bookingans.php'>Tilbake</a>
 
 
     </div>
