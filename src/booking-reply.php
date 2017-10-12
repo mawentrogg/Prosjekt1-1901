@@ -53,8 +53,7 @@ $val = $_GET["val"];
                       <th>" . $scene . " </th>
                     </tr>
                   </table>";
-                  echo $offer_result[0][7];
-                  if ($offer_result[0][7] == 0) {
+                  if ($offer_result[0][11] == 0) {
                   ob_start();
                   echo '<form method="post"> <input type="submit" value="Accept" name="accept"></form>
                   <form method="post" onsubmit="return confirmDelete();"> <input type="submit" value="Decline" name="decline" ></form>';
