@@ -91,7 +91,6 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
                         //Finner demand
                         $sqlDemand = "SELECT * FROM Concert_Demands WHERE ConcertID = '$ConcertID'";
                         $resultDemand = mysqli_query($conn, $sqlDemand);
-                        $demandArray = mysqli_fetch_assoc($resultDemand);
 
                         $outDemand = "";
                         while($rowDemand = mysqli_fetch_assoc($resultDemand)){
@@ -99,6 +98,7 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
                         }
 
                         $outDemand = substr($outDemand, 0,-2);
+
 
                         echo "<tr> <td style='$style;'>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . " | " . "Scene " . $row['SceneID']  . "</td> <td style='$style'>" . $outDemand  . "</td>" . "</tr>";
                     }
