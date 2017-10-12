@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 //Checking if user is logged in
@@ -65,7 +66,7 @@ for ($i = 0; $i < $length; $i++) {
         <div style="width:80vh;height:100%;" class="flexWrapper">
             <p class="insideMenuHeader">Send booking offer</p>
             <div class="flexWrapperInside" style="background-color:#353535; overflow-y: hidden;">
-                <form action="insert-offer.php" method="post">
+                <form action="includes\insert-offer.inc.php" method="post">
                     Festival:
                     <select name="festival">
                         <?php
@@ -97,8 +98,12 @@ for ($i = 0; $i < $length; $i++) {
 
                 <?php
                     if (isset($_SESSION['sent']) && $_SESSION['sent']) {
-                      echo "An offer to " . $_SESSION['band'] . " has been sent. <br> An email will be sent to " . $_SESSION['mail'] . " after bookingsjef has reviewed the offer";
-                      session_destroy();
+                        $band = $_SESSION['band'];
+                        $mail = $_SESSION['mail'];
+                        $popupMessage = "An offer to " . $band . " has been sent. An email will be sent to " . $mail . " after bookingsjef has reviewed the offer";
+
+                        echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
+                        exit();
                     }
                 ?>
             </div>
