@@ -20,7 +20,7 @@ include 'includes/dbh.inc.php';
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Konsertkrav</title>
+    <title>Konsertrapport</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
@@ -53,74 +53,21 @@ include 'includes/dbh.inc.php';
 
         <p class="insideMenuHeader">Konsertrapport</p>
         <div class="flexWrapperInside">
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Band</th>
-                    <th>Sjanger</th>
-                    <th>Publikumsantall</th>
-                    <th>Inntekter</th>
-                    <th>Utgifter</th>
-                    <th>Fortjeneste</th>
-                </tr>
-
-                <?php
-                    $sqlConcert = "SELECT * FROM Concert";
-                    $resultConcert = mysqli_query($conn, $sqlConcert);
-                    while($row = mysqli_fetch_assoc($resultConcert)){
-
-                        //Checking if concert is to be added, based on date
-                        $currentTime = time();
-                        $dateSeconds = strtotime($row['ConcertTimeStart']);
-
-                        if($currentTime > $dateSeconds){
-                            //Getting BandID and date
-                            $bandID = $row['BandID'];
-                            $date = date('d.M.Y H:s', strtotime($row['ConcertTimeStart']));
-
-                            //Getting bandName from BandID
-                            $sqlBand = "SELECT * FROM Band WHERE BandID = '$bandID'";
-                            $resultBand = mysqli_query($conn, $sqlBand);
-                            $bandArray = mysqli_fetch_assoc($resultBand);
-                            $bandName = $bandArray['BandName'];
-
-                            //Getting bandGenre from BandID
-                            $sqlBand = "SELECT * FROM BandInfo WHERE BandID = '$bandID'";
-                            $resultBand = mysqli_query($conn, $sqlBand);
-                            $bandArray = mysqli_fetch_assoc($resultBand);
-                            $bandGenre = $bandArray['Genre'];
-
-                            //Getting attendance and economy from ConcertID
-                            $concertID = $row['ConcertID'];
-                            $sqlReport = "SELECT * FROM Concert_Report WHERE ConcertID = '$concertID'";
-                            $resultReport = mysqli_query($conn, $sqlReport);
-                            $reportArray = mysqli_fetch_assoc($resultReport);
-                            $attendance = $reportArray['Attendance'];
-                            $outcome = $reportArray['Outcome'];
-                            $income = $reportArray['Income'];
-                            $profit = $income - $outcome;
-
-
-                            echo "<tr><td>" . $date . "</td> <td>" . $bandName . "</td> <td>" . $bandGenre . "</td> <td>" . $attendance . "</td> 
-                            <td>" . $income . ",-</td>  <td>" . $outcome . ",-</td>   <td>" . $profit . ",-</td>";
-                        }
-
-
-
-
-                        if($currentTime > $dateSeconds){
-
-
-
-
-                        }
+            <form action = "concert-report-scene.php" method="POST">
+                <label>Scene: </label>
+                <select name="sceneID">
+                    <?php
+                    $sql = "SELECT * FROM Scene";
+                    $result = mysqli_query($conn, $sql);
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<option value = " . $row['SceneID'] . "> Scene: ID " . $row['SceneID'] . " - " . $row['SceneName'] . "</option>";
                     }
+                    ?>
+                </select>
+                <input type="submit" name="submit" value = "Choose scene">
+            </form>
 
 
-                ?>
-
-
-            </table>
         </div>
     </div>
 </div>
