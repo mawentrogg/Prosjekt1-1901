@@ -40,11 +40,6 @@ VALUES ($val, '$bandName','$startTime', '$endTime', $scene, '$email', '$genre', 
 	$festival, 0, 0)";
 
 if ($conn->query($sql) === TRUE) {
-    mail($email, utf8_decode("Booking offer for ") . utf8_decode($bandName),
-	"Your band " . $bandName . " has received an offer to play at festiv4len on " . $date . ", " . $time . " on Stage " . $scene .
-	". Your set will last " . $length . " minutes\n\n" .
-	"For the concert, you will be paid " . $price . "kr \n\nClick the following link to review your offer. \n\n\n"
-	. "http://org.ntnu.no/festiv4len/Prosjekt1-1901/src/booking-reply.php?band=" . $bandName . "&val=" . $val);
 
 	$_SESSION['sent'] = true;
 	$_SESSION['mail'] = $email;

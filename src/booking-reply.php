@@ -29,8 +29,8 @@ $val = $_GET["val"];
               $sql = "SELECT * FROM Booking_Offers WHERE bandName = '$band' AND Validation = $val";
               $result = mysqli_query($conn, $sql);
               $offer_result = $result->fetch_all();
-              $bandName = $offer_result[0][2];
               $validation = $offer_result[0][1];
+              $bandName = $offer_result[0][2];
               if($band == $bandName and $validation == $val)
               {
                 $concertStart = $offer_result[0][3];
@@ -38,6 +38,7 @@ $val = $_GET["val"];
                 $scene = $offer_result[0][5];
                 $email = $offer_result[0][6];
                 $id = $offer_result[0][0];
+                $festival = $offer_result[0][9];
                   echo "<table>
                     <tr>
                       <th>Band</th>
@@ -52,7 +53,7 @@ $val = $_GET["val"];
                       <th>" . $scene . " </th>
                     </tr>
                   </table>";
-                  echo $offer_reulst[0][7];
+                  echo $offer_result[0][7];
                   if ($offer_result[0][7] == 0) {
                   ob_start();
                   echo '<form method="post"> <input type="submit" value="Accept" name="accept"></form>
@@ -68,8 +69,8 @@ $val = $_GET["val"];
                           $result2 = mysqli_query($conn, $sql3);
                           $offer_result2 = $result2->fetch_all();
                           $BandID = $offer_result2[0][0];
-                          $sql4 = "INSERT IGNORE INTO Concert (ConcertTimeStart, ConcertTimeEnd, SceneID, BandID)
-                          VALUES ('$concertStart', '$concertEnd', $scene, $BandID)";
+                          $sql4 = "INSERT IGNORE INTO Concert (ConcertTimeStart, ConcertTimeEnd, SceneID, BandID, FestivalID)
+                          VALUES ('$concertStart', '$concertEnd', $scene, $BandID, $festival)";
                           if ($conn->query($sql4) === TRUE) {
                             $concert = "SELECT * FROM Concert WHERE BandID =" . $BandID;
                             $result3 = mysqli_query($conn, $concert);

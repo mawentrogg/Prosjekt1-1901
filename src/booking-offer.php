@@ -65,7 +65,7 @@ for ($i = 0; $i < $length; $i++) {
         <div style="width:80vh;height:100%;" class="flexWrapper">
             <p class="insideMenuHeader">Send booking offer</p>
             <div class="flexWrapperInside" style="background-color:#353535; overflow-y: hidden;">
-                <form action="send-booking-mail.php" method="post">
+                <form action="insert-offer.php" method="post">
                     Festival:
                     <select name="festival">
                         <?php
@@ -97,7 +97,7 @@ for ($i = 0; $i < $length; $i++) {
 
                 <?php
                     if (isset($_SESSION['sent']) && $_SESSION['sent']) {
-                      echo "<p>An offer to " . $_SESSION['band'] . " has been sent to " . $_SESSION['mail'] . "</p>";
+                      echo "An offer to " . $_SESSION['band'] . " has been sent. <br> An email will be sent to " . $_SESSION['mail'] . " after bookingsjef has reviewed the offer";
                       session_destroy();
                     }
                 ?>

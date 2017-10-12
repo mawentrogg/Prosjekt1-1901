@@ -57,11 +57,14 @@ include 'includes/dbh.inc.php';
                 <tr>
                     <th>BookingOfferID</th>
                     <th>BandName</th>
+                    <th>Genre</th>
                     <th>SceneID</th>
                     <th>ConcertTime Start</th>
                     <th>ConcertTime End</th>
+                    <th>Price</th>
                     <th>Contact Email</th>
                     <th>Accepted</th>
+                    <th>Send Offer</th>
                 </tr>
 
                 <?php
@@ -76,9 +79,20 @@ include 'includes/dbh.inc.php';
                         $accepted = "False";
                     }
 
-                    echo "<tr><td>" . $row['BookingOfferID'] . "</td> <td>" . $row['BandName'] . "</td> <td>" . $row['SceneID'] . "</td>
-                          <td>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . "</td> <td>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . "</td>
-                          <td>" . $row['ContactEmail'] . "</td><td>" . $accepted  . "</td>";
+                    echo "<tr><td>" . $row['BookingOfferID'] . "</td> 
+                    <td>" . $row['BandName'] . "</td>
+                    <td>" . $row['Genre'] . "</td>
+                    <td>" . $row['SceneID'] . "</td>
+                    <td>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . "</td>
+                    <td>" . date('d.M.Y H:s', strtotime($row['ConcertTimeEnd'])) . "</td> 
+                    <td>" . $row['Price'] . "</td> 
+                    <td>" . $row['ContactEmail'] . "</td><td>" . $accepted  . "</td>";
+                    if ($row['Sent'] == 1) {
+                        echo '<td> Sent </td>';
+                    }
+                    else {
+                        echo "<td style='background-color: green'> <a class='btn btn-primary btn-lg' onclick='return confirm(\"Are you sure you want to send the offer?\");' href='send.php?band=" . $row['BandName'] . "&val=" .   $row['Validation'] . "'>Send</a></td> </td>";
+                    }
                 }
 
 
