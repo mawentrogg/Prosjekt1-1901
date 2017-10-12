@@ -22,10 +22,6 @@ $username = $_SESSION['u_username'];
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-<<<<<<< HEAD
-    <div class="flexBody">
-        <div style="width:auto;height:70vh;" class="flexWrapper">
-=======
 <div class="flexTop">
         <a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
@@ -41,9 +37,7 @@ $username = $_SESSION['u_username'];
         </form> 
     </div>
     <div style="margin:0; height:100%" class="flexBody">
-    
         <div style="width:80vh;height:100%;" class="flexWrapper">
->>>>>>> Jonassin
             <p class="insideMenuHeader">Send booking offer</p>
             <div class="flexWrapperInside" style="background-color:#353535; overflow-y: hidden;">
                 <form action="send-booking-mail.php" method="post">
@@ -70,30 +64,9 @@ $username = $_SESSION['u_username'];
                       session_destroy();
                     }
                 ?>
-                            
-
-
-
-
-
             </div>
-
-            <a class="hjemButton" href="<?php
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.html";
-                    }
-                    ?>">Hjem</a>
-
-            <form action="includes\logout.inc.php" method="post">
-                <button type="submit" name="submit">Logg ut</button>
-            </form> 
         </div>
-
     </table>
-
     </div>
 </body>
 </html>
