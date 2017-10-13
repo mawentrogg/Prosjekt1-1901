@@ -23,9 +23,15 @@ if(empty($festival) || empty($bandName) || empty($genre) || empty($date) || empt
     exit();
 }
 
-
 //Checking if date is valid
 validDate($date, $time, $length, $festival, $conn);
+
+//Checking if concertStartTime and endTime overlaps with concert
+if(!duplicateConcert($date, $time, $length, $festival, $scene, $conn)){
+    $_SESSION['sent'] = False;
+    header("Location: ..\booking-offer.php?ConcertTimeNotAvailable");
+    exit();
+}
 
 
 $sql3 = "SELECT * FROM Scene WHERE SceneName = '$scene'";
@@ -86,3 +92,38 @@ function validDate($date, $time, $length, $festival, $conn){
     }
 }
 
+function duplicateConcert($date, $time, $length, $festival, $scene, $conn){
+
+    //Variable to check validity
+    $validConcertTime = True;
+
+    //Calulating concertStartTime and concertEndTime in seconds
+    $concertStartTime = strtotime($date.$time);
+    $concertEndTime = $concertStartTime + ($length * 60);
+
+    //Getting festival ID
+    $sql = "SELECT * FROM Festival WHERE FestivalName = '$festival'";
+    $result = mysqli_query($conn, $sql);;
+    $festivalArray = mysqli_fetch_assoc($result);
+    $festivalID = $festivalArray['FestivalID'];
+
+    //Getting SceneID
+    $sql = "SELECT * FROM Scene WHERE SceneName = '$scene'";
+    $result = mysqli_query($conn, $sql);;
+    $sceneArray = mysqli_fetch_assoc($result);
+    $sceneID = $sceneArray['SceneID'];
+
+    //Getting concerts on the same stages and festivals
+    $sql = "SELECT * FROM Concert WHERE FestivalID = '$festivalID' AND SceneID = '$sceneID'";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result)){
+        $startTime = strtotime($row['ConcertTimeStart']);
+        $endTime = strtotime($row['ConcertTimeEnd']);
+
+        //Checking if offerTime overlaps
+        if((($concertStartTime >= $startTime) && ($concertStartTime <= $endTime)) || (($concertEndTime >= $startTime) && ($concertEndTime <= $endTime))){
+            $validConcertTime = False;
+        }
+    }
+    return $validConcertTime;
+}
