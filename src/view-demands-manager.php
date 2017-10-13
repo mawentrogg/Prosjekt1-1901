@@ -5,7 +5,7 @@ session_start();
 
 //Checking if user is logged in
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 else{
@@ -33,7 +33,7 @@ $result = mysqli_query($conn, $sql);
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
