@@ -143,7 +143,7 @@ button:hover{
 	background-color: #b2c2bf;
 }
 
-.helleButton: hover{
+.helleButton:hover{
 	background-color: #7e9a95;
 }
 
@@ -163,8 +163,6 @@ th, td, tr{
 	border-radius: 10px;
 }
 
-<<<<<<< HEAD
-=======
 .finished > td{
   background-color: #57625f;
 }

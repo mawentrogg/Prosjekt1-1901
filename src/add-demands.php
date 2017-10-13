@@ -6,7 +6,7 @@ session_start();
 
 //Checking if user is logged in
 if(!(isset($_SESSION['concertID']))){
-    header("Location: index.html?Denied");
+    header("Location: index.php?Denied");
     exit();
 }
 
@@ -45,7 +45,7 @@ $bandName = $row['BandName'];
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>

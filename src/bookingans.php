@@ -1,11 +1,11 @@
-<<<<<<< HEAD
+
 <?php
 session_start();
 include_once 'includes\dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
 }
 else{
     if(!($_SESSION['u_role'] == "bookingans")){
@@ -29,7 +29,7 @@ else{
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>

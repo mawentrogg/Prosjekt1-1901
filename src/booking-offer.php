@@ -3,7 +3,7 @@
 session_start();
 //Checking if user is logged in
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 else{
@@ -54,7 +54,7 @@ for ($i = 0; $i < $length; $i++) {
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
