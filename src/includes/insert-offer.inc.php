@@ -19,13 +19,18 @@ $val = rand();
 //Checking if any fields are empty. If so, returning to homepage
 if(empty($festival) || empty($bandName) || empty($genre) || empty($date) || empty($time) || empty($length) || empty($scene) || empty($price) || empty($email)){
     $_SESSION['sent'] = False;
+    $_SESSION['failed'] = True;
+    $_SESSION['message'] = "Missing fields";
     header("Location: ..\booking-offer.php?EmptyFields");
     exit();
 }
 
 
-//Checking if date is valid
-validDate($date, $time, $length, $festival, $conn);
+//Checking if date is valid based on the date of the chosen festival
+validDateFestival($date, $time, $length, $festival, $conn);
+
+//Checking if date and time is valid based on concerts already booked
+validDateConcert($date, $time, $length, $festival, $scene, $conn);
 
 
 $sql3 = "SELECT * FROM Scene WHERE SceneName = '$scene'";
@@ -53,17 +58,19 @@ VALUES ($val, '$bandName','$startTime', '$endTime', $scene, '$email', '$genre', 
 
 if ($conn->query($sql) === TRUE) {
 
-	$_SESSION['sent'] = true;
+	$_SESSION['sent'] = True;
+    $_SESSION['failed'] = False;
 	$_SESSION['mail'] = $email;
 	$_SESSION['band'] = $bandName;
-
-  header("Location: ..\booking-offer.php");
+	$_SESSION['message'] = "An offer to " . $bandName . " has been sent. An email will be sent to " . $email . " after bookingsjef has reviewed the offer";
+    header("Location: ..\booking-offer.php");
+    exit();
 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-function validDate($date, $time, $length, $festival, $conn){
+function validDateFestival($date, $time, $length, $festival, $conn){
 
     //Calulating concertStartTime and concertEndTime in seconds
     $concertStartTime = strtotime($date.$time);
@@ -80,9 +87,80 @@ function validDate($date, $time, $length, $festival, $conn){
     //Checking if concert start and end is between start and end of festival
     if(!($concertStartTime >= $festivalStartTime && $concertEndTime <= $festivalEndTime)){
         $_SESSION['sent'] = False;
+        $_SESSION['failed'] = True;
+        $_SESSION['message'] = "Chosen date of concert is outside range of the festival " . $festival;
         header("Location: ..\booking-offer.php?Invalid_Date_and_Time");
         exit();
 
     }
 }
+
+function validDateConcert($date, $time, $length, $festival, $scene, $conn){
+    //Getting SceneID from SceneName
+    $sql = "SELECT * FROM Scene WHERE SceneName = '$scene'";
+    $result = mysqli_query($conn, $sql);;
+    $sceneArray = mysqli_fetch_assoc($result);
+    $sceneID = $sceneArray['SceneID'];
+
+    //Getting FestivalID from FestivalName
+    $sql = "SELECT * FROM Festival WHERE FestivalName = '$festival'";
+    $result = mysqli_query($conn, $sql);;
+    $festivalArray = mysqli_fetch_assoc($result);
+    $festivalID = $festivalArray['FestivalID'];
+
+    //Calulating concertStartTime and concertEndTime in seconds
+    $requestedStartTime = strtotime($date.$time);
+    $requestedEndTime = $requestedStartTime + ($length * 60);
+
+    //Checking all concerts to find duplicates
+    $sql = "SELECT * FROM Concert";
+    $result = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_assoc($result)){
+        //Getting start and end time for concert
+        $startTime = strtotime($row['ConcertTimeStart']);
+        $endTime = strtotime($row['ConcertTimeEnd']);
+
+        //Checking if times overlap
+        $overlapedTime = False;
+        if($requestedStartTime >= $startTime || $requestedStartTime <= $endTime){
+            $overlapedTime = True;
+        }
+        if($requestedEndTime >= $startTime || $requestedEndTime <= $endTime){
+            $overlapedTime = True;
+        }
+        if($requestedStartTime <= $startTime && $requestedEndTime >= $endTime){
+            $overlapedTime = True;
+        }
+
+        //If concerts overlaps => send error message
+        if($overlapedTime && $sceneID == $row['SceneID'] && $festivalID == $row['FestivalID']){
+            $_SESSION['sent'] = False;
+            $_SESSION['failed'] = True;
+            $_SESSION['message'] = "Chosen date of concert overlaps with already booked concert";
+            header("Location: ..\booking-offer.php?Invalid_Date_and_Time");
+            exit();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
