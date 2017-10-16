@@ -68,40 +68,49 @@ for ($i = 0; $i < $length; $i++) {
             <div class="flexWrapperInside" style="background-color:#353535; overflow-y: hidden;">
                 <form action="includes\insert-offer.inc.php" method="post">
                     Festival:
-                    <select name="festival">
+                    <select name="festival" required>
                         <?php
                         echo $festivals; 
                         ?>
                     </select><br>
                     Band name:<br>
-                    <input type="text" name="bandName"><br>
+                    <input type="text" name="bandName" required><br>
                     Genre:<br>
-                    <input type="text" name="genre"><br>
+                    <input type="text" name="genre" required><br>
                     Date:<br>
-                    <input type="date" name="date"><br>
+                    <input type="date" name="date" required><br>
                     Time:<br>
-                    <input type="time" name="time"><br>
+                    <input type="time" name="time" required><br>
                     Length of set in minutes:
-                    <input min="0" type="number" name="length"><br>
+                    <input min="1" type="number" name="length" required><br>
                     Scene:
-                    <select name="scene">
+                    <select name="scene" required>
                         <?php
                         echo $scenes; 
                         ?>
                     </select><br>
                     Price:<br>
-                    <input min="0" type="number" name="price"><br>
+                    <input min="0" type="number" name="price" required><br>
                     Contact e-mail:<br>
-                    <input type="email" name=email><br><br>
+                    <input type="email" name=email required><br><br>
                     <input type="submit" value="Submit">
                 </form>
 
                 <?php
                     if (isset($_SESSION['sent']) && $_SESSION['sent']) {
+                        $_SESSION['sent'] = False;
+                        $_SESSION['failed'] = False;
                         $band = $_SESSION['band'];
                         $mail = $_SESSION['mail'];
-                        $popupMessage = "An offer to " . $band . " has been sent. An email will be sent to " . $mail . " after bookingsjef has reviewed the offer";
+                        $popupMessage = $_SESSION['message'];
 
+                        echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
+                        exit();
+                    }
+                    elseif (isset($_SESSION['failed']) && $_SESSION['failed']){
+                        $_SESSION['sent'] = False;
+                        $_SESSION['failed'] = False;
+                        $popupMessage = $_SESSION['message'];
                         echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
                         exit();
                     }

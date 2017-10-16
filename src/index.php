@@ -22,6 +22,7 @@
 
         <?php
             if(isset($_SESSION['failed']) && $_SESSION['failed']){
+                $_SESSION['failed'] = False;
                 $popupMessage = $_SESSION['message'];
                 echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
             }
