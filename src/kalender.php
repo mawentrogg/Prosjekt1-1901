@@ -71,8 +71,12 @@ $festivals = "";
 $length = sizeof($festival);
 
 for ($i = 0; $i < $length; $i++) {
-        $festivals .= "<option>" . $festival[$i][1] . "</option>";
+	if ($festival[$i][1] == $formFestival) {
+        $festivals .= "<option selected>" . $festival[$i][1] . "</option>";
+	} else {
+		$festivals .= "<option>" . $festival[$i][1] . "</option>";
     }
+}
 
 $weekNumbers = "";
 
@@ -89,17 +93,12 @@ for ($y = 1; $y <= 52; $y++) {
 
 <!DOCTYPE html>
 <html>
-<hea<!DOCTYPE html>
-<html>
 <head>
-	<title>Organizer</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <title>Bookingtilbud - oversikt</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-
-    <div class="flexBody">
-        <div class="flexWrapper">
-            <div class="flexTop">
+<div class="flexTop">
         <a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
                         echo $_SESSION['u_role'] . ".php";
@@ -112,14 +111,25 @@ for ($y = 1; $y <= 52; $y++) {
         <form action="includes\logout.inc.php" method="post">
             <button type="submit" name="submit">Logg ut</button>
         </form> 
-	</div>		
+    </div>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh; width:100%" class="flexWrapper">
+        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
+            <?php
+            $userLoggedIn = $_SESSION["u_username"];
+            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
+            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
+            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
+            $firstName = $usersArrayTop["UserFirstname"];
 
-				<?php 
-					echo "<h1> Festival: " . $formFestival . " " . $weekFormat .  "</h1>";
+            echo $firstName;
+            ?></p>
+
+        <p class="insideMenuHeader">Konserter
+        	 <?php 
+					echo "<br>" . $formFestival . ", uke " . $weekFormat;
 					?>
-               
-               
-               <form action="kalender.php" method="post"> 
+			<form action="kalender.php" method="post" style="margin:auto"> 
                <select name="festival" onchange="this.form.submit()">
                		<?php
                			echo $festivals;
@@ -132,7 +142,14 @@ for ($y = 1; $y <= 52; $y++) {
             	</select>
             	
 
-            	</form>               		
+            	</form>
+			</p>
+        <div class="flexWrapperInside">		
+
+				
+               
+               
+                              		
 
                <?php
 
@@ -164,12 +181,12 @@ for ($y = 1; $y <= 52; $y++) {
 					  <tr>
 					    <th></th>
 					    <th>Mandag " . $weekDates[0] . "</th> 
-					    <th>Tirsdag " . $weekDates[0] . "</th> 
-					    <th>Onsdag " . $weekDates[0] . "</th> 
-					    <th>Torsdag " . $weekDates[0] . "</th> 
-					    <th>Fredag " . $weekDates[0] . "</th> 
-					    <th>Lørdag " . $weekDates[0] . "</th> 
-					    <th>Søndag " . $weekDates[0] . "</th> 
+					    <th>Tirsdag " . $weekDates[1] . "</th> 
+					    <th>Onsdag " . $weekDates[2] . "</th> 
+					    <th>Torsdag " . $weekDates[3] . "</th> 
+					    <th>Fredag " . $weekDates[4] . "</th> 
+					    <th>Lørdag " . $weekDates[5] . "</th> 
+					    <th>Søndag " . $weekDates[6] . "</th> 
 					  </tr>";
                	}
                		else {
@@ -200,10 +217,9 @@ for ($y = 1; $y <= 52; $y++) {
 
 
 
-
         </div>
     </div>
-
+</div>
 </body>
 </html>
 
