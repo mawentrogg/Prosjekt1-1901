@@ -39,6 +39,7 @@ $val = $_GET["val"];
                 $email = $offer_result[0][6];
                 $id = $offer_result[0][0];
                 $festival = $offer_result[0][9];
+                $price = $offer_result[0][8];
                   echo "<table>
                     <tr>
                       <th>Band</th>
@@ -68,8 +69,8 @@ $val = $_GET["val"];
                           $result2 = mysqli_query($conn, $sql3);
                           $offer_result2 = $result2->fetch_all();
                           $BandID = $offer_result2[0][0];
-                          $sql4 = "INSERT IGNORE INTO Concert (ConcertTimeStart, ConcertTimeEnd, SceneID, BandID, FestivalID)
-                          VALUES ('$concertStart', '$concertEnd', $scene, $BandID, $festival)";
+                          $sql4 = "INSERT IGNORE INTO Concert (ConcertTimeStart, ConcertTimeEnd, SceneID, BandID, FestivalID, TicketPrice)
+                          VALUES ('$concertStart', '$concertEnd', $scene, $BandID, $festival, $price)";
                           if ($conn->query($sql4) === TRUE) {
                             $concert = "SELECT * FROM Concert WHERE BandID =" . $BandID;
                             $result3 = mysqli_query($conn, $concert);
