@@ -31,8 +31,8 @@
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-	<div style="margin:0;height:100%;" class="flexBody">
-    	<div style="height:80vh;" class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
         <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
         <?php
         $userLoggedIn = $_SESSION["u_username"];

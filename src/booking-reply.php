@@ -20,10 +20,24 @@ $val = $_GET["val"];
     </script>
 </head>
 <body style="background-color: #3C6E71">
-    <div class="flexBody">
-        <div style="width:auto;height:70vh;" class="flexWrapper">
+<div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.php";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
             <p class="insideMenuHeader">Your booking offer</p>
-            <div class="flexWrapperInside" style="background-color: #353535">
+            <div class="flexWrapperInside" style="overflow-y:hidden; background-color: #353535">
 
               <?php
               $sql = "SELECT * FROM Booking_Offers WHERE bandName = '$band' AND Validation = $val";
@@ -57,7 +71,7 @@ $val = $_GET["val"];
                   if ($offer_result[0][11] == 0) {
                   ob_start();
                   echo '<form method="post"> <input type="submit" value="Accept" name="accept"></form>
-                  <form method="post" onsubmit="return confirmDelete();"> <input type="submit" value="Decline" name="decline" ></form>';
+                  <form method="post" onsubmit="return confirmDelete();"> <input style="type="submit" value="Decline" name="decline" ></form>';
                   if(isset($_POST['accept'])){
                     ob_end_clean();
                     $updateAccept = "UPDATE Booking_Offers SET Accepted=1 WHERE BookingOfferID=" . $id;

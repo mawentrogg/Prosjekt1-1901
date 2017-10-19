@@ -42,6 +42,9 @@ else{
 					<tr>
                         <td><a href="admin-add-festival.php">Legg til festival</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="admin-add-scene.php">Legg til scene</a></td>
+                    </tr>
 				</table>
 			</div>
         </div>

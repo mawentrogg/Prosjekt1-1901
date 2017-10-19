@@ -34,8 +34,8 @@ else{
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-	<div class="flexBody">
-		<div style="width:50%" class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width:50%; height: 70vh;" class="flexWrapper">
 			<p class="insideMenuHeader">Arrangør//Oversikt</p>
 			<div class="flexWrapperInside">
 				<table>

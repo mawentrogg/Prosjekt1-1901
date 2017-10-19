@@ -30,6 +30,6 @@ if ((int)$_SESSION['festivalAlreadyAdded'] == false){
     	echo "Error: " . $sqlInsert . "<br>" . $conn->error;
 	}
 }
-$_SESSION['taskDone'] = true;
+$_SESSION['taskDoneFestival'] = true;
 header("Location: admin-add-festival.php");
 ?>
