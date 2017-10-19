@@ -15,6 +15,7 @@ else{
 }
 
 include 'includes/dbh.inc.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +81,7 @@ include 'includes/dbh.inc.php';
                     }
 
                     echo "<tr><td>" . $row['BookingOfferID'] . "</td> 
-                    <td>" . $row['BandName'] . "</td>
+                    <td>" . str_replace('_', ' ', $row['BandName']) . "</td>
                     <td>" . $row['Genre'] . "</td>
                     <td>" . $row['SceneID'] . "</td>
                     <td>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . "</td>
@@ -96,6 +97,21 @@ include 'includes/dbh.inc.php';
                 }
 
 
+                if (isset($_SESSION['sent']) && $_SESSION['sent']){
+                    $_SESSION['sent'] = False;
+                    $_SESSION['failed'] = False;
+                    $popupMessage = $_SESSION['message'];
+                    echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
+                    exit();
+                }
+
+                if (isset($_SESSION['failed']) && $_SESSION['failed']){
+                    $_SESSION['sent'] = False;
+                    $_SESSION['failed'] = False;
+                    $popupMessage = $_SESSION['message'];
+                    echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
+                    exit();
+                }
                 ?>
 
 
