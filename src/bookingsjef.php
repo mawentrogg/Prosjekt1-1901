@@ -46,6 +46,9 @@ else{
                         <td><a href="concert-report.php">Se konsertrapport</a></td>
                     </tr>
                     <tr>
+                        <td><a href="kalender.php">Kalender</a></td>
+                    </tr>
+                    <tr>
                         <td><a href="offer-overview.php">Oversikt over bookingtilbud</a></td>
                     </tr>
                 </table>
