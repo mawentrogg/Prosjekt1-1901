@@ -32,8 +32,8 @@
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-	<div style="margin:0; height:100%" class="flexBody">
-    	<div style="height:80vh;" class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
         
         <?php
             $conn = mysqli_connect("mysql.stud.ntnu.no", "kimera_gruppe4", "festiv4l", "kimera_gruppe4");

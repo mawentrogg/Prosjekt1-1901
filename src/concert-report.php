@@ -24,22 +24,22 @@ include 'includes/dbh.inc.php';
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-<div class="flexBody">
-    <div class="flexTop">
+<div class="flexTop">
         <a class="hjemButton" href="<?php
-        if(isset($_SESSION['u_id'])){
-            echo $_SESSION['u_role'] . ".php";
-        }
-        else{
-            echo "index.php";
-        }
-        ?>">Hjem</a>
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.php";
+                    }
+                    ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
         <form action="includes\logout.inc.php" method="post">
             <button type="submit" name="submit">Logg ut</button>
-        </form>
+        </form> 
     </div>
-    <div style="width:auto;height:70vh;" class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
         <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
             <?php
             $userLoggedIn = $_SESSION["u_username"];
