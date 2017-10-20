@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'includes\dbh.inc.php';
+include_once 'includes/dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
