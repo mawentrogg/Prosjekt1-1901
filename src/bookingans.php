@@ -21,7 +21,9 @@ else{
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-<div class="flexTop">
+
+    <div class="flexBody">
+    <div class="flexTop">
         <a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
                         echo $_SESSION['u_role'] . ".php";
@@ -35,9 +37,7 @@ else{
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-    <div style="margin: 0;height: 100%" class="flexBody">
-        <div style="width:50%; height: 70vh;" class="flexWrapper">
-            <p class="insideMenuHeader">Bookingansvarlig//Oversikt</p>
+        <div class="flexWrapper">
             <div class="flexWrapperInside">
                 <table>
                     <tr>
@@ -54,7 +54,10 @@ else{
                     </tr>
                     <tr>
                     <td><a href="band.php">Band-oversikt</a></td>
-                </tr>
+                    </tr>
+                    <tr>
+                        <td><a href="band-review.php">Add review of a Band</a></td>
+                    </tr>
                 </table>
             </div>
         </div>

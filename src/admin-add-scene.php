@@ -18,7 +18,7 @@ $festivals = "";
 
 if(mysqli_num_rows($resultFestival) > 0){
     while ($row = mysqli_fetch_assoc($resultFestival)) {
-        $festivals .= "<option>" . $row["FestivalName"] . "</option>";
+        $festivals .= "<option>" . $row["FestivalID"] . "</option>";
     }
 }
 ?>
@@ -51,7 +51,7 @@ if(mysqli_num_rows($resultFestival) > 0){
                 <form action="admin-insert-scene.php" method="post">
                     <label>Scenenavn:</label>
                     <input type="text" name="sceneName" required>
-                    <label>Festival-start:</label>
+                    <label>Festival-ID:</label>
                     <select name="sceneFestival">
                         <?php  
                         echo $festivals;
