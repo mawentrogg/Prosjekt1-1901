@@ -99,6 +99,13 @@ for ($y = 1; $y <= 52; $y++) {
 	}
 }
 
+
+$sqlfest = "SELECT * FROM Festival where FestivalName = '$formFestival'";
+$result = mysqli_query($conn, $sqlfest);
+$festivalfest = $result->fetch_all();
+
+$festivalID = $festivalfest[0][0]
+
 ?>
 
 
@@ -181,7 +188,7 @@ for ($y = 1; $y <= 52; $y++) {
 
 				$daysInMonth = cal_days_in_month(0, $month, $year);
 
-				$sqlConcert = "SELECT * FROM Concert ORDER BY ConcertTimeStart";
+				$sqlConcert = "SELECT * FROM Concert WHERE FestivalID = $festivalID ORDER BY ConcertTimeStart";
 				$result = mysqli_query($conn, $sqlConcert);
 				$concerts = $result->fetch_all();
 
