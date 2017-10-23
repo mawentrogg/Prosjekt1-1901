@@ -1,22 +1,13 @@
 <?php
 session_start();
-include_once 'includes/dbh.inc.php';
 
-//Checking if user is logged in. If not sending back to proper site
-if(!(isset($_SESSION['u_id']))){
-    header("Location: index.php");
-}
-else{
-    if(!($_SESSION['u_role'] == "pr")){
-        header("Location: " . $_SESSION['u_role'] . ".php");
-    }
-}
+include_once 'includes/dbh.inc.php';
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Konsert-oversikt</title>
+    <title>Oversikt - PR</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
@@ -34,79 +25,86 @@ else{
         <button type="submit" name="submit">Logg ut</button>
     </form>
 </div>
-<div style="margin: 0;height: 100%" class="flexBody">
-    <div style="height: 75vh;" class="flexWrapper">
-        <p class="insideMenuHeader">Konsert-oversikt</p>
+
+<div style="margin:0;height:100%;" class="flexBody">
+    <div style="height:80vh;" class="flexWrapper">
+        <p class="insideMenuHeader">Konsertoversikt//PR-Ansvarlig</p>
         <div class="flexWrapperInside">
-            <?php
+            <table>
+                <tr>
+                    <th>Band/Artist</th>
+                    <th>Dato</th>
+                    <th>Salgstall</th>
+                    <th>Kontaktperson</th>
+                    <th>Telefon</th>
+                    <th>Epost</th>
+                    <th>Presseomtale</th>
+                </tr>
 
-            //Henter inn diverse fra databasen
-            $sqlConcert = "SELECT * FROM Concert ORDER BY ConcertTimeStart;";
-            $resultConcert = mysqli_query($conn, $sqlConcert);
+                <?php
 
-            echo "<table>"
-                . "<tr>"
-                . "<th>Band</th>"
-                . "<th>Konsert-start</th>"
-                . "<th>Konsert-slutt</th>"
-                . "<th>Publikumsantall</th>"
-                . "</tr>";
+                //Looping through concerts
+                $sql = "SELECT * FROM Concert";
+                $result = mysqli_query($conn, $sql);
+                while($row = mysqli_fetch_assoc($result)){
+                    $concertID = $row['ConcertID'];
+                    $concertTime = date('d-m-y', strtotime($row['ConcertTimeStart']));
+                    $sceneID = $row['SceneID'];
+                    $bandID = $row['BandID'];
 
-            date_default_timezone_set("Europe/Oslo");
-            if(mysqli_num_rows($resultConcert) > 0){
-                while($row1 = mysqli_fetch_assoc($resultConcert)) {
-                    $concertID = $row1["ConcertID"];
-                    $bandID = $row1["BandID"];
-
+                    //Getting band name
                     $sqlBand = "SELECT * FROM Band WHERE BandID = '$bandID'";
                     $resultBand = mysqli_query($conn, $sqlBand);
-                    $row2 = mysqli_fetch_assoc($resultBand);
+                    $rowBand = mysqli_fetch_assoc($resultBand);
+                    $bandName = $rowBand['BandName'];
 
-                    $sqlConcertReport = "SELECT * FROM Concert_Report WHERE ConcertID = '$concertID'";
-                    $resultConcertReport = mysqli_query($conn, $sqlConcertReport);
-                    $row3 = mysqli_fetch_assoc($resultConcertReport);
+                    //Getting scene name
+                    $sqlScene = "SELECT * FROM Scene WHERE SceneID = '$sceneID'";
+                    $resultScene = mysqli_query($conn, $sqlScene);
+                    $rowScene = mysqli_fetch_assoc($resultScene);
+                    $sceneName = $rowScene['SceneName'];
+                    $sceneCapacity = $rowScene['Capacity'];
 
-                    $BandName = $row2["BandName"];
-                    $ConcertStart = $row1["ConcertTimeStart"];
-                    $ConcertEnd = $row1["ConcertTimeEnd"];
-                    $Attendance = $row3["Attendance"];
+                    //Få tak i salgstall
+                    $sqlSalg = "SELECT * FROM Concert WHERE BandID = '$bandID'";
+                    $resultSalg = mysqli_query($conn, $sqlSalg);
+                    $rowSalg = mysqli_fetch_assoc($resultSalg);
+                    $Solgt = $rowSalg['TicketsSold'];
 
-                    //Strings to display time
-                    $displayStart = strtotime($ConcertStart);
-                    $displayStart = date('d.M.Y H:s', $displayStart);
-                    $displayEnd = strtotime($ConcertEnd);
-                    $displayEnd = date('H:s', $displayEnd);
+                    //Få tak i link
+                    $sqlLink = "SELECT * FROM Band WHERE BandID = '$bandID'";
+                    $resultLink = mysqli_query($conn, $sqlLink);
+                    $rowLink = mysqli_fetch_assoc($resultLink);
+                    $Link = $rowLink['ReviewLink'];
 
-                    $unix_concert_time_start = strtotime($ConcertStart);
-                    $unix_concert_time_end = strtotime($ConcertEnd);
-                    $unix_time_now = strtotime("now");
-                    $concert_has_started = FALSE;
-                    $concert_has_ended = FALSE;
-                    $concert_row_class = "notStarted";
+                    //Getting contact info
+                    $sqlInfo = "SELECT * FROM Concert_ContactInfo WHERE ConcertID = '$concertID'";
+                    $resultInfo = mysqli_query($conn, $sqlInfo);
+                    $rowInfo = mysqli_fetch_assoc($resultInfo);
+                    $contactName = $rowInfo['ContactFirstName'] . " " . $rowInfo['ContactLastName'];
+                    $contactPhone = $rowInfo['ContactPhone'];
+                    $contactEmail = $rowInfo['ContactEmail'];
 
-                    if ($unix_time_now > $unix_concert_time_start) {
-                        $concert_has_started = TRUE;
-                        $concert_row_class = "started";
-                        if ($unix_time_now > $unix_concert_time_end) {
-                            $concert_has_ended = TRUE;
-                            $concert_row_class = "finished";
-                        }
-                    }
+                    echo "<tr>
+                        <td>" . $bandName . "</td>
+                        <td>" . $concertTime ."</td>
+                        <td>" . $Solgt . '/' . $sceneCapacity . "</td>
+                        <td>" . $contactName ."</td>
+                        <td>" . $contactPhone ."</td>
+                        <td>" . $contactEmail . "</td>
+                        <td><a target='_blank' href='$Link'>Link</a></td>
+                    </tr>" ;
 
-                    echo "<tr class='$concert_row_class'>"
-                        . "<td>$BandName</td>"
-                        . "<td>$displayStart</td>"
-                        . "<td>$displayEnd</td>"
-                        . "<td>$Attendance</td>"
-                        . "</tr>";
                 }
-            }
 
-            echo "</table>";
+                ?>
+            </table>
 
-
-            ?>
         </div>
+
     </div>
+
+</div>
+</div>
 </body>
 </html>
