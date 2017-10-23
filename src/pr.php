@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'includes\dbh.inc.php';
+include_once 'includes/dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
@@ -36,11 +36,23 @@ else{
 </div>
 <div class="flexBody">
     <div style="width:50%" class="flexWrapper">
+        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
+
+            <?php
+            $userLoggedIn = $_SESSION["u_username"];
+            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
+            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
+            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
+            $firstName = $usersArrayTop["UserFirstname"];
+            echo $firstName;
+            ?></p>
+
+
         <p class="insideMenuHeader">PR//Oversikt</p>
         <div class="flexWrapperInside">
             <table>
                 <tr>
-                    <td><a href="oversikt-pr.php">Band booket</a></td>
+                    <td><a href="oversikt-pr.php">Band Booket</a></td>
                 </tr>
                 <tr>
                     <td><a href="omtaler.php">Omtaler</a></td>
