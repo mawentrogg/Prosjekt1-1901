@@ -47,9 +47,8 @@ else{
             echo "<table>"
                 . "<tr>"
                 . "<th>Band</th>"
-                . "<th>Konsert-start</th>"
-                . "<th>Konsert-slutt</th>"
-                . "<th>Publikumsantall</th>"
+                . "<th>Konsertdato</th>"
+                . "<th>Omtale</th>"
                 . "</tr>";
 
             date_default_timezone_set("Europe/Oslo");
@@ -66,14 +65,20 @@ else{
                     $resultConcertReport = mysqli_query($conn, $sqlConcertReport);
                     $row3 = mysqli_fetch_assoc($resultConcertReport);
 
+                    $sqlReview = "SELECT * FROM BandReview WHERE BandID = '$bandID'";
+                    $resultReview = mysqli_query($conn, $sqlReview);
+                    $row4 = mysqli_fetch_assoc($resultReview);
+
                     $BandName = $row2["BandName"];
                     $ConcertStart = $row1["ConcertTimeStart"];
+                    //concertend brukes kun til style
                     $ConcertEnd = $row1["ConcertTimeEnd"];
-                    $Attendance = $row3["Attendance"];
+                    //
+                    $review = $row4["BandReview"];
 
                     //Strings to display time
                     $displayStart = strtotime($ConcertStart);
-                    $displayStart = date('d.M.Y H:s', $displayStart);
+                    $displayStart = date('d.M.Y', $displayStart);
                     $displayEnd = strtotime($ConcertEnd);
                     $displayEnd = date('H:s', $displayEnd);
 
@@ -96,8 +101,7 @@ else{
                     echo "<tr class='$concert_row_class'>"
                         . "<td>$BandName</td>"
                         . "<td>$displayStart</td>"
-                        . "<td>$displayEnd</td>"
-                        . "<td>$Attendance</td>"
+                        . "<td>$review</td>"
                         . "</tr>";
                 }
             }
