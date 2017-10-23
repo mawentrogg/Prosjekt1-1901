@@ -143,7 +143,7 @@ button:hover{
 	background-color: #b2c2bf;
 }
 
-.helleButton: hover{
+.helleButton:hover{
 	background-color: #7e9a95;
 }
 
@@ -163,8 +163,6 @@ th, td, tr{
 	border-radius: 10px;
 }
 
-<<<<<<< HEAD
-=======
 .finished > td{
   background-color: #57625f;
 }
@@ -190,6 +188,17 @@ td a{
 }
 
 input[type=text], input[type=PASSWORD], input[type=date], input[type=time], input[type=email], input[type=number]{
+	width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Consolas;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+select, option{
 	width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

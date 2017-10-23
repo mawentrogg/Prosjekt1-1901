@@ -2,7 +2,7 @@
     session_start();
     //Checking if user is logged in
     if(!(isset($_SESSION['u_id']))){
-        header("Location: index.html");
+        header("Location: index.php");
     }
     include_once 'includes/dbh.inc.php';
     $sqlConcert = "SELECT * FROM Concert";
@@ -23,7 +23,7 @@
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
@@ -31,8 +31,8 @@
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-	<div style="margin:0;height:100%;" class="flexBody">
-    	<div style="height:80vh;" class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
         <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
         <?php
         $userLoggedIn = $_SESSION["u_username"];

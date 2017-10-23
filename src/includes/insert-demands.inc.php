@@ -40,6 +40,6 @@ if (isset($_POST['submit'])) {
     exit();
 }
 else {
-    header("Location: ../index.html");
+    header("Location: ../index.php");
     exit();
 }

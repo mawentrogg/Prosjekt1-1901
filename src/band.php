@@ -5,7 +5,7 @@
     //I'll just let this stand for now, I will assume it works, this still needs testing.
     //https://www.tutorialspoint.com/mysqli/ is good for this stuff.
     if(!(isset($_SESSION['u_id']))){
-        header("Location: index.html");
+        header("Location: index.php");
     }
     else if(!($_SESSION['u_role'] == "bookingans")){
             header("Location: " . $_SESSION['u_role'] . ".php");
@@ -24,7 +24,7 @@
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
@@ -32,8 +32,8 @@
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-	<div style="margin:0; height:100%" class="flexBody">
-    	<div style="height:80vh;" class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
         
         <?php
             $conn = mysqli_connect("mysql.stud.ntnu.no", "kimera_gruppe4", "festiv4l", "kimera_gruppe4");

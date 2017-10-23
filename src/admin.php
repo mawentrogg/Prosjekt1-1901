@@ -1,14 +1,13 @@
-
 <?php
 session_start();
 include_once 'includes\dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.php");
+    header("Location: index.html");
 }
 else{
-    if(!($_SESSION['u_role'] == "bookingans")){
+    if(!($_SESSION['u_role'] == "admin")){
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }
@@ -17,7 +16,7 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Organizer</title>
+	<title>Admin</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
@@ -37,26 +36,17 @@ else{
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
         <div style="width:50%; height: 70vh;" class="flexWrapper">
-            <p class="insideMenuHeader">Bookingansvarlig//Oversikt</p>
-            <div class="flexWrapperInside">
-                <table>
-                    <tr>
-                        <th style="color: white; background-color: #353535;">Oversikt:</th>
+			<p class="insideMenuHeader">Admin//Oversikt</p>
+			<div class="flexWrapperInside">
+				<table>
+					<tr>
+                        <td><a href="admin-add-festival.php">Legg til festival</a></td>
                     </tr>
                     <tr>
-                        <td><a href="booking-offer.php">Send Booking Offer</a></td>
+                        <td><a href="admin-add-scene.php">Legg til scene</a></td>
                     </tr>
-                    <tr>
-                        <td><a href="band-demands-bookingans.php">Band Demands</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="rigge-oversikt-bookingans.php">Riggeoversikt</a></td>
-                    </tr>
-                    <tr>
-                    <td><a href="band.php">Band-oversikt</a></td>
-                </tr>
-                </table>
-            </div>
+				</table>
+			</div>
         </div>
     </div>
 </body>

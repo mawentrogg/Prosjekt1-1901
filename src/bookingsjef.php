@@ -4,7 +4,7 @@ include_once 'includes\dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
 }
 else{
     if(!($_SESSION['u_role'] == "bookingsjef")){
@@ -26,7 +26,7 @@ else{
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
@@ -34,8 +34,9 @@ else{
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-    <div class="flexBody">
-        <div style="width:50%" class="flexWrapper">   
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width:50%; height: 70vh;" class="flexWrapper">
+            <p class="insideMenuHeader">Bookingsjef//Oversikt</p>
             <div class="flexWrapperInside">
                 <table>
                     <tr>
@@ -43,6 +44,12 @@ else{
                     </tr>
                     <tr>
                         <td><a href="concert-report.php">Se konsertrapport</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="kalender.php">Kalender</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="offer-overview.php">Oversikt over bookingtilbud</a></td>
                     </tr>
                 </table>
             </div>

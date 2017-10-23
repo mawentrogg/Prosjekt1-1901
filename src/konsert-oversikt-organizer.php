@@ -1,10 +1,10 @@
 <?php
 session_start();
-include_once 'includes\dbh.inc.php';
+include_once 'includes/dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
 }
 else{
     if(!($_SESSION['u_role'] == "organizer")){
@@ -15,18 +15,18 @@ else{
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Konsert-oversikt</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body style="background-color: #3C6E71">
-    <div class="flexTop">
+<head>
+    <title>Konsert-oversikt</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="background-color: #3C6E71">
+<div class="flexTop">
         <a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
                         echo $_SESSION['u_role'] . ".php";
                     }
                     else{
-                        echo "index.html";
+                        echo "index.php";
                     }
                     ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
@@ -34,8 +34,8 @@ else{
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-    <div style="margin:0;height:100%;" class="flexBody">
-        <div style="height:80vh;" class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
             <p class="insideMenuHeader">Konsert-oversikt</p> 
                 <div class="flexWrapperInside">
 
