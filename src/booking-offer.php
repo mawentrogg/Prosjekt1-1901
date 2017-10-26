@@ -23,7 +23,7 @@ $festivals = "";
 $length = sizeof($festival);
 
 for ($i = 0; $i < $length; $i++) {
-        $festivals .= "<option>" . $festival[$i][1] . "</option>";
+        $festivals .= "<option>" . $festival[$i][1] . "   (" . date('d/m/Y', strtotime($festival[$i][2])) . " - " . date('d/m/Y', strtotime($festival[$i][3])) .  ")</option>";
     }
 
 $sql2 = "SELECT * FROM Scene";
