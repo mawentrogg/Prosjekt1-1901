@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
     header("Location: index.php");
@@ -24,28 +25,58 @@ $now = date('Y-m-d', time());
 
 $thisWeek = date('W', strtotime($now));
 
-$formFestival = $_POST['festival'];
+$sql = "SELECT * FROM Festival";
+$result = mysqli_query($conn, $sql);
+$festival = $result->fetch_all();
+
+$sqlscene = "SELECT * FROM Scene where FestivalID = $festivalID";
+$result = mysqli_query($conn, $sqlscene);
+$scenelist = $result->fetch_all();
+
+
+$length = sizeof($festival);
+
+$formFestival = "";
+
+if ( isset($_POST['festival'])) {
+	$formFestival = $_POST['festival'];
+}
+else {
+	for ($i = 0; $i < $length; $i++) {
+	if (strtotime($festival[$i][2]) < time() and strtotime($festival[$i][3]) > time()) {
+		$formFestival = $festival[$i][1];
+		break;
+	}
+}
+	if($formFestival == "") {
+		$formFestival = $festival[0][1];
+	}	
+}
 if( isset($_POST['week-number']) )	{
 	$week = $_POST['week-number'];
 }	else {
 	$week = $thisWeek;
 }
 
+if( isset($_POST['scene']) )	{
+	$scene = $_POST['scene'];
+}	else {
+	$scene = $scenelist[0][1];
+}
 
 
-
-
-
-
-
-
-$day = date('d', strtotime($now));
 $month = date('m', strtotime($now));
 $year = date('Y', strtotime($now));
 
-
 $first = date('Y-m-01', strtotime($now));
 $dayOfWeek = date('D', strtotime($first));
+
+$startOfWeekDate = date('Y-m-d', strtotime($year . "W" . $week));
+$startOfWeek = strtotime($startOfWeekDate . " 00:00");
+
+$zero = time() - (time() - $startOfWeek);
+
+$endOfWeek = $startOfWeek + 7*24*60*60 + 3600;
 
 $weekDates = [];
 
@@ -63,12 +94,9 @@ for($d=1; $d<=7; $d++)
 
 
 
-$sql = "SELECT * FROM Festival";
-$result = mysqli_query($conn, $sql);
-$festival = $result->fetch_all();
+
 
 $festivals = "";
-$length = sizeof($festival);
 
 for ($i = 0; $i < $length; $i++) {
 	if ($festival[$i][1] == $formFestival) {
@@ -87,6 +115,27 @@ for ($y = 1; $y <= 52; $y++) {
 	$weekNumbers .=  "<option>" . $y . "</option>";
 	}
 }
+
+
+$sqlfest = "SELECT * FROM Festival where FestivalName = '$formFestival'";
+$result = mysqli_query($conn, $sqlfest);
+$festivalfest = $result->fetch_all();
+
+$festivalID = $festivalfest[0][0];
+
+
+
+$scenes = "";
+
+for ($i = 0; $i < sizeof($scenelist) ; $i++) {
+	if ($scenelist[$i][1] == $scene) {
+		$scenes .=  "<option selected>" . $scenelist[$i][1] . "</option>";
+	} else {
+	$scenes .=  "<option>" . $scenelist[$i][1] . "</option>";
+	}
+}
+
+
 
 ?>
 
@@ -140,6 +189,11 @@ for ($y = 1; $y <= 52; $y++) {
                			echo $weekNumbers;
                		?>
             	</select>
+            	<select name="scene" onchange="this.form.submit()">
+               		<?php
+               			echo $scenes;
+               		?>
+            	</select>
             	
 
             	</form>
@@ -168,7 +222,28 @@ for ($y = 1; $y <= 52; $y++) {
 					case "Sat": $blank = 6; break; 
 				 }
 
-				$daysInMonth = cal_days_in_month(0, $month, $year) ;
+				$daysInMonth = cal_days_in_month(0, $month, $year);
+
+				$sqlConcert = "SELECT * FROM Concert WHERE FestivalID = $festivalID ORDER BY ConcertTimeStart";
+				$result = mysqli_query($conn, $sqlConcert);
+				$concerts = $result->fetch_all();
+
+				
+
+
+				
+
+				
+
+
+
+
+
+
+
+
+				
+
 
 
 
@@ -177,7 +252,7 @@ for ($y = 1; $y <= 52; $y++) {
 			    echo "<table>";
               	for ($i = 0; $i<13; $i++) {
                		if ($i == 0) {
-               		echo "<table style=\"width:100%\">
+               		echo "<table id=\"cal\" style=\"width:100%\">
 					  <tr>
 					    <th></th>
 					    <th>Mandag " . $weekDates[0] . "</th> 
@@ -197,16 +272,99 @@ for ($y = 1; $y <= 52; $y++) {
                				$tid2 = $tid+2;
 
                				if ($y == 0) {
-               					echo "<td>" . $tid . ":00-" . $tid2 . ".00</td>";
+               					echo "<th>" . $tid . ":00-" . $tid2 . ".00</th>";
                				}
                				else {
                					echo "<td></td>";
                				}
                			}
-               			echo "<tr>";
+               			echo "</tr>";
                		}
            		}
            		echo "</table>";
+
+           		$sqlBand = "SELECT * FROM Band";
+				$resultBand = mysqli_query($conn, $sqlBand);
+				$bands = $resultBand->fetch_all();
+
+				echo "<p style=\"color: red\">";
+
+
+
+
+				
+
+
+
+
+
+           		
+
+
+				function timeToPercent($id, $zero, $time1, $time2, $bandId, $bands) {
+					$len = sizeof($bands);
+					for ($i = 0; $i < $len; $i ++) {
+						if ($bandId == $bands[$i][0]) {
+							$band = $bands[$i][1];
+						}
+					}
+
+					
+
+
+
+					$unixTime1 = strtotime($time1);
+					$unixTime2 = strtotime($time2);
+					$percent1 = ($unixTime1 - $zero)/604800;
+					$percent2 = ($unixTime2 - $zero)/604800;
+					return array($id, $percent1, $percent2, $band);
+					
+				}
+
+				$length = sizeof($concerts);
+
+
+
+				
+
+
+
+
+				$times = array();
+
+				for ($i = 0; $i < $length; $i++) {
+					
+					if (strtotime($concerts[$i][1]) >= $zero and strtotime($concerts[$i][1]) < $zero + 604800) {
+
+
+						$lol = timeToPercent($concerts[$i][0], $zero, $concerts[$i][1], $concerts[$i][2], $concerts[$i][4], $bands);
+						array_push($times, $lol);
+
+					}
+				}
+
+
+
+				$tableTimes = array();
+
+				$columnTime = 0;
+
+				for ($i = 0; $i < 84; $i++) {
+					$columnPercent = $columnTime/(604800);
+					$tableTime = array($i, $columnPercent);
+					array_push($tableTimes, $tableTime);
+					$columnTime += 7200;
+				}
+
+
+
+
+
+
+
+
+
+				echo "</p>";
 
            		?>
                	
@@ -220,6 +378,90 @@ for ($y = 1; $y <= 52; $y++) {
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+var times = <?php echo json_encode($times); ?>;
+var tableTimes = <?php echo json_encode($tableTimes); ?>;
+
+console.log(times);
+
+var tr = document.getElementById("cal").getElementsByTagName("td");
+
+var calendar = []
+
+var a = 0;
+
+for (var y = 0; y<7; y++) {
+	for (var i = 0; i < 84; i+=7) {
+		calendar.push(tr[i+y]);
+	}
+}
+
+var len = times.length;
+
+for (var i = 0; i < len; i++) {
+	table = times[i][1] * 84;
+	table2 = times[i][2] * 84;
+	band = times[i][3]
+	colorCalendar(table, table2, i, band);
+}
+
+
+
+
+		
+
+function colorCalendar(table1, table2, far, band) {
+
+		var col = ["DodgerBlue", "Orange", "Tomato", "MediumSeaGreen", "Gray", "SlateBlue", "Violet"]
+
+
+		var start = Math.floor(table1);		
+		var stop = Math.floor(table2);
+
+		var percent1 = ((table1 - start)*100).toFixed(0) + "%";
+		var percent2 = ((table2 - stop)*100).toFixed(0) + "%";
+
+
+		var percent11 = ((table1 - start)*100+1).toFixed(0) + "%";
+		var percent21 = ((table2 - stop)*100+1).toFixed(0) + "%";
+		console.log(percent11);
+
+
+		console.log("neste");
+
+		for (var i = start; i <= stop; i++) {
+			if (i == start) {
+				if (percent1 == "0%" && stop >= start+1) {
+					calendar[i].style.backgroundColor = col[far];
+					calendar[i].innerHTML = band;
+				}
+				else {
+				calendar[i].style.background = "linear-gradient(to top, " + col[far] + " " + percent1 +", #b2c2bf " + percent11 + ")";
+					calendar[i+1].innerHTML = band;
+				}
+
+
+			}
+			else if (i == stop) {
+				if (percent2 == "0%") {
+					;
+				}
+				else {
+					calendar[i].style.background = "linear-gradient(to bottom, " + col[far] + " " + percent2 +", #b2c2bf " + percent21 + ")";
+				}
+				
+			}
+			else {
+				calendar[i].style.backgroundColor = col[far];
+		}
+	}
+}
+
+
+
+</script>
+
 </body>
 </html>
 

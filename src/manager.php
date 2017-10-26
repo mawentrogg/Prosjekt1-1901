@@ -42,6 +42,9 @@ else{
                 <tr>
                     <td><a href="add-demands.php">Add Band Demands</a></td>
                 </tr>
+                <tr>
+                    <td><a href="concert-contactinfo.php">View contactinfo for concerts</a> </td>
+                </tr>
             </table>
         </div>
     </div>
