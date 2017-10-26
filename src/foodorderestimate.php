@@ -35,7 +35,7 @@ else{
     </form> 
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
-    <div style="height: 75vh;" class="flexWrapper">
+    <div style="height: 80vh;" class="flexWrapper">
         <p class="insideMenuHeader">Bestillingsestimat</p> 
         <div class="flexWrapperInside">
         <?php
@@ -70,8 +70,10 @@ else{
                 $ConcertStart = $row1["ConcertTimeStart"];
                 $ConcertEnd = $row1["ConcertTimeEnd"];
                 $Attendance = $row3["Attendance"];
-                $Drinks = $Attendance * 4;
-                $Food = $Attendance * 1.5;
+                $editDrinks = $_POST["editDrinkUnit"];
+                $editFood = $_POST["editFoodUnit"];
+                $Drinks = $Attendance * $editDrinks;
+                $Food = $Attendance * $editFood;
 
                     //Strings to display time
                 $displayStart = strtotime($ConcertStart);
@@ -109,6 +111,19 @@ else{
 
         ?>
         </div>
+        <form action="foodorderestimate.php" method="post">
+        	<table>
+        	<tr>
+        		<th style="font-size: 15px">Endre drikkeenhet</th>
+        		<th style="font-size: 15px">Endre matenhet</th>
+        	</tr>
+        	<tr>
+        		<td style="padding:0"><input style="padding: 5px 10px; margin: 0" type="number" name="editDrinkUnit" step="0.01" required></td>
+        		<td style="padding:0"><input style="padding: 5px 10px; margin: 0" type="number" name="editFoodUnit" step="0.01" required></td>
+        	</tr>
+        </table>
+        <input type="submit" name="submitEdit" value="Endre enheter">
+        </form>
     </div>
 </body>
 </html>
