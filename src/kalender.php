@@ -29,9 +29,7 @@ $sql = "SELECT * FROM Festival";
 $result = mysqli_query($conn, $sql);
 $festival = $result->fetch_all();
 
-$sqlscene = "SELECT * FROM Scene where FestivalID = $festivalID";
-$result = mysqli_query($conn, $sqlscene);
-$scenelist = $result->fetch_all();
+
 
 
 $length = sizeof($festival);
@@ -58,11 +56,7 @@ if( isset($_POST['week-number']) )	{
 	$week = $thisWeek;
 }
 
-if( isset($_POST['scene']) )	{
-	$scene = $_POST['scene'];
-}	else {
-	$scene = $scenelist[0][1];
-}
+
 
 
 $month = date('m', strtotime($now));
@@ -123,6 +117,21 @@ $festivalfest = $result->fetch_all();
 
 $festivalID = $festivalfest[0][0];
 
+$sqlscene = "SELECT * FROM Scene where FestivalID = $festivalID";
+$result = mysqli_query($conn, $sqlscene);
+$scenelist = $result->fetch_all();
+
+if( isset($_POST['scene']) )	{
+	$scene = $_POST['scene'];
+}	else {
+	$scene = $scenelist[0][1];
+}
+
+$sqlsceneId = "SELECT * FROM Scene where SceneName = '$scene'";
+$result = mysqli_query($conn, $sqlsceneId);
+$sceneIdList = $result->fetch_all();
+
+$sceneId = $sceneIdList[0][0];
 
 
 $scenes = "";
@@ -224,7 +233,7 @@ for ($i = 0; $i < sizeof($scenelist) ; $i++) {
 
 				$daysInMonth = cal_days_in_month(0, $month, $year);
 
-				$sqlConcert = "SELECT * FROM Concert WHERE FestivalID = $festivalID ORDER BY ConcertTimeStart";
+				$sqlConcert = "SELECT * FROM Concert WHERE FestivalID = $festivalID /*AND SceneID = $sceneId */ORDER BY ConcertTimeStart";
 				$result = mysqli_query($conn, $sqlConcert);
 				$concerts = $result->fetch_all();
 
