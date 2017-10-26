@@ -71,7 +71,7 @@ $val = $_GET["val"];
                   if ($offer_result[0][11] == 0) {
                   ob_start();
                   echo '<form method="post"> <input type="submit" value="Accept" name="accept"></form>
-                  <form method="post" onsubmit="return confirmDelete();"> <input style="type="submit" value="Decline" name="decline" ></form>';
+                  <form method="post" onsubmit="return confirmDelete();"> <input type="submit" value="Decline" name="decline" ></form>';
                   if(isset($_POST['accept'])){
                     ob_end_clean();
                     $updateAccept = "UPDATE Booking_Offers SET Accepted=1 WHERE BookingOfferID=" . $id;

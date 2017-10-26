@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
     header("Location: index.php");
@@ -24,7 +25,16 @@ $now = date('Y-m-d', time());
 
 $thisWeek = date('W', strtotime($now));
 
-$formFestival = $_POST['festival'];
+$sql = "SELECT * FROM Festival";
+$result = mysqli_query($conn, $sql);
+$festival = $result->fetch_all();
+
+if ( isset($_POST['festival'])) {
+	$formFestival = $_POST['festival'];
+}
+else {
+	$formFestival = $festival[1][1];
+}
 if( isset($_POST['week-number']) )	{
 	$week = $_POST['week-number'];
 }	else {
@@ -74,9 +84,7 @@ for($d=1; $d<=7; $d++)
 
 
 
-$sql = "SELECT * FROM Festival";
-$result = mysqli_query($conn, $sql);
-$festival = $result->fetch_all();
+
 
 $festivals = "";
 $length = sizeof($festival);
