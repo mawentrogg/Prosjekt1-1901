@@ -66,6 +66,9 @@ else{
                     <tr>
                         <td><a href="band-review.php">Add review of a Band</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="ticket-price.php">Generer forslag til billettpris</a> </td>
+                    </tr>
 
                 </table>
             </div>
