@@ -29,11 +29,28 @@ $sql = "SELECT * FROM Festival";
 $result = mysqli_query($conn, $sql);
 $festival = $result->fetch_all();
 
+$sqlscene = "SELECT * FROM Scene where FestivalID = $festivalID";
+$result = mysqli_query($conn, $sqlscene);
+$scenelist = $result->fetch_all();
+
+
+$length = sizeof($festival);
+
+$formFestival = "";
+
 if ( isset($_POST['festival'])) {
 	$formFestival = $_POST['festival'];
 }
 else {
-	$formFestival = $festival[1][1];
+	for ($i = 0; $i < $length; $i++) {
+	if (strtotime($festival[$i][2]) < time() and strtotime($festival[$i][3]) > time()) {
+		$formFestival = $festival[$i][1];
+		break;
+	}
+}
+	if($formFestival == "") {
+		$formFestival = $festival[0][1];
+	}	
 }
 if( isset($_POST['week-number']) )	{
 	$week = $_POST['week-number'];
@@ -41,23 +58,18 @@ if( isset($_POST['week-number']) )	{
 	$week = $thisWeek;
 }
 
+if( isset($_POST['scene']) )	{
+	$scene = $_POST['scene'];
+}	else {
+	$scene = $scenelist[0][1];
+}
 
 
-
-
-
-
-
-
-$day = date('d', strtotime($now));
 $month = date('m', strtotime($now));
 $year = date('Y', strtotime($now));
 
-
 $first = date('Y-m-01', strtotime($now));
 $dayOfWeek = date('D', strtotime($first));
-
-
 
 $startOfWeekDate = date('Y-m-d', strtotime($year . "W" . $week));
 $startOfWeek = strtotime($startOfWeekDate . " 00:00");
@@ -65,8 +77,6 @@ $startOfWeek = strtotime($startOfWeekDate . " 00:00");
 $zero = time() - (time() - $startOfWeek);
 
 $endOfWeek = $startOfWeek + 7*24*60*60 + 3600;
-
-
 
 $weekDates = [];
 
@@ -87,7 +97,6 @@ for($d=1; $d<=7; $d++)
 
 
 $festivals = "";
-$length = sizeof($festival);
 
 for ($i = 0; $i < $length; $i++) {
 	if ($festival[$i][1] == $formFestival) {
@@ -112,7 +121,21 @@ $sqlfest = "SELECT * FROM Festival where FestivalName = '$formFestival'";
 $result = mysqli_query($conn, $sqlfest);
 $festivalfest = $result->fetch_all();
 
-$festivalID = $festivalfest[0][0]
+$festivalID = $festivalfest[0][0];
+
+
+
+$scenes = "";
+
+for ($i = 0; $i < sizeof($scenelist) ; $i++) {
+	if ($scenelist[$i][1] == $scene) {
+		$scenes .=  "<option selected>" . $scenelist[$i][1] . "</option>";
+	} else {
+	$scenes .=  "<option>" . $scenelist[$i][1] . "</option>";
+	}
+}
+
+
 
 ?>
 
@@ -164,6 +187,11 @@ $festivalID = $festivalfest[0][0]
             	<select name="week-number" onchange="this.form.submit()">
                		<?php
                			echo $weekNumbers;
+               		?>
+            	</select>
+            	<select name="scene" onchange="this.form.submit()">
+               		<?php
+               			echo $scenes;
                		?>
             	</select>
             	
