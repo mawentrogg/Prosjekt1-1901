@@ -45,7 +45,9 @@ else{
 					<tr>
 						<td><a href="konsert-oversikt-organizer.php">Konsert-oversikt</a></td>
 					</tr>
-					
+                    <tr>
+                        <td><a href="ticket-sale.php">Billettsalg-oversikt</a> </td>
+                    </tr>
 				</table>
 			</div>
         </div>
