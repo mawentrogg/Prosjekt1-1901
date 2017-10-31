@@ -21,7 +21,7 @@ if(empty($festival) || empty($bandName) || empty($genre) || empty($date) || empt
     $_SESSION['sent'] = False;
     $_SESSION['failed'] = True;
     $_SESSION['message'] = "Missing fields";
-    header("Location: ..\booking-offer.php?EmptyFields");
+    header("Location: ..\booking-offer-pre.php?EmptyFields");
     exit();
 }
 
@@ -66,7 +66,7 @@ if ($conn->query($sql) === TRUE) {
 	$_SESSION['mail'] = $email;
 	$_SESSION['band'] = $bandName;
 	$_SESSION['message'] = "An offer for " . str_replace('_', ' ', $bandName) . " to play at " . $festival ." on " . $date . " " . $time ." has been sent. An email will be sent to " . $email . " after bookingsjef has reviewed the offer";
-    header("Location: ..\booking-offer.php");
+    header("Location: ..\booking-offer-pre.php");
     exit();
 
 } else {
@@ -92,7 +92,7 @@ function validDateFestival($date, $time, $length, $festival, $conn){
         $_SESSION['sent'] = False;
         $_SESSION['failed'] = True;
         $_SESSION['message'] = "Chosen date of concert is outside range of the festival " . $festival;
-        header("Location: ..\booking-offer.php?Invalid_Date_and_Time");
+        header("Location: ..\booking-offer-pre.php?Invalid_Date_and_Time");
         exit();
 
     }
@@ -140,7 +140,7 @@ function validDateConcert($date, $time, $length, $festival, $scene, $conn){
             $_SESSION['sent'] = False;
             $_SESSION['failed'] = True;
             $_SESSION['message'] = "Chosen concert overlaps with already booked concert";
-            header("Location: ..\booking-offer.php?Invalid_Date_and_Time");
+            header("Location: ..\booking-offer-pre.php?Invalid_Date_and_Time");
             exit();
         }
     }
@@ -188,7 +188,7 @@ function validDateOffers($date, $time, $length, $festival, $scene, $conn){
             $_SESSION['sent'] = False;
             $_SESSION['failed'] = True;
             $_SESSION['message'] = "Chosen concert overlaps with already sent offer.";
-            header("Location: ..\booking-offer.php?Invalid_Date_and_Time");
+            header("Location: ..\booking-offer-pre.php?Invalid_Date_and_Time");
             exit();
         }
     }
