@@ -12,6 +12,9 @@ else{
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +47,7 @@ else{
                         <th style="color: white; background-color: #353535;">Oversikt:</th>
                     </tr>
                     <tr>
-                        <td><a href="booking-offer.php">Send Booking Offer</a></td>
+                        <td><a href="booking-offer-pre.php">Send Booking Offer</a></td>
                     </tr>
                     <tr>
                         <td><a href="band-demands-bookingans.php">Band Demands</a></td>
@@ -62,5 +65,8 @@ else{
             </div>
         </div>
     </div>
+
+
+
 </body>
 </html>
