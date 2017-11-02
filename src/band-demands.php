@@ -9,8 +9,9 @@ if(!(isset($_SESSION['u_id']))){
     exit();
 }
 else{
-    if(!($_SESSION['u_role'] == "bookingans" or $_SESSION['u_role'] == "organizer" or $_SESSION['u_role'] == "tech")){
+    if(!($_SESSION['u_role'] == "bookingans" or $_SESSION['u_role'] == "organizer" or $_SESSION['u_role'] == "tech" or $_SESSION['u_role'] == "bookingsjef")){
         header("Location: " . $_SESSION['u_role'] . ".php");
+        exit();
     }
 }
 
