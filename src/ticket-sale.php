@@ -44,11 +44,17 @@ include_once 'includes/dbh.inc.php';
         <div class="flexWrapperInside">
             <table>
                 <tr>
+                    <th colspan="3">Konsert-info</th>
+                    <th colspan="2">Billettsalg</th>
+                    <th>Tekniske oppgaver</th>
+                </tr>
+                <tr>
                     <th>Dato</th>
                     <th>Band / Artist</th>
                     <th>Scene</th>
                     <th>Billettsalg</th>
                     <th>Billettinntekter</th>
+                    <th>Antall fullført</th>
                 </tr>
 
                 <?php
@@ -62,6 +68,12 @@ include_once 'includes/dbh.inc.php';
                     $bandID = $row['BandID'];
                     $ticketsSold = $row['TicketsSold'];
                     $ticketPrice = $row['TicketPrice'];
+                    $ticketIncome = $ticketsSold*$ticketPrice;
+
+                    //Formating numbers to pretty
+                    $ticketsSold = number_format($ticketsSold, 0, ',', ' ');
+                    $ticketPrice = number_format($ticketPrice, 0, ',', ' ');
+                    $ticketIncome = number_format($ticketIncome, 0, ',', ' ');
 
                     //Getting band name
                     $sqlBand = "SELECT * FROM Band WHERE BandID = '$bandID'";
@@ -76,12 +88,14 @@ include_once 'includes/dbh.inc.php';
                     $sceneName = $rowScene['SceneName'];
                     $sceneCapacity = $rowScene['Capacity'];
 
-                    echo "<tr><td>" . $concertTime ."</td><td>" . $bandName . "</td><td>" . $sceneName . "</td><td>" . $ticketsSold ." / ". $sceneCapacity ."</td><td>" . $ticketsSold*$ticketPrice . ",-</td></tr>";
+                    //Gettings number of tasks
+                    $taskNum = $row['TechTasks'];
+                    $taskComp = $row['TasksCompleted'];
 
+                    echo "<tr><td>" . $concertTime ."</td><td>" . $bandName . "</td><td>" . $sceneName . "</td>
+                              <td>" . $ticketsSold ." / ". $sceneCapacity ."</td><td>" . $ticketIncome . ",-</td>
+                              <td>". $taskNum ." / ".  $taskComp. "</td></tr>";
                 }
-
-
-
                 ?>
             </table>
 
