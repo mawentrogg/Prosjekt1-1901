@@ -1,10 +1,14 @@
-
 <?php
 session_start();
 
+if(!isset($_POST['submit'])){
+    header("Location: ..\booking-offer-pre.php");
+    exit();
+}
+
+
 $festivalTitle = $_POST['festival'];
 $festivalpost = substr($_POST['festival'],0,strrpos($_POST['festival'],'('));
-
 
 //Checking if user is logged in
 if(!(isset($_SESSION['u_id']))){
@@ -12,8 +16,9 @@ if(!(isset($_SESSION['u_id']))){
     exit();
 }
 else{
-    if(!($_SESSION['u_role'] == "bookingans")){
+    if(!($_SESSION['u_role'] == "bookingans" || $_SESSION['u_role'] == "bookingsjef")){
         header("Location: " . $_SESSION['u_role'] . ".php");
+        exit();
     }
 }
 include_once 'includes/dbh.inc.php';
@@ -36,7 +41,6 @@ for ($i = 0; $i < $length; $i++) {
 $sql2 = "SELECT * FROM Scene WHERE FestivalID = $festivalId";
 $result2 = mysqli_query($conn, $sql2);
 $scene = $result2->fetch_all();
-
 
 $scenes = "";
 $length = sizeof($scene);
@@ -67,7 +71,7 @@ for ($i = 0; $i < $length; $i++) {
         <p class="superHeader">Festiv4len</p>
         <form action="includes\logout.inc.php" method="post">
             <button type="submit" name="submit">Logg ut</button>
-        </form> 
+        </form>
     </div>
     <div style="margin:0; height:100%" class="flexBody">
         <div style="width:80vh;height:100%;" class="flexWrapper">
@@ -91,7 +95,7 @@ for ($i = 0; $i < $length; $i++) {
                     Scene:
                     <select name="scene" required>
                         <?php
-                        echo $scenes; 
+                        echo $scenes;
                         ?>
                     </select><br>
                     Price:<br>
@@ -100,11 +104,6 @@ for ($i = 0; $i < $length; $i++) {
                     <input type="email" name=email required><br><br>
                     <input type="submit" value="Submit">
                 </form>
-
-
-
-
-
             </div>
         </div>
     </table>
