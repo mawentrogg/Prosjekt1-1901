@@ -108,11 +108,6 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
                 ?>
             </table>
         </div>
-
-
-        <a class="helleButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
-
-
     </div>
 </div>
 </body>
