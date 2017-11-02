@@ -16,13 +16,11 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Organizer</title>
+	<title>Bookingansvarlig</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-
-    <div class="flexBody">
-    <div class="flexTop">
+<div class="flexTop">
         <a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
                         echo $_SESSION['u_role'] . ".php";
@@ -36,17 +34,16 @@ else{
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-        <div class="flexWrapper">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width:50%; height: 70vh;" class="flexWrapper">
+        <p class="insideMenuHeader">Bookingansvarlig//Oversikt</p>
             <div class="flexWrapperInside">
                 <table>
                     <tr>
-                        <th style="color: white; background-color: #353535;">Oversikt:</th>
+                        <td><a href="booking-offer-pre.php">Send booking-offer</a></td>
                     </tr>
                     <tr>
-                        <td><a href="booking-offer-pre.php">Send Booking Offer</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="band-demands-bookingans.php">Band Demands</a></td>
+                        <td><a href="band-demands-bookingans.php">Bandkrav</a></td>
                     </tr>
                     <tr>
                         <td><a href="rigge-oversikt-bookingans.php">Riggeoversikt</a></td>
@@ -55,7 +52,7 @@ else{
                         <td><a href="band.php">Band-oversikt</a></td>
                     </tr>
                     <tr>
-                        <td><a href="band-review.php">Add review of a Band</a></td>
+                        <td><a href="band-review.php">Legg til omtale til band</a></td>
                     </tr>
                 </table>
             </div>
