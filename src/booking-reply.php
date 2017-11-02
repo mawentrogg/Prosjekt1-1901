@@ -51,6 +51,7 @@ $val = $_GET["val"];
                 $concertEnd = $offer_result[0][4];
                 $scene = $offer_result[0][5];
                 $email = $offer_result[0][6];
+                $genre = $offer_result[0][7];
                 $id = $offer_result[0][0];
                 $festival = $offer_result[0][9];
                 $price = $offer_result[0][8];
@@ -76,8 +77,7 @@ $val = $_GET["val"];
                     ob_end_clean();
                     $updateAccept = "UPDATE Booking_Offers SET Accepted=1 WHERE BookingOfferID=" . $id;
                     if ($conn->query($updateAccept) === TRUE) {
-                        $sql2 = "INSERT IGNORE INTO Band (BandName, Manager)
-                        VALUES ('$bandName', '$email')";
+                        $sql2 = "INSERT IGNORE INTO Band (BandName, BandGenre, Manager) VALUES ('$bandName', '$genre', '$email')";
                         if ($conn->query($sql2) === TRUE) {
                           $sql3 = "SELECT * FROM Band WHERE bandName = '$band'";
                           $result2 = mysqli_query($conn, $sql3);
@@ -86,11 +86,20 @@ $val = $_GET["val"];
                           $sql4 = "INSERT IGNORE INTO Concert (ConcertTimeStart, ConcertTimeEnd, SceneID, BandID, FestivalID, TicketPrice)
                           VALUES ('$concertStart', '$concertEnd', $scene, $BandID, $festival, $price)";
                           if ($conn->query($sql4) === TRUE) {
-                            $concert = "SELECT * FROM Concert WHERE BandID =" . $BandID;
-                            $result3 = mysqli_query($conn, $concert);
-                            $concertResult = $result3->fetch_all();
-                            $_SESSION['concertID'] = $concertResult[0][0];
-                            $concertID2 = $concertResult[0][0];
+
+                            $concertID2 = mysqli_insert_id($conn);
+
+                            //Assign random tech to a concert
+                            $sqlTech = "SELECT * FROM Users WHERE UserRole = 'tech'";
+                            $resultTech = mysqli_query($conn, $sqlTech);
+                            $techArray = mysqli_fetch_all($resultTech);
+
+                            $randTechUserID =  $techArray[array_rand($techArray)][0];
+
+                            $sqlInsertTech = "INSERT INTO Concerts_UserTechnicians (ConcertID, UserID) VALUES('$concertID2', '$randTechUserID')";
+                            mysqli_query($conn, $sqlInsertTech);
+
+
                             echo 'The Offer has been accepted, click below to add technical demands<br>';
                             echo "Your concert ID: <br><br>" . $concertID2;
                             echo '<form action="add-demands.php"> <input type="submit" value="Add demands"></form>';
@@ -133,7 +142,6 @@ $val = $_GET["val"];
               ?>
 
             </div>
-
 
         </div>
 
