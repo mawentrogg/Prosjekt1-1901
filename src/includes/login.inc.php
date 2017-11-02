@@ -12,7 +12,9 @@ if(isset($_POST['submit'])){
 
     //Check if inputs are empty
     if(empty($username) || empty($password)){
-        header("Location: ../index.html?login=empty");
+        $_SESSION['failed'] = True;
+        $_SESSION['message'] = "Missing username and/or password";
+        header("Location: ../index.php");
         exit();
     }
     else{
@@ -20,14 +22,18 @@ if(isset($_POST['submit'])){
         $result = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($result);
         if($resultCheck < 1){
-            header("Location: ../index.html?login=error");
+            $_SESSION['failed'] = True;
+            $_SESSION['message'] = "Wrong username and/or password";
+            header("Location: ../index.php");
             exit();
         }
         else{
             if($row = mysqli_fetch_assoc($result)){
                 //Verifying the password
                 if(!($password == $row['UserPassword'])){
-                    header("Location: ../index.html?login=error");
+                    $_SESSION['failed'] = True;
+                    $_SESSION['message'] = "Wrong username and/or password";
+                    header("Location: ../index.php");
                     exit();
                 }
                 else{
@@ -35,6 +41,7 @@ if(isset($_POST['submit'])){
                     $_SESSION['u_id'] = $row['UserID'];
                     $_SESSION['u_role'] = $row['UserRole'];
                     $_SESSION['u_username'] = $row['UserUsername'];
+                    $_SESSION['failed'] = False;
 
                     header("Location: ../" . $_SESSION['u_role'] . ".php");
                     exit();
@@ -44,6 +51,8 @@ if(isset($_POST['submit'])){
     }
 }
 else{
-    header("Location: ../index.html?login=error");
+    $_SESSION['failed'] = True;
+    $_SESSION['message'] = "ERROR";
+    header("Location: ../index.php");
     exit();
 }

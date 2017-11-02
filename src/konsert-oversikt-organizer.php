@@ -1,25 +1,47 @@
+<?php
+session_start();
+include_once 'includes/dbh.inc.php';
 
+//Checking if user is logged in. If not sending back to proper site
+if(!(isset($_SESSION['u_id']))){
+    header("Location: index.php");
+}
+else{
+    if(!($_SESSION['u_role'] == "organizer")){
+        header("Location: " . $_SESSION['u_role'] . ".php");
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body style="background-color: #3C6E71">
-
-
-
-
-
-        <div class="indexBody">
-            <div class="indexWrapper">
-
+<head>
+    <title>Konsert-oversikt</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body style="background-color: #3C6E71">
+<div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.php";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
+            <p class="insideMenuHeader">Konsert-oversikt</p> 
+                <div class="flexWrapperInside">
 
 <?php
 
 // For brukerhistorie 2, Arrangør skal få oversikt over alle konserter på alle scener
-
 // Takes a constant query and returns 2d array as result
 function sql_query_array_result($mysqli, $query, $associative=TRUE){
     $mysqli_result = $mysqli->query($query);
@@ -68,7 +90,7 @@ if ($_SESSION["u_role"] == "organizer") { // TODO: remove || TRUE
     // Go through each festival
     foreach ($festival_array_result as $festival_row){
         
-        echo "<p>" . $festival_row["FestivalName"] . "</p>";
+        echo "<p class='festivalHeader'>" . $festival_row["FestivalName"] . "</p>";
         
         $festival_id = $festival_row["FestivalID"];
         
@@ -99,11 +121,17 @@ if ($_SESSION["u_role"] == "organizer") { // TODO: remove || TRUE
             $query_band_name = "SELECT BandName FROM Band WHERE BandID=? LIMIT 1;";
             $band_id = $row["BandID"];
             $band_name_array_result 
-                    = sql_prepared_query_1param_array_result($mysqli, $query_band_name, $scene_id, "i", FALSE);
+                    = sql_prepared_query_1param_array_result($mysqli, $query_band_name, $band_id, "i", FALSE);
             $band_name = $band_name_array_result[0][0];
             
             $concert_time_start = $row["ConcertTimeStart"];
             $concert_time_end = $row["ConcertTimeEnd"];
+
+            //Strings to display time
+            $displayStart = strtotime($concert_time_start);
+            $displayStart = date('d.M.Y H:s', $displayStart);
+            $displayEnd = strtotime($concert_time_end);
+            $displayEnd = date('H:s', $displayEnd);
             
             $unix_concert_time_start = strtotime($concert_time_start);
             $unix_concert_time_end = strtotime($concert_time_end);
@@ -125,8 +153,8 @@ if ($_SESSION["u_role"] == "organizer") { // TODO: remove || TRUE
             echo "<tr class='$concert_row_class'>\r\n"
                     . "<td>$band_name</td>"
                     . "<td>$scene_name</td>"
-                    . "<td>$concert_time_start</td>"
-                    . "<td>$concert_time_end</td>"
+                    . "<td>$displayStart</td>"
+                    . "<td>$displayEnd</td>"
                     . "</tr>\r\n";
         }
 
@@ -140,7 +168,6 @@ else {
 }
 
 ?>
-
             </div>
         </div>
     </body>

@@ -4,7 +4,7 @@ include_once 'includes\dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
 }
 else{
     if(!($_SESSION['u_role'] == "organizer")){
@@ -20,8 +20,22 @@ else{
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-	<div class="flexBody">
-		<div class="flexWrapper">
+<div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.php";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width:50%; height: 70vh;" class="flexWrapper">
 			<p class="insideMenuHeader">Arrangør//Oversikt</p>
 			<div class="flexWrapperInside">
 				<table>
@@ -31,12 +45,11 @@ else{
 					<tr>
 						<td><a href="konsert-oversikt-organizer.php">Konsert-oversikt</a></td>
 					</tr>
-					
+                    <tr>
+                        <td><a href="ticket-sale.php">Billettsalg-oversikt</a> </td>
+                    </tr>
 				</table>
 			</div>
-			<form action="includes\logout.inc.php" method="post">
-			<button type="submit" name="submit">Logg ut</button>
-			</form> 
         </div>
     </div>
 </body>

@@ -2,7 +2,7 @@
     session_start();
     //Checking if user is logged in
     if(!(isset($_SESSION['u_id']))){
-        header("Location: index.html");
+        header("Location: index.php");
     }
     include_once 'includes/dbh.inc.php';
     $sqlConcert = "SELECT * FROM Concert";
@@ -17,8 +17,22 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-	<div class="flexBody">
-    	<div style="width:auto;height:70vh;" class="flexWrapper">
+<div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.php";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="height: 75vh;" class="flexWrapper">
         <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
         <?php
         $userLoggedIn = $_SESSION["u_username"];
@@ -29,7 +43,7 @@
 
         echo $firstName;
         ?></p>
-   			<p class="insideMenuHeader">Rigge-oversikt</p> 
+   			<p class="insideMenuHeader">Rigge-oversikt</p>
         	<div class="flexWrapperInside">
 				<table>
 					<tr>
@@ -37,7 +51,6 @@
 						<th>Scene</th>
             			<th>Artist</th>
             			<th>Tekniker</th>
-            			<th>Krav</th>
 					</tr>
 
                     <?php
@@ -50,6 +63,7 @@
                             $row3 = mysqli_fetch_assoc($resultIDBand);
                             $bandName = $row3['BandName'];
 
+
                             $ConcertID = $row['ConcertID'];
                             $sqlConTech = "SELECT UserID FROM Concerts_UserTechnicians WHERE ConcertID = '$ConcertID'";
                             $resultConTech = mysqli_query($conn, $sqlConTech);
@@ -61,39 +75,28 @@
                             $userName = $usersArray['UserFirstname'];
 
 
+
                             if($_SESSION["u_username"] == $usersArray['UserUsername']){
-                                $style = 'background-color: #384745; color:white; border-radius:5px;';
+                                $style = 'background-color: #88cc88; border-radius:5px;';
                             }
                             else{
                                 $style = 'background-color:#b2c2bf; border-radius:5px;';
                             }
 
-                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart'] . "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td><td style='$style;'><a style='$style;'href='band-demands.php'>Se krav</a></td></tr>";
+                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart'] . "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td></tr>";
                         }
                     }
 
 
                     ?>
-
 				</table>
+
 			</div>
 
-			<a class="hjemButton" href="<?php
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.html";
-                    }
-                    ?>">Hjem</a>
+            <a class='helleButton' style='$style;'href='band-demands.php'>Se krav</a>
+			</div> 
 
-            <form action="includes\logout.inc.php" method="post">
-				<button type="submit" name="submit">Logg ut</button>
-			</form> 
 		</div>
-
-	</table>
-
 	</div>
 </body>
 </html>

@@ -99,7 +99,6 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
 
                         $outDemand = substr($outDemand, 0,-2);
 
-
                         echo "<tr> <td style='$style;'>" . date('d.M.Y H:s', strtotime($row['ConcertTimeStart'])) . " | " . "Scene " . $row['SceneID']  . "</td> <td style='$style'>" . $outDemand  . "</td>" . "</tr>";
                     }
 
@@ -109,11 +108,6 @@ $resultConcert = mysqli_query($conn, $sqlConcert);
                 ?>
             </table>
         </div>
-
-
-        <a class="helleButton" style='$style;'href='rigge-oversikt.php'>Tilbake</a>
-
-
     </div>
 </div>
 </body>

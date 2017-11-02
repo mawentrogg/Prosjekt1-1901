@@ -7,7 +7,7 @@ if(!(isset($_SESSION['u_id']))){
     header("Location: index.php");
 }
 else{
-    if(!($_SESSION['u_role'] == "manager")){
+    if(!($_SESSION['u_role'] == "foodservice")){
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }
@@ -16,11 +16,10 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Organizer</title>
+	<title>Serverings-ansvarlig</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-<div class="flexBody">
 <div class="flexTop">
         <a class="hjemButton" href="<?php
                     if(isset($_SESSION['u_id'])){
@@ -35,19 +34,20 @@ else{
             <button type="submit" name="submit">Logg ut</button>
         </form> 
     </div>
-    <div class="flexWrapper">
-        <p class="insideMenuHeader">Organizer//Oversikt</p>
-        <div class="flexWrapperInside">
-            <table>
-                <tr>
-                    <td><a href="add-demands.php">Add Band Demands</a></td>
-                </tr>
-                <tr>
-                    <td><a href="concert-contactinfo.php">View contactinfo for concerts</a> </td>
-                </tr>
-            </table>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width:50%; height: 70vh;" class="flexWrapper">
+			<p class="insideMenuHeader">Serverings-ansvarlig//Oversikt</p>
+			<div class="flexWrapperInside">
+				<table>
+					<tr>
+						<td><a href="konsert-oversikt-foodservice.php">Konsert-oversikt</a></td>
+					</tr>
+                    <tr>
+                        <td><a href="foodorderestimate.php">Bestillingsestimat</a></td>
+                    </tr>
+				</table>
+			</div>
         </div>
     </div>
-</div>
 </body>
 </html>
