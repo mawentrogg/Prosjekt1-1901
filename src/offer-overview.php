@@ -39,21 +39,10 @@ include 'includes/dbh.inc.php';
         </form> 
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
-        <div style="height: 75vh; width:100%" class="flexWrapper">
-        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
-            <?php
-            $userLoggedIn = $_SESSION["u_username"];
-            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
-            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
-            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
-            $firstName = $usersArrayTop["UserFirstname"];
-
-            echo $firstName;
-            ?></p>
-
+        <div style="width:99%; height: 80vh;" class="flexWrapper">
         <p class="insideMenuHeader">Bookingtilbud - oversikt</p>
         <div class="flexWrapperInside">
-            <table>
+            <table style="font-size: 15px;">
                 <tr>
                     <th>BookingOfferID</th>
                     <th>BandName</th>

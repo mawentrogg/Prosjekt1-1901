@@ -20,39 +20,28 @@ include 'includes/dbh.inc.php';
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Band-Review</title>
+    <title>Legg til omtale</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-<div class="flexBody">
-    <div class="flexTop">
+<div class="flexTop">
         <a class="hjemButton" href="<?php
-        if(isset($_SESSION['u_id'])){
-            echo $_SESSION['u_role'] . ".php";
-        }
-        else{
-            echo "index.php";
-        }
-        ?>">Hjem</a>
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.php";
+                    }
+                    ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
-        <form action="includes/logout.inc.php" method="post">
+        <form action="includes\logout.inc.php" method="post">
             <button type="submit" name="submit">Logg ut</button>
-        </form>
+        </form> 
     </div>
-    <div style="width:auto;height:70vh;" class="flexWrapper">
-        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
-            <?php
-            $userLoggedIn = $_SESSION["u_username"];
-            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
-            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
-            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
-            $firstName = $usersArrayTop["UserFirstname"];
-
-            echo $firstName;
-            ?></p>
-
-        <p class="insideMenuHeader">Add Band-Review</p>
-        <div class="flexWrapperInside">
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width:50%; height: auto;" class="flexWrapper">
+        <p class="insideMenuHeader">Legg til omtale</p>
+        <div class="flexWrapperInside" style="overflow-y: hidden;">
             <form onsubmit = "return confirm('Are you sure you want to send the review?')" action = "includes/insert-band-review.inc.php" method="POST">
                 <select name="BandID">
                     <?php
@@ -64,7 +53,7 @@ include 'includes/dbh.inc.php';
                     ?>
                 </select>
                 <br>
-                <textarea name="BandReview" style = "width: 300px; height: 100px"
+                <textarea name="BandReview""     
                           placeholder="Write a short review (max 140 characters)..." maxlength="140"
                           oninvalid="this.setCustomValidity('Please write a review')" oninput="setCustomValidity('')" required></textarea>
                 <input type="submit" name="submit" value = "Add review of band">
@@ -77,7 +66,6 @@ include 'includes/dbh.inc.php';
                 echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
             }
             ?>
-
         </div>
     </div>
 </div>

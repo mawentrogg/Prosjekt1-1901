@@ -171,34 +171,22 @@ for ($i = 0; $i < sizeof($scenelist) ; $i++) {
         </form> 
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
-        <div style="height: 75vh; width:100%" class="flexWrapper">
-        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
-            <?php
-            $userLoggedIn = $_SESSION["u_username"];
-            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
-            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
-            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
-            $firstName = $usersArrayTop["UserFirstname"];
-
-            echo $firstName;
-            ?></p>
-
-        <p class="insideMenuHeader">Konserter
-        	 <?php 
+        <div style="width:100%; height: 80vh;" class="flexWrapper">
+        <p class="insideMenuHeader"><?php 
 					echo "<br>" . $formFestival . ", uke " . $weekFormat;
 					?>
-			<form action="kalender.php" method="post" style="margin:auto"> 
-               <select name="festival" onchange="this.form.submit()">
+			<form class="kalenderform" action="kalender.php" method="post"> 
+               <select name="festival" onchange="this.form.submit()" style="width:auto;">
                		<?php
                			echo $festivals;
                		?>
             	</select>
-            	<select name="week-number" onchange="this.form.submit()">
+            	<select name="week-number" onchange="this.form.submit()" style="width:auto;">
                		<?php
                			echo $weekNumbers;
                		?>
             	</select>
-            	<select name="scene" onchange="this.form.submit()">
+            	<select name="scene" onchange="this.form.submit()" style="width:auto;">
                		<?php
                			echo $scenes;
                		?>
