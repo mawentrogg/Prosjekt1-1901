@@ -12,7 +12,7 @@ if(!(isset($_SESSION['u_id']))){
     exit();
 }
 else{
-    if(!($_SESSION['u_role'] == "bookingans")){
+    if(!($_SESSION['u_role'] == "bookingans" or $_SESSION['u_role'] == "bookingsjef")){
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }
