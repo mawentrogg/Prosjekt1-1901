@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include_once 'includes\dbh.inc.php';
@@ -12,9 +11,6 @@ else{
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +52,7 @@ else{
                         <td><a href="rigge-oversikt-bookingans.php">Riggeoversikt</a></td>
                     </tr>
                     <tr>
-                    <td><a href="band.php">Band-oversikt</a></td>
+                        <td><a href="band.php">Band-oversikt</a></td>
                     </tr>
                     <tr>
                         <td><a href="band-review.php">Add review of a Band</a></td>
@@ -66,7 +62,15 @@ else{
         </div>
     </div>
 
+    <?php
+    if (isset($_SESSION['sent']) && $_SESSION['sent']) {
+    $_SESSION['sent'] = False;
+    $popupMessage = $_SESSION['message'];
 
+    echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
+    exit();
+    }
+    ?>
 
 </body>
 </html>
