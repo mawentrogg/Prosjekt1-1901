@@ -100,11 +100,6 @@ for ($i = 0; $i < $length; $i++) {
                     <input type="email" name=email required><br><br>
                     <input type="submit" value="Submit">
                 </form>
-
-
-
-
-
             </div>
         </div>
     </table>
