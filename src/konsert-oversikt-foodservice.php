@@ -35,7 +35,7 @@ else{
     </form> 
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
-    <div style="height: 75vh;" class="flexWrapper">
+    <div style="width: 80%; height: 75vh;" class="flexWrapper">
         <p class="insideMenuHeader">Konsert-oversikt</p> 
         <div class="flexWrapperInside">
         <?php
@@ -47,6 +47,7 @@ else{
         echo "<table>"
               . "<tr>"
               . "<th>Band</th>"
+              . "<th>Musikksjanger</th>"
               . "<th>Konsert-start</th>"
               . "<th>Konsert-slutt</th>"
               . "<th>Publikumsantall</th>"
@@ -66,7 +67,12 @@ else{
                 $resultConcertReport = mysqli_query($conn, $sqlConcertReport);
                 $row3 = mysqli_fetch_assoc($resultConcertReport);
 
+                $sqlBandInfo = "SELECT * FROM BandInfo WHERE BandID = '$bandID'";
+                $resultBandInfo = mysqli_query($conn, $sqlBandInfo);
+                $row4 = mysqli_fetch_assoc($resultBandInfo);
+
                 $BandName = $row2["BandName"];
+                $Genre = $row4["Genre"];
                 $ConcertStart = $row1["ConcertTimeStart"];
                 $ConcertEnd = $row1["ConcertTimeEnd"];
                 $Attendance = $row3["Attendance"];
@@ -95,6 +101,7 @@ else{
 
                 echo "<tr class='$concert_row_class'>"
                       . "<td>$BandName</td>"
+                      . "<td>$Genre</td>"
                       . "<td>$displayStart</td>"
                       . "<td>$displayEnd</td>"
                       . "<td>$Attendance</td>"

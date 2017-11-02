@@ -40,9 +40,6 @@ else{
             <div class="flexWrapperInside">
                 <table>
                     <tr>
-                        <th style="color: white; background-color: #353535;">Oversikt</th>
-                    </tr>
-                    <tr>
                         <td><a href="concert-report.php">Se konsertrapport</a></td>
                     </tr>
                     <tr>
@@ -55,7 +52,7 @@ else{
                         <td><a href="booking-offer-pre.php">Send Booking Offer</a></td>
                     </tr>
                     <tr>
-                        <td><a href="band-demands-bookingans.php">Band Demands</a></td>
+                        <td><a href="band-demands-bookingans.php">Bandkrav</a></td>
                     </tr>
                     <tr>
                         <td><a href="rigge-oversikt-bookingans.php">Riggeoversikt</a></td>
@@ -64,7 +61,7 @@ else{
                         <td><a href="band.php">Band-oversikt</a></td>
                     </tr>
                     <tr>
-                        <td><a href="band-review.php">Add review of a Band</a></td>
+                        <td><a href="band-review.php">Legg til omtale til band</a></td>
                     </tr>
                     <tr>
                         <td><a href="ticket-price.php">Generer forslag til billettpris</a> </td>
@@ -74,5 +71,18 @@ else{
             </div>
         </div>
     </div>
+
+<?php
+if (isset($_SESSION['sent']) && $_SESSION['sent']) {
+    $_SESSION['sent'] = False;
+    $_SESSION['failed'] = False;
+    $band = $_SESSION['band'];
+    $mail = $_SESSION['mail'];
+    $popupMessage = $_SESSION['message'];
+
+    echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
+    exit();
+}
+?>
 </body>
 </html>
