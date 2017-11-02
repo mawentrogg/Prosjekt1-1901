@@ -51,6 +51,25 @@ else{
                     <tr>
                         <td><a href="offer-overview.php">Oversikt over bookingtilbud</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="booking-offer.php">Send Booking Offer</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="band-demands-bookingans.php">Band Demands</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="rigge-oversikt-bookingans.php">Riggeoversikt</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="band.php">Band-oversikt</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="band-review.php">Add review of a Band</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="ticket-price.php">Generer forslag til billettpris</a> </td>
+                    </tr>
+
                 </table>
             </div>
         </div>
