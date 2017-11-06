@@ -3,18 +3,9 @@
 <?php
 session_start();
 
-
-//Checking if user is logged in
-if(!(isset($_SESSION['concertID']))){
-    header("Location: index.php?Denied");
-    exit();
-}
-
-
 include_once 'includes/dbh.inc.php';
 $username = $_SESSION['u_username'];
 $concertID = $_SESSION['concertID'];
-//$concertID = 2;
 
 $sql = "SELECT * FROM Concert WHERE ConcertID = '$concertID'";
 $result = mysqli_query($conn, $sql);
@@ -36,9 +27,10 @@ $bandName = $row['BandName'];
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
+
 <div style="justify-content: center;" class="flexTop">
     <p class="superHeader">Festiv4len</p>
-    </div>
+</div>
     <div style="margin: 0;height: 100%" class="flexBody">
         <div style="width: 100vh ; height: 75vh;" class="flexWrapper">
             <form action="includes/insert-demands.inc.php" method="POST">

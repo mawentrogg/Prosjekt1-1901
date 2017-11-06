@@ -90,17 +90,12 @@ $festivalName = $festivalArray['FestivalName'];
                         $bandID = $row['BandID'];
                         $date = date('d.M.Y H:s', strtotime($row['ConcertTimeStart']));
 
-                        //Getting bandName from BandID
+                        //Getting bandName and bandGenrefrom BandID
                         $sqlBand = "SELECT * FROM Band WHERE BandID = '$bandID'";
                         $resultBand = mysqli_query($conn, $sqlBand);
                         $bandArray = mysqli_fetch_assoc($resultBand);
                         $bandName = $bandArray['BandName'];
-
-                        //Getting bandGenre from BandID
-                        $sqlBand = "SELECT * FROM BandInfo WHERE BandID = '$bandID'";
-                        $resultBand = mysqli_query($conn, $sqlBand);
-                        $bandArray = mysqli_fetch_assoc($resultBand);
-                        $bandGenre = $bandArray['Genre'];
+                        $bandGenre = $bandArray['BandGenre'];
 
                         //Getting attendance and economy from ConcertID
                         $concertID = $row['ConcertID'];
@@ -124,7 +119,6 @@ $festivalName = $festivalArray['FestivalName'];
                 }
                 ?>
             </table>
-            <label>Oppsummering scene:</label>
             <table>
                 <tr>
                     <th>SceneID</th>
