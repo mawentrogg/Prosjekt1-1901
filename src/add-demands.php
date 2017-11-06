@@ -23,17 +23,18 @@ $bandName = $row['BandName'];
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Band Demands</title>
+    <title>Legge til bandkrav</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
-<div class="flexBody">
- <div class="flexTop">
-        <p class="superHeader">Festiv4len</p>
-    </div>
-        <div style="width:auto" class="flexWrapper">
+
+<div style="justify-content: center;" class="flexTop">
+    <p class="superHeader">Festiv4len</p>
+</div>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width: 100vh ; height: 75vh;" class="flexWrapper">
             <form action="includes/insert-demands.inc.php" method="POST">
-                <?php echo "<p class='indexHeader'>Technical demands: <br> " . $bandName . " - " . $date . "</p>"; ?>
+                <?php echo "<p style='font-size: 25px' class='indexHeader'>Legge til bandkrav: <br> " . $bandName . " - " . $date . "</p>"; ?>
 
                 <label>Demands: </label>
                 <?php
@@ -46,7 +47,7 @@ $bandName = $row['BandName'];
                     }
                     echo "<input type = 'hidden' name = 'ConcertID' value='$concertID'></input>";
                 ?>
-                <input type="submit" name ="submit" value="Add demands"/>
+                <input type="submit" name ="submit" value="Legg til krav"/>
             </form>
         </div>
     </div>

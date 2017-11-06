@@ -1,12 +1,43 @@
-
+<!DOCTYPE html>
+<html>
 <head>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="style.css">
     <title>Oversikt over tidligere konserter</title>
 </head>
 
-<body>
-
+<body style="background-color: #3C6E71">
+<div class="flexTop">
+        <a class="hjemButton" href="<?php
+                    if(isset($_SESSION['u_id'])){
+                        echo $_SESSION['u_role'] . ".php";
+                    }
+                    else{
+                        echo "index.php";
+                    }
+                    ?>">Hjem</a>
+        <p class="superHeader">Festiv4len</p>
+        <form action="includes\logout.inc.php" method="post">
+            <button type="submit" name="submit">Logg ut</button>
+        </form> 
+    </div>
+    <div style="margin: 0;height: 100%" class="flexBody">
+        <div style="width:80%; height: 70vh;" class="flexWrapper">
+        <p class="insideMenuHeader">Tidligere konserter</p>
+            <div class="flexWrapperInside">
 <?php
+
+session_start();
+include_once 'includes/dbh.inc.php';
+
+//Checking if user is logged in. If not sending back to proper site
+if(!(isset($_SESSION['u_id']))){
+    header("Location: index.php");
+}
+else{
+    if(!($_SESSION['u_role'] == "bookingans")){
+        header("Location: " . $_SESSION['u_role'] . ".php");
+    }
+}
 
 // Author: Matias
 
@@ -62,7 +93,7 @@ function possible_genres ($mysqli) {
     return $possible_genres_array;
 }
 
-if (TRUE || $_SESSION["u_role"] == "organizer") {
+if ($_SESSION["u_role"] == "bookingans") {
     
     $mysqli = mysqli_connect("mysql.stud.ntnu.no", "kimera_gruppe4", "festiv4l", "kimera_gruppe4");
     if($mysqli->connect_error){
@@ -225,7 +256,13 @@ if (TRUE || $_SESSION["u_role"] == "organizer") {
     echo "<table>\r\n";
     
 }
+else {
+    echo "<p>Du har ikke tilgang, du er " . $_SESSION["u_role"] . "</p>";
+}
 
 ?>
-
+</div>
+</div>
+</div>
 </body>
+</html>

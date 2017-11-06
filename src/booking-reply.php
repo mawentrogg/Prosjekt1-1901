@@ -20,21 +20,10 @@ $val = $_GET["val"];
     </script>
 </head>
 <body style="background-color: #3C6E71">
-<div class="flexTop">
-        <a class="hjemButton" href="<?php
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.php";
-                    }
-                    ?>">Hjem</a>
-        <p class="superHeader">Festiv4len</p>
-        <form action="includes\logout.inc.php" method="post">
-            <button type="submit" name="submit">Logg ut</button>
-        </form> 
+<div style="justify-content: center;" class="flexTop">
+    <p class="superHeader">Festiv4len</p>
     </div>
-    <div style="margin: 0;height: 100%" class="flexBody">
+    <div style="margin:0; height: 100%" class="flexBody">
         <div style="height: 75vh;" class="flexWrapper">
             <p class="insideMenuHeader">Your booking offer</p>
             <div class="flexWrapperInside" style="overflow-y:hidden; background-color: #353535">
@@ -51,7 +40,6 @@ $val = $_GET["val"];
                 $concertEnd = $offer_result[0][4];
                 $scene = $offer_result[0][5];
                 $email = $offer_result[0][6];
-                $genre = $offer_result[0][7];
                 $id = $offer_result[0][0];
                 $festival = $offer_result[0][9];
                 $price = $offer_result[0][8];
@@ -72,12 +60,13 @@ $val = $_GET["val"];
                   if ($offer_result[0][11] == 0) {
                   ob_start();
                   echo '<form method="post"> <input type="submit" value="Accept" name="accept"></form>
-                  <form method="post" onsubmit="return confirmDelete();"> <input type="submit" value="Decline" name="decline" ></form>';
+                  <form method="post" onsubmit="return confirmDelete();"> <input style="background-color: red" type="submit" value="Decline" name="decline" ></form>';
                   if(isset($_POST['accept'])){
                     ob_end_clean();
                     $updateAccept = "UPDATE Booking_Offers SET Accepted=1 WHERE BookingOfferID=" . $id;
                     if ($conn->query($updateAccept) === TRUE) {
-                        $sql2 = "INSERT IGNORE INTO Band (BandName, BandGenre, Manager) VALUES ('$bandName', '$genre', '$email')";
+                        $sql2 = "INSERT IGNORE INTO Band (BandName, Manager)
+                        VALUES ('$bandName', '$email')";
                         if ($conn->query($sql2) === TRUE) {
                           $sql3 = "SELECT * FROM Band WHERE bandName = '$band'";
                           $result2 = mysqli_query($conn, $sql3);
@@ -86,20 +75,11 @@ $val = $_GET["val"];
                           $sql4 = "INSERT IGNORE INTO Concert (ConcertTimeStart, ConcertTimeEnd, SceneID, BandID, FestivalID, TicketPrice)
                           VALUES ('$concertStart', '$concertEnd', $scene, $BandID, $festival, $price)";
                           if ($conn->query($sql4) === TRUE) {
-
-                            $concertID2 = mysqli_insert_id($conn);
-
-                            //Assign random tech to a concert
-                            $sqlTech = "SELECT * FROM Users WHERE UserRole = 'tech'";
-                            $resultTech = mysqli_query($conn, $sqlTech);
-                            $techArray = mysqli_fetch_all($resultTech);
-
-                            $randTechUserID =  $techArray[array_rand($techArray)][0];
-
-                            $sqlInsertTech = "INSERT INTO Concerts_UserTechnicians (ConcertID, UserID) VALUES('$concertID2', '$randTechUserID')";
-                            mysqli_query($conn, $sqlInsertTech);
-
-
+                            $concert = "SELECT * FROM Concert WHERE BandID =" . $BandID;
+                            $result3 = mysqli_query($conn, $concert);
+                            $concertResult = $result3->fetch_all();
+                            $_SESSION['concertID'] = $concertResult[0][0];
+                            $concertID2 = $concertResult[0][0];
                             echo 'The Offer has been accepted, click below to add technical demands<br>';
                             echo "Your concert ID: <br><br>" . $concertID2;
                             echo '<form action="add-demands.php"> <input type="submit" value="Add demands"></form>';
@@ -142,6 +122,7 @@ $val = $_GET["val"];
               ?>
 
             </div>
+
 
         </div>
 

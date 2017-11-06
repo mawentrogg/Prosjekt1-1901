@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Riggeoversikt</title>
+	<title>Band-oversikt</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
