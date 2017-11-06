@@ -52,8 +52,18 @@ else{
                         <td><a href="admin-update-concert.php">Oppdater konsert</a></td>
                     <tr>
                     <tr>
-                        <td><a href="admin-update-concert-costs.php">Oppdatere konsertkostnader</a> </td>
+                        <td><a href="admin-update-concert-costs.php">Oppdater konsertkostnader</a> </td>
                     </tr>
+                    <tr>
+                        <td><a href="admin-update-concert-contactinfo.php">Oppdater kontaktinfo for konsert</a> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="admin-update-bandinfo.php">Oppdater nøkkelinformasjon om band</a> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="admin-add-band-reviewlink.php">Legg til link for anmeldelse av band</a> </td>
+                    </tr>
+
 				</table>
 			</div>
         </div>
