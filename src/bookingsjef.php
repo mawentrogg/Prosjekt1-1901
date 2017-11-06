@@ -52,7 +52,7 @@ else{
                         <td><a href="booking-offer-pre.php">Send Booking Offer</a></td>
                     </tr>
                     <tr>
-                        <td><a href="band-demands-bookingans.php">Bandkrav</a></td>
+                        <td><a href="band-demands-bookingans.php">Konsertkrav</a></td>
                     </tr>
                     <tr>
                         <td><a href="rigge-oversikt-bookingans.php">Riggeoversikt</a></td>
