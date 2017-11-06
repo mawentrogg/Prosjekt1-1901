@@ -4,7 +4,7 @@ include_once 'includes/dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
 }
 else{
     if(!($_SESSION['u_role'] == "admin")){
@@ -48,16 +48,22 @@ if(mysqli_num_rows($resultConcert) > 0){
         <div style="width:50%; " class="flexWrapper">
 			<p class="insideMenuHeader">Admin//Oppdater konsert</p>
 			<div style="background-color:#353535; overflow-y: hidden;" class="flexWrapperInside">
-            <form action="admin-update-concertDB.php" method="post">
+            <form action="includes/update-concert.inc.php" method="post">
                 <label>Konsert-ID:</label>
-                <select name="concerts">
+                <select name="concertID">
                     <?php  
                     echo $concerts;
                     ?>
                 </select>
                 <label>Billetter solgt:</label>
-                <input type="number" name="ticketsSold" required>
-                <input type="submit" value="Oppdater konsert">
+                <input type="number" name="ticketsSold">
+                <label>Billettpris (NOK):</label>
+                <input type="number" name="ticketPrice">
+                <label>Antall tekniske oppgaver:</label>
+                <input type="number" name="techTaskNum">
+                <label>Tekniske oppgaver utført:</label>
+                <input type="number" name="completedTaskNum">
+                <input type="submit" name="submit" value="Oppdater konsert">
             </form>
 			</div>
         </div>
