@@ -8,6 +8,19 @@
 
 <?php
 
+session_start();
+include_once 'includes/dbh.inc.php';
+
+//Checking if user is logged in. If not sending back to proper site
+if(!(isset($_SESSION['u_id']))){
+    header("Location: index.php");
+}
+else{
+    if(!($_SESSION['u_role'] == "organizer")){
+        header("Location: " . $_SESSION['u_role'] . ".php");
+    }
+}
+
 // Author: Matias
 
 // Note: this code will bring errors if there are ' in a genre
@@ -62,7 +75,7 @@ function possible_genres ($mysqli) {
     return $possible_genres_array;
 }
 
-if (TRUE || $_SESSION["u_role"] == "organizer") {
+if ($_SESSION["u_role"] == "organizer") {
     
     $mysqli = mysqli_connect("mysql.stud.ntnu.no", "kimera_gruppe4", "festiv4l", "kimera_gruppe4");
     if($mysqli->connect_error){
@@ -224,6 +237,9 @@ if (TRUE || $_SESSION["u_role"] == "organizer") {
     
     echo "<table>\r\n";
     
+}
+else {
+    echo "<p>Du har ikke tilgang, du er " . $_SESSION["u_role"] . "</p>";
 }
 
 ?>
