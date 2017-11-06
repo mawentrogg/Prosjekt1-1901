@@ -206,6 +206,11 @@ input[type=text], input[type=PASSWORD], input[type=date], input[type=time], inpu
     box-sizing: border-box;
 }
 
+textarea{
+	width: 99%;
+	height: 200px;
+}
+
 select, option{
 	width: 100%;
     padding: 12px 20px;
@@ -236,4 +241,10 @@ input[type=submit]:hover{
 
 #cal th, #cal td, #cal th {
 	border-radius: 0px;
+}
+
+.kalenderform{
+	display: inline;
+	margin-left: auto;
+	margin-right: auto;
 }

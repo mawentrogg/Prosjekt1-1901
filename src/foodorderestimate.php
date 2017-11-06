@@ -35,7 +35,7 @@ else{
     </form> 
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
-    <div style="height: 80vh;" class="flexWrapper">
+    <div style="width: 80%; height: 80vh;" class="flexWrapper">
         <p class="insideMenuHeader">Bestillingsestimat</p> 
         <div class="flexWrapperInside">
         <?php

@@ -39,18 +39,7 @@ include 'includes/dbh.inc.php';
         </form> 
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
-        <div style="height: 75vh;" class="flexWrapper">
-        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
-            <?php
-            $userLoggedIn = $_SESSION["u_username"];
-            $sqlUsersTop = "SELECT * FROM Users WHERE UserUsername = '$userLoggedIn'";
-            $resultUsersTop = mysqli_query($conn, $sqlUsersTop);
-            $usersArrayTop = mysqli_fetch_assoc($resultUsersTop);
-            $firstName = $usersArrayTop["UserFirstname"];
-
-            echo $firstName;
-            ?></p>
-
+        <div style="height: 70vh;" class="flexWrapper">
         <p class="insideMenuHeader">Konsertrapport</p>
         <div class="flexWrapperInside">
             <form action = "concert-report-scene.php" method="POST">
@@ -66,8 +55,6 @@ include 'includes/dbh.inc.php';
                 </select>
                 <input type="submit" name="submit" value = "Choose scene">
             </form>
-
-
         </div>
     </div>
 </div>
