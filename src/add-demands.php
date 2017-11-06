@@ -3,18 +3,9 @@
 <?php
 session_start();
 
-
-//Checking if user is logged in
-if(!(isset($_SESSION['concertID']))){
-    header("Location: index.php?Denied");
-    exit();
-}
-
-
 include_once 'includes/dbh.inc.php';
 $username = $_SESSION['u_username'];
 $concertID = $_SESSION['concertID'];
-//$concertID = 2;
 
 $sql = "SELECT * FROM Concert WHERE ConcertID = '$concertID'";
 $result = mysqli_query($conn, $sql);
@@ -27,8 +18,6 @@ $sql = "SELECT * FROM Band WHERE BandID = '$bandID'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $bandName = $row['BandName'];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -40,18 +29,7 @@ $bandName = $row['BandName'];
 <body style="background-color: #3C6E71">
 <div class="flexBody">
  <div class="flexTop">
-        <a class="hjemButton" href="<?php
-                    if(isset($_SESSION['u_id'])){
-                        echo $_SESSION['u_role'] . ".php";
-                    }
-                    else{
-                        echo "index.php";
-                    }
-                    ?>">Hjem</a>
         <p class="superHeader">Festiv4len</p>
-        <form action="includes\logout.inc.php" method="post">
-            <button type="submit" name="submit">Logg ut</button>
-        </form> 
     </div>
         <div style="width:auto" class="flexWrapper">
             <form action="includes/insert-demands.inc.php" method="POST">

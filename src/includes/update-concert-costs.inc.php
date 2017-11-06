@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
         mysqli_query($conn, $sql);
     }
 
-    header("Location: ../admin-update-concert.php");
+    header("Location: ../admin-update-concert-costs.php");
     exit();
 
 }
