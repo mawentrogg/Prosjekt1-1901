@@ -18,8 +18,8 @@
 			<label>Password: </label>
 			<input type="password" name="password" required>
 			<input type="submit" name = 'submit' value="Login"/>
-		</form>
 
+		</form>
         <?php
             if(isset($_SESSION['failed']) && $_SESSION['failed']){
                 $_SESSION['failed'] = False;
@@ -27,7 +27,7 @@
                 echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
             }
         ?>
-
+		<a style="align-self: center; margin:0; width:97%; padding: 10px; border-radius: 5px;" class='hjemButton' href="lost-url.php">Lost URL for manager</a>
 	</div>
 </div>
 </body>
