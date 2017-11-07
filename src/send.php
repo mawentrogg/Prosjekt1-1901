@@ -28,7 +28,7 @@ if($band == $bandName and $validation == $val){
 	"Your band " . $bandName . " has received an offer to play at festiv4len on " . $date . ", " . $time . " on Stage " . $sceneID .
 	"." . 
 	"For the concert, you will be paid " . $price . "kr \n\nClick the following link to review your offer. \n\n\n"
-	. "http://org.ntnu.no/festiv4len/Prosjekt1-1901/src/booking-reply.php?band=" . $bandName . "&val=" . $validation);
+	. "http://org.ntnu.no/festiv4len/booking-reply.php?band=" . $bandName . "&val=" . $validation);
 
 	$sqlUpdate = "UPDATE Booking_Offers SET Sent=1 WHERE BookingOfferID=" . $id;
 
