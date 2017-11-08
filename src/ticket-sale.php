@@ -10,7 +10,7 @@ include_once 'includes/dbh.inc.php';
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Riggeoversikt</title>
+    <title>Billettsalg</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body style="background-color: #3C6E71">
@@ -30,7 +30,7 @@ include_once 'includes/dbh.inc.php';
     </div>
     <div style="margin: 0;height: 100%" class="flexBody">
         <div style="width:90%; height: 80vh;" class="flexWrapper">
-        <p class="insideMenuHeader">Rigge-oversikt</p>
+        <p class="insideMenuHeader">Billettsalg</p>
         <div class="flexWrapperInside">
             <table>
                 <tr>

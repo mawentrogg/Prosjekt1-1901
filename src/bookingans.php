@@ -43,7 +43,7 @@ else{
                         <td><a href="booking-offer-pre.php">Send booking-offer</a></td>
                     </tr>
                     <tr>
-                        <td><a href="band-demands-bookingans.php">Bandkrav</a></td>
+                        <td><a href="band-demands-bookingans.php">Konsertkrav</a></td>
                     </tr>
                     <tr>
                         <td><a href="rigge-oversikt-bookingans.php">Riggeoversikt</a></td>
@@ -53,6 +53,9 @@ else{
                     </tr>
                     <tr>
                         <td><a href="band-review.php">Legg til omtale til band</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="earlier-concerts-bookingans.php">Se tidligere konserter</a></td>
                     </tr>
                 </table>
             </div>

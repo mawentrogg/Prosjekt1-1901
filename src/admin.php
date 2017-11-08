@@ -4,7 +4,7 @@ include_once 'includes\dbh.inc.php';
 
 //Checking if user is logged in. If not sending back to proper site
 if(!(isset($_SESSION['u_id']))){
-    header("Location: index.html");
+    header("Location: index.php");
 }
 else{
     if(!($_SESSION['u_role'] == "admin")){
@@ -50,7 +50,20 @@ else{
                     </tr>
                     <tr>
                         <td><a href="admin-update-concert.php">Oppdater konsert</a></td>
+                    <tr>
+                    <tr>
+                        <td><a href="admin-update-concert-costs.php">Oppdater konsertkostnader</a> </td>
                     </tr>
+                    <tr>
+                        <td><a href="admin-update-concert-contactinfo.php">Oppdater kontaktinfo for konsert</a> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="admin-update-bandinfo.php">Oppdater nøkkelinformasjon om band</a> </td>
+                    </tr>
+                    <tr>
+                        <td><a href="admin-add-band-reviewlink.php">Legg til link for anmeldelse av band</a> </td>
+                    </tr>
+
 				</table>
 			</div>
         </div>

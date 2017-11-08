@@ -16,6 +16,7 @@
 
 .indexWrapper{
 	display: flex;
+	flex-direction: column;
 	background-color: #353535;
 	justify-content: center;
 	padding: 20px;
