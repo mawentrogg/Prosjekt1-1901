@@ -77,6 +77,7 @@ $val = $_GET["val"];
                           if ($conn->query($sql4) === TRUE) {
 
                               $concertID2 = mysqli_insert_id($conn);
+                              $_SESSION['concertID'] = $concertID2;
 
                               //Assign random tech to a concert
                               $sqlTech = "SELECT * FROM Users WHERE UserRole = 'tech'";
@@ -88,7 +89,9 @@ $val = $_GET["val"];
 
                               echo 'The Offer has been accepted, click below to add technical demands<br>';
                               echo "Your concert ID: <br><br>" . $concertID2;
-                              echo '<form action="add-demands.php"> <input type="submit" value="Add demands"></form>';
+                              echo "<form action='add-demands.php' method='post'> 
+                                        <input type='submit' name='submit' value='Add demands'>
+                                    </form>";
                           }
                           else {
                               echo "Error: " . $sql4 . "<br>" . $conn->error;
