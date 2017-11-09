@@ -57,6 +57,9 @@ else{
                     <tr>
                         <td><a href="earlier-concerts-bookingans.php">Se tidligere konserter</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="scene-find-band.php">Oversikt over konserter på scene</a></td>
+                    </tr>
                 </table>
             </div>
         </div>
