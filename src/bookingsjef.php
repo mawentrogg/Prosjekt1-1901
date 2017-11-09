@@ -73,16 +73,6 @@ else{
     </div>
 
 <?php
-if (isset($_SESSION['sent']) && $_SESSION['sent']) {
-    $_SESSION['sent'] = False;
-    $_SESSION['failed'] = False;
-    $band = $_SESSION['band'];
-    $mail = $_SESSION['mail'];
-    $popupMessage = $_SESSION['message'];
-
-    echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
-    exit();
-}
 ?>
 </body>
 </html>

@@ -7,7 +7,7 @@
     if(!(isset($_SESSION['u_id']))){
         header("Location: index.php");
     }
-    else if(!($_SESSION['u_role'] == "bookingans" or $_SESSION['u_role'] == "bookingsjef")){
+    else if(!(($_SESSION['u_role'] == "bookingans") || ($_SESSION['u_role'] =="bookingsjef"))){
             header("Location: " . $_SESSION['u_role'] . ".php");
     }
 ?>
@@ -42,9 +42,8 @@
              }
             
 
-             $bandQuery = "SELECT Band.BandID, Band.BandName, BandInfo.BandID, BandInfo.PopRank, BandInfo.Sales, BandInfo.Genre, Concert.ConcertTimeStart, Concert.BandID, Concert.FestivalID, Festival.FestivalID, Festival.FestivalName
+             $bandQuery = "SELECT Band.BandID, Band.BandName, Band.PopRank, Band.Sales, Band.BandGenre, Concert.ConcertTimeStart, Concert.BandID, Concert.FestivalID, Festival.FestivalID, Festival.FestivalName
                         FROM Band 
-                        INNER JOIN BandInfo ON Band.BandID=BandInfo.BandID
                         INNER JOIN Concert ON Band.BandID=Concert.BandID
                         INNER JOIN Festival ON Concert.FestivalID=Festival.FestivalID";
             ?>
@@ -56,10 +55,10 @@
 
                         echo "<table>\r\n"
                         . "<tr>\r\n"
-                        . "<th>Name</th>"
-                        . "<th>Popularity Rank</th>"
-                        . "<th>Sales</th>"
-                        . "<th>Genre</th>\r\n"
+                        . "<th>Navn</th>"
+                        . "<th>Pop.rangering</th>"
+                        . "<th>Salg</th>"
+                        . "<th>Sjanger</th>\r\n"
                         . "<th>Tidligere Konsert</th>\r\n"
                         . "</tr>\r\n";
             

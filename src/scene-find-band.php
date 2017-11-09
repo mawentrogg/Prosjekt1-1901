@@ -67,7 +67,7 @@ if(mysqli_num_rows($resultScene) > 0){
 
 
 
-        <p class="insideMenuHeader">Find previous concerts</p>
+        <p class="insideMenuHeader">Finn konserter</p>
         <div class="flexWrapperInside">
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 <Select name="SceneID">
@@ -100,7 +100,7 @@ if(mysqli_num_rows($resultScene) > 0){
 
                             echo "<table>\r\n"
                             . "<tr>\r\n"
-                            . "<th>Navn</th>"
+                            . "<th>Band</th>"
                             . "<th>Manager </th>"
                             . "<th>PopRank</th>"
                             . "<th>Salg</th>\r\n"
@@ -109,10 +109,10 @@ if(mysqli_num_rows($resultScene) > 0){
                 
                             while($row = mysqli_fetch_array($result)){
                                 if(!($lastBand == $row['BandName'])){
-                                    echo "<tr>\r\n";
-                                    echo "<td>" . $row['BandName'] . "</td>";
+                                    echo "<tr>";
+                                    echo "<td>  " . $row['BandName'] . "</td>";
                                     //echo "<tr>";
-                                    echo "<td>" . $row['Manager'] . "</td>";
+                                    echo "<td> " . $row['Manager'] . "</td>";
                                     echo "<td> " . $row['PopRank'] . "</td>";
                                     echo "<td> " . $row['Sales'] . "</td>";
                                     echo "<td> " . $row['Genre'] . "</td>";
@@ -126,11 +126,11 @@ if(mysqli_num_rows($resultScene) > 0){
                                 }//Skal uansett ha siste konsertinfo.
                                 
                                     echo "<tr id='".$row['BandID'].">" //style='display:none'>"
-                                    . "<td> Billetter: ". $row['TicketsSold'] ."</td>"
-                                    . "<td>". $row['ConcertTimeStart'] ."</td>"
-                                    . "<td>". $row['TicketPrice'] ."</td>"
-                                    . "<td>". $row['TicketsSold'] ."</td>"
-                                    . "<td>". $row['FestivalName'] ."</td>"
+                                    . "<td>  </td>"
+                                    . "<td> Konsertdato:". $row['ConcertTimeStart'] ."</td>"
+                                    . "<td> Bilettsalg: ". $row['TicketsSold'] ."</td>"
+                                    . "<td> Bilettpris: ". $row['TicketPrice'] ."</td>"
+                                    . "<td> Festival - ". $row['FestivalName'] ."</td>"
                                     . "</tr>\r\n".
                                     "</tr>";
 
@@ -139,7 +139,7 @@ if(mysqli_num_rows($resultScene) > 0){
                             echo "</table>";
                             mysqli_free_result($result);
                         } else {
-                            echo "No records matching your query were found.";
+                            echo "<p style='color: blue'>Ingen konserter funnet på denne scenen.";
                         }
                     } else {
                       echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);

@@ -21,13 +21,14 @@ if($band == $bandName and $validation == $val){
     $price = $offer_result[0][8];
     $festivalID = $offer_result[0][9];
 
+
     //Checking if offer is overlaping with an already sent offer
     validDateOffers($concertStart, $concertEnd, $festivalID, $sceneID, $conn);
 
     mail($email, utf8_decode("Booking offer for ") . utf8_decode($bandName),
-	"Your band " . $bandName . " has received an offer to play at festiv4len on " . $date . ", " . $time . " on Stage " . $sceneID .
+	"Your band " . $bandName . " has received an offer to play at festiv4len on " . $concertStart . " on Stage " . $sceneID .
 	"." . 
-	"For the concert, you will be paid " . $price . "kr \n\nClick the following link to review your offer. \n\n\n"
+	"The ticket price for the concert will be " . $price . "kr \n\nClick the following link to review your offer. \n\n\n"
 	. "http://org.ntnu.no/festiv4len/booking-reply.php?band=" . $bandName . "&val=" . $validation);
 
 	$sqlUpdate = "UPDATE Booking_Offers SET Sent=1 WHERE BookingOfferID=" . $id;

@@ -3,6 +3,8 @@
 <?php
 session_start();
 
+include 'includes/dbh.inc.php';
+
 //Checking if user is logged in
 if(!(isset($_SESSION['u_id']))){
     header("Location: index.php");
@@ -13,8 +15,6 @@ else{
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
 }
-
-include 'includes/dbh.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +84,16 @@ include 'includes/dbh.inc.php';
                     }
                 }
 
+                if (isset($_SESSION['sent']) && $_SESSION['sent']) {
+                    $_SESSION['sent'] = False;
+                    $_SESSION['failed'] = False;
+                    $band = $_SESSION['band'];
+                    $mail = $_SESSION['mail'];
+                    $popupMessage = $_SESSION['message'];
+
+                    echo "<script type='text/javascript'> window.alert('$popupMessage')</script>";
+                    exit();
+                }
 
                 ?>
 

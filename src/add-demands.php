@@ -4,7 +4,6 @@
 session_start();
 
 include_once 'includes/dbh.inc.php';
-$username = $_SESSION['u_username'];
 $concertID = $_SESSION['concertID'];
 
 $sql = "SELECT * FROM Concert WHERE ConcertID = '$concertID'";
