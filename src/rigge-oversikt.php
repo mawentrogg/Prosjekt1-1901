@@ -51,6 +51,7 @@
 						<th>Scene</th>
             			<th>Artist</th>
             			<th>Tekniker</th>
+                        <th>Legg til oppmøtetid</th>
 					</tr>
 
                     <?php
@@ -63,27 +64,39 @@
                             $row3 = mysqli_fetch_assoc($resultIDBand);
                             $bandName = $row3['BandName'];
 
-
                             $ConcertID = $row['ConcertID'];
                             $sqlConTech = "SELECT UserID FROM Concerts_UserTechnicians WHERE ConcertID = '$ConcertID'";
                             $resultConTech = mysqli_query($conn, $sqlConTech);
                             $conTechArray = mysqli_fetch_assoc($resultConTech);
                             $userIDConTech = $conTechArray['UserID'];
+
                             $sqlUsers = "SELECT * FROM Users WHERE UserID = '$userIDConTech'";
                             $resultUsers = mysqli_query($conn, $sqlUsers);
                             $usersArray= mysqli_fetch_assoc($resultUsers);
                             $userName = $usersArray['UserFirstname'];
 
+                            $sqlMeeting = "SELECT * FROM Concert WHERE ConcertID = '$ConcertID'";
+                            $resultMeeting = mysqli_query($conn, $sqlMeeting);
+                            $meetingArray = mysqli_fetch_assoc($resultMeeting);
+                            $meetingTime = $meetingArray[MeetingTime];
 
 
                             if($_SESSION["u_username"] == $usersArray['UserUsername']){
+                                //endrer bakgrunnsfarge
                                 $style = 'background-color: #88cc88; border-radius:5px;';
+                                $meeting = "<a href='meeting.php'>Legg til oppmøtetid</a>";
                             }
                             else{
                                 $style = 'background-color:#b2c2bf; border-radius:5px;';
+                                $meeting = 'Ingen oppmøtetid';
                             }
 
-                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart'] . "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td></tr>";
+                            if($meetingTime != 0000-00-00){
+                                $meeting = strtotime($meetingTime);
+                                $meeting = date('d-m-y H:i', $meeting);
+                            }
+
+                            echo "<tr> <td style='$style;'>" . $row['ConcertTimeStart']. "</td> <td  style='$style;'>" . $row['SceneID'] . "</td> <td  style='$style;'> ". $bandName. "</td> <td  style='$style;'> " . $userName. "</td><td style='$style;'>$meeting</td></tr>";
                         }
                     }
 
@@ -94,7 +107,7 @@
 			</div>
 
             <a class='helleButton' style='$style;'href='band-demands.php'>Se krav</a>
-			</div> 
+			</div>
 
 		</div>
 	</div>
