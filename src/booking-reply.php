@@ -88,7 +88,17 @@ $val = $_GET["val"];
                               mysqli_query($conn, $sqlInsertTech);
 
                               echo 'The Offer has been accepted, click below to add technical demands<br>';
-                              echo "Your concert ID: <br><br>" . $concertID2;
+                              echo "Your concert ID: " . $concertID2 . "<br>";
+
+                              //Getting contact info
+                              $sqlInfo = "SELECT * FROM Tech_ContactInfo WHERE UserID='$randTechUserID'";
+                              $resultInfo = mysqli_query($conn, $sqlInfo);
+                              $rowInfo = mysqli_fetch_assoc($resultInfo);
+                              $contactEmail = $rowInfo['ContactEmail'];
+                              $contactPhone = $rowInfo['ContactPhone'];
+
+                              echo "<b>Contact information: </b>" . $contactEmail . ", " . "$contactPhone <br>";
+
                               echo "<form action='add-demands.php' method='post'> 
                                         <input type='submit' name='submit' value='Add demands'>
                                     </form>";
@@ -123,6 +133,22 @@ $val = $_GET["val"];
                   $_SESSION['concertID'] = $concertResult[0][0];
                   $concertID2 = $concertResult[0][0];
                   echo '<p>You have already accepted the offer, click below to add technical demands.<br><br></p>';
+
+                  //Getting Tech userID
+                  $sqlTechID = "SELECT * FROM Concerts_UserTechnicians WHERE ConcertID='$concertID2'";
+                  $resultTechID = mysqli_query($conn, $sqlTechID);
+                  $rowTechID = mysqli_fetch_assoc($resultTechID);
+                  $techUserID = $rowTechID['UserID'];
+
+                  //Getting contact info
+                  $sqlInfo = "SELECT * FROM Tech_ContactInfo WHERE UserID='$techUserID'";
+                  $resultInfo = mysqli_query($conn, $sqlInfo);
+                  $rowInfo = mysqli_fetch_assoc($resultInfo);
+                  $contactEmail = $rowInfo['ContactEmail'];
+                  $contactPhone = $rowInfo['ContactPhone'];
+
+                  echo "<b>Contact information: </b>" . $contactEmail . ", " . "$contactPhone <br>";
+
                   echo "Your concert ID: " . $concertID2;
                   echo '<form action="add-demands.php"> <input type="submit" value="Add demands"></form>';
                 }
