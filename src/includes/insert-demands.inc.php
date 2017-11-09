@@ -31,12 +31,10 @@ if (isset($_POST['submit'])) {
         }
         $sqlinsert = "INSERT INTO Concert_Demands (ConcertID, Demand) VALUES ('$ConcertID', '$value')";
         mysqli_query($conn, $sqlinsert);
-
-
-
+        
     }
 
-    header("Location: ../add-demands.php?DemandsAdded|duplicate=".$duplicate."/".$numDemands);
+    header("Location: ../booking-reply.php");
     exit();
 }
 else {

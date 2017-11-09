@@ -67,7 +67,7 @@
                             echo "<td>" . $row['BandName'] . "</td>";
                             echo "<td>" . $row['PopRank'] . "</td>";
                             echo "<td>" . $row['Sales'] . "</td>";
-                            echo "<td>" . $row['Genre'] . "</td>";
+                            echo "<td>" . $row['BandGenre'] . "</td>";
 
                             //I belive this needs some onClick functionality, checking php compatibility.
                             //This entire table should be refered to whenever anyone clicks an individual band name, eventlistener and ID of the selected item somehow. 
