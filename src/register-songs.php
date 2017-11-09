@@ -57,9 +57,13 @@ $getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$c
         </form>
     </div>
     <div style="width:auto;height:70vh;" class="flexWrapper">
-        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som
+        <p class="insideMenuHeader" style="font-size: 20px; margin-bottom: 0">Du er logget inn som manager for
             <?php
-            $managerEpost = $_SESSION["ManagerEpost"];
+            $bandQuery = "SELECT Band.BandName FROM Band WHERE Band.BandID = $bandID";
+            $result = mysqli_query($conn, $bandQuery);
+            while($row = mysqli_fetch_assoc($result)){
+                echo $row['BandName']."<br>";
+            }
             
 
             echo $managerEpost;
@@ -113,7 +117,7 @@ $getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$c
                     echo "Data ble lagt til";
                 } 
                 else {
-                    echo "Error: " . $sqlInsert . "<br>" . $conn->error;
+                    echo "Error: " . $insertValuesSQL . "<br>" . $conn->error;
                 }
                 
                 
