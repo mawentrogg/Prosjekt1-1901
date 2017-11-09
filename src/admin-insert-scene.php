@@ -22,7 +22,8 @@ if(mysqli_num_rows($resultScene) > 0){
 	}
 }
 
-$sqlInsert = "INSERT INTO Scene (SceneName, FestivalID, Capacity) VALUES ('$SceneName', '$FestivalID', '$SceneCapacity')";
+$sqlInsert = "INSERT INTO Scene (SceneName, FestivalID, Capacity) 
+VALUES ('$SceneName', '$FestivalID', '$SceneCapacity')";
 
 if ((int)$_SESSION['sceneAlreadyAdded'] == false){
 	if ($conn->query($sqlInsert) === true) {

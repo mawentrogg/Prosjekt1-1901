@@ -25,9 +25,9 @@ $_SESSION["bandID"] = "2";
 $_SESSION["concertID"] = "36";
 */
 $managerEpost = $_SESSION["managerEpost"];
-$band = $_SESSION["bandID"];
-$concert = $_SESSION["concertID"];
-$getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$concert'";
+$bandID = $_SESSION["bandID"];
+$concertID = $_SESSION["concertID"];
+$getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$concertID'";
 
 ?>
 
@@ -81,11 +81,19 @@ $getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$c
 
             
             $resultSongs = mysqli_query($conn, $getConcertSongsSQL);
-            echo "<Table>";
+            echo "<table>\r\n"
+            . "<tr>\r\n"
+            . "<th>ID</th>"
+            . "<th>Sang</th>\r\n"
+            . "<th>Sangsjanger</th>\r\n"
+            . "</tr>\r\n";
+
             while($row = mysqli_fetch_assoc($resultSongs)){
+                echo "<tr>";
                 echo "<td>" . $row["SongID"] . "</td>";
                 echo "<td>" . $row["SongName"] . "</td>";
                 echo "<td>" . $row["SongGenre"] . "</td>";
+                echo "</tr>";
             }
             echo "</Table>";
 
@@ -96,20 +104,24 @@ $getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$c
                 } 
                 $songName= $_POST["SongName"];
                 $songGenre = $_POST["SongGenre"];
+                echo "Song:".$songName." Genre:".$songGenre." BandID:".$bandID." ConcertID:".$concertID." Email:".$managerEpost; 
 
-                $insertValuesSQL = "INSERT INTO Band_Songs (SongName, SongGenre, BandID, ConcertID)
-                VALUES ($songName, $songGenre, $band, $concert)";
+                $insertValuesSQL = "INSERT INTO Band_Songs (SongName, SongGenre, ConcertID)
+                VALUES ('$songName', '$songGenre', '$concertID')";
 
-                if (mysqli_query($conn, $sql)) {
-                    echo "New record created successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                if ($conn->query($insertValuesSQL) === true) {
+                    echo "Data ble lagt til";
+                } 
+                else {
+                    echo "Error: " . $sqlInsert . "<br>" . $conn->error;
                 }
+                
                 
             }
             else{
                 echo "Nothing requested.";
             }
+            $conn->close();
             ?>
 
             <?php

@@ -44,6 +44,7 @@ $val = $_GET["val"];
                 $id = $offer_result[0][0];
                 $festival = $offer_result[0][9];
                 $price = $offer_result[0][8];
+                $_SESSION['managerEpost'] =$email;
                   echo "<table>
                     <tr>
                       <th>Band</th>
@@ -78,8 +79,8 @@ $val = $_GET["val"];
 
                               $concertID2 = mysqli_insert_id($conn);
                               $_SESSION['concertID'] = $concertID2;
-                              $_SESSION["bandID"] = $BandID;
-                              $_SESSION["managerEpost"] =$email;
+                              $_SESSION['bandID'] = $BandID;
+                              $_SESSION['managerEpost'] =$email;
 
                               //Assign random tech to a concert
                               $sqlTech = "SELECT * FROM Users WHERE UserRole = 'tech'";
@@ -94,6 +95,11 @@ $val = $_GET["val"];
                               echo "<form action='add-demands.php' method='post'> 
                                         <input type='submit' name='submit' value='Add demands'>
                                     </form>";
+                              echo "<table>
+                                      <tr>
+                                        <td><a href='register-songs.php'> Registrer sanger</a></td>
+                                      </tr>
+                                    </table>";
                           }
                           else {
                               echo "Error: " . $sql4 . "<br>" . $conn->error;
@@ -124,9 +130,18 @@ $val = $_GET["val"];
                   $concertResult = $result3->fetch_all();
                   $_SESSION['concertID'] = $concertResult[0][0];
                   $concertID2 = $concertResult[0][0];
+
+                  $_SESSION['concertID'] = $concertID2;
+                  $_SESSION['bandID'] = $BandID;
+                  $_SESSION['managerEpost'] =$email;
                   echo '<p>You have already accepted the offer, click below to add technical demands.<br><br></p>';
                   echo "Your concert ID: " . $concertID2;
                   echo '<form action="add-demands.php"> <input type="submit" value="Add demands"></form>';
+                  echo "<table>
+                  <tr>
+                    <td><a href='register-songs.php'> Registrer sanger</a></td>
+                  </tr>
+                </table>";
                 }
               } else {
                 echo "Your band " . $band . "does not have an offer";
