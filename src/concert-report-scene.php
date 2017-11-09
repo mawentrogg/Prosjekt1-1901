@@ -89,6 +89,7 @@ $festivalName = $festivalArray['FestivalName'];
                         //Getting BandID and date
                         $bandID = $row['BandID'];
                         $date = date('d.M.Y H:s', strtotime($row['ConcertTimeStart']));
+                        $attendance = $row['TicketsSold'];
 
                         //Getting bandName and bandGenrefrom BandID
                         $sqlBand = "SELECT * FROM Band WHERE BandID = '$bandID'";
@@ -102,7 +103,6 @@ $festivalName = $festivalArray['FestivalName'];
                         $sqlReport = "SELECT * FROM Concert_Report WHERE ConcertID = '$concertID'";
                         $resultReport = mysqli_query($conn, $sqlReport);
                         $reportArray = mysqli_fetch_assoc($resultReport);
-                        $attendance = $reportArray['Attendance'];
                         $outcome = $reportArray['Outcome'];
                         $income = $reportArray['Income'];
                         $profit = $income - $outcome;
