@@ -138,7 +138,7 @@ $scenes = "";
 
 for ($i = 0; $i < sizeof($scenelist) ; $i++) {
 	if ($scenelist[$i][1] == $scene) {
-		$scenes .=  "<option selected>" . $scenelist[$i][1] . "</option>";
+		$scenes .=  "<option selected>" . $scenelist[$i][7] . "</option>";
 	} else {
 	$scenes .=  "<option>" . $scenelist[$i][1] . "</option>";
 	}
