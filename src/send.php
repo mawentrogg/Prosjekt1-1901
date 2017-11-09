@@ -27,7 +27,7 @@ if($band == $bandName and $validation == $val){
     mail($email, utf8_decode("Booking offer for ") . utf8_decode($bandName),
 	"Your band " . $bandName . " has received an offer to play at festiv4len on " . $date . ", " . $time . " on Stage " . $sceneID .
 	"." . 
-	"For the concert, you will be paid " . $price . "kr \n\nClick the following link to review your offer. \n\n\n"
+	"The ticket price for the concert will be " . $price . "kr \n\nClick the following link to review your offer. \n\n\n"
 	. "http://org.ntnu.no/festiv4len/booking-reply.php?band=" . $bandName . "&val=" . $validation);
 
 	$sqlUpdate = "UPDATE Booking_Offers SET Sent=1 WHERE BookingOfferID=" . $id;
