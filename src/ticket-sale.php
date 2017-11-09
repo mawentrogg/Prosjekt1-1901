@@ -84,7 +84,7 @@ include_once 'includes/dbh.inc.php';
 
                     echo "<tr><td>" . $concertTime ."</td><td>" . $bandName . "</td><td>" . $sceneName . "</td>
                               <td>" . $ticketsSold ." / ". $sceneCapacity ."</td><td>" . $ticketIncome . ",-</td>
-                              <td>". $taskNum ." / ".  $taskComp. "</td></tr>";
+                              <td>". $taskComp ." / ".  $taskNum. "</td></tr>";
                 }
                 ?>
             </table>
