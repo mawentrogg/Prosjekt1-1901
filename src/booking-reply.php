@@ -78,6 +78,8 @@ $val = $_GET["val"];
 
                               $concertID2 = mysqli_insert_id($conn);
                               $_SESSION['concertID'] = $concertID2;
+                              $_SESSION["bandID"] = $BandID;
+                              $_SESSION["managerEpost"] =$email;
 
                               //Assign random tech to a concert
                               $sqlTech = "SELECT * FROM Users WHERE UserRole = 'tech'";

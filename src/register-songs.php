@@ -5,6 +5,7 @@ session_start();
 
 
 //Checking if user is logged in
+/*
 if(!(isset($_SESSION['u_id']))){
     header("Location: index.php");
     exit();
@@ -13,17 +14,19 @@ else{
     if(!($_SESSION['u_role'] == "bookingans")){
         header("Location: " . $_SESSION['u_role'] . ".php");
     }
-}
+}*/
 
 include 'includes/dbh.inc.php';
 
 //Initialize
-$_SESSION["ManagerEpost"] = "kimmern92@gmail.com";
-$_SESSION["BandID"] = "2";
-$_SESSION["ConcertID"] = "36";
-$managerEpost = $_SESSION["ManagerEpost"];
-$band = $_SESSION["BandID"];
-$concert = $_SESSION["ConcertID"];
+/*
+$_SESSION["managerEpost"] = "kimmern92@gmail.com";
+$_SESSION["bandID"] = "2";
+$_SESSION["concertID"] = "36";
+*/
+$managerEpost = $_SESSION["managerEpost"];
+$band = $_SESSION["bandID"];
+$concert = $_SESSION["concertID"];
 $getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$concert'";
 
 ?>
@@ -71,7 +74,7 @@ $getConcertSongsSQL = "SELECT * FROM Band_Songs WHERE Band_Songs.ConcertID = '$c
             <input type="text" name="SongName" value="<?php echo $songName; ?>">  
             <label for="SongGenre"> Sang Sjanger </Label>
             <input type="text" name="SongGenre" id="SongGenre" value="<?php echo $songGenre; ?>"> 
-            <input type="submit" value="Hent band"> 
+            <input type="submit" value="Legg til opptreden"> 
             </form>
            
             <?php
